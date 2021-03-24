@@ -1,14 +1,17 @@
-﻿using Prism.Mvvm;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using IPLFranchise2021.Views;
+using Prism.Mvvm;
+using Prism.Regions;
+
 
 namespace IPLFranchise2021.ViewModels
 {
     public class ShellViewModel :BindableBase
     {
-
+        private IRegionManager _regionManger;
+        public ShellViewModel(IRegionManager regionManger)
+        {
+            _regionManger = regionManger;
+            _regionManger.RegisterViewWithRegion("MainRegion", typeof(HomeView));
+        }
     }
 }
