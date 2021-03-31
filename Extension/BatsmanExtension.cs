@@ -24,7 +24,7 @@ namespace IPLFranchise2021
                     Balls = int.Parse(columns[3]),
                     SR = double.Parse(columns[4]),
                     Fours = int.Parse(columns[5]),
-                    Sixes = int.Parse(columns[6])
+                    Sixes = int.Parse(columns[6]),
                 };
             }
         }

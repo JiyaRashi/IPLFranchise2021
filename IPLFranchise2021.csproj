@@ -82,6 +82,7 @@
     </ApplicationDefinition>
     <Compile Include="Extension\BatsmanExtension.cs" />
     <Compile Include="Model\Batsman.cs" />
+    <Compile Include="Model\BatsmanTotalScore.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="ViewModels\ScoreDetailsViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />

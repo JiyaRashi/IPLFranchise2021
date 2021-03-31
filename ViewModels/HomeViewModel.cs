@@ -12,13 +12,13 @@ namespace IPLFranchise2021.ViewModels
 {
    public class HomeViewModel :BindableBase
     {
-        public DelegateCommand CalculateDelegateCommand { get; private set; }
+        public DelegateCommand PointDetailsDelegateCommand { get; private set; }
 
         private IRegionManager _regionManger;
         public HomeViewModel(IRegionManager regionManger)
         {
             _regionManger = regionManger;
-            CalculateDelegateCommand = new DelegateCommand(Execute, CanExecute);
+            PointDetailsDelegateCommand = new DelegateCommand(Execute, CanExecute);
         }
 
         private bool CanExecute()

@@ -11,7 +11,7 @@
     <Grid>
 
         <StackPanel>
-            <Button Command="{Binding CalculateDelegateCommand}" Content="Calculate Score" FontSize="20" Margin="10"/>
+            <Button Command="{Binding PointDetailsDelegateCommand}" Content="Point Details" FontSize="20" Margin="10"/>
         </StackPanel>
             
     </Grid>

@@ -15,5 +15,6 @@ namespace IPLFranchise2021.Model
         public int Fours { get; set; }
         public int Sixes { get; set; }
         public double SR { get; set; }
+        public int TotalScore { get; set; }
     }
 }

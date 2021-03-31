@@ -9,16 +9,50 @@
              prism:ViewModelLocator.AutoWireViewModel="True"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Path=BatsmenDetails}" >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <DataGrid AutoGenerateColumns="False"  CanUserSortColumns="False" Grid.Row="0" Grid.Column="0" ItemsSource="{Binding Path=BatsmenDetails, UpdateSourceTrigger=PropertyChanged}" >
             <DataGrid.Columns>
-                <DataGridTextColumn Header="BatsmanName" Binding="{Binding BatsmanName}"/>
-                <DataGridTextColumn Header="Details" Binding="{Binding Details}"/>
-                <DataGridTextColumn Header="Runs" Binding="{Binding Runs}" />
-                <DataGridTextColumn Header="Balls" Binding="{Binding Balls}"/>
-                <DataGridTextColumn Header="SR" Binding="{Binding SR}" />
-                <DataGridTextColumn Header="Fours" Binding="{Binding Fours}" />
-                <DataGridTextColumn Header="Sixes" Binding="{Binding Sixes}" />
+                <DataGridTextColumn  Header="BatsmanName" Binding="{Binding BatsmanName}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Details" Binding="{Binding Details}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Runs" Binding="{Binding Runs}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Balls" Binding="{Binding Balls}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="SR" Binding="{Binding SR}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Fours" Binding="{Binding Fours}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Sixes" Binding="{Binding Sixes}" IsReadOnly="True"/>
+            </DataGrid.Columns>
+            
+        </DataGrid>
+        <DataGrid AutoGenerateColumns="False" CanUserSortColumns="False" Margin="1 0 0 0" Grid.Row="0" Grid.Column="1" ItemsSource="{Binding Path=AllBatsmenDetails, UpdateSourceTrigger=PropertyChanged}" >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Total Score" Binding="{Binding TotalScore}" IsReadOnly="True"/>
             </DataGrid.Columns>
         </DataGrid>
+
+        <Button Command="{Binding CalculateScoreDelegateCommand}" Margin="20 20" FontSize="25" Grid.Row="1" Grid.ColumnSpan="2" Content="Calulate Score"/>
+
+        <!--<DataGrid AutoGenerateColumns="False"  ItemsSource="{Binding Path=AllBatsmenDetails, UpdateSourceTrigger=PropertyChanged}" >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Total Score" Binding="{Binding TotalScore, Source=TotalScore}"  IsReadOnly="True"/>
+            </DataGrid.Columns>
+        </DataGrid>-->
+
+        <!--<ItemsControl Grid.Row="1" Grid.Column="2" ItemsSource="{Binding Path=AllBatsmenDetails, UpdateSourceTrigger=PropertyChanged}">
+        <ItemsControl.ItemTemplate>
+            <DataTemplate>
+                    <StackPanel>
+                    <TextBlock  Text="{Binding TotalScore}" />
+                    </StackPanel>
+                </DataTemplate>
+        </ItemsControl.ItemTemplate>
+        </ItemsControl>-->
     </Grid>
 </UserControl>
