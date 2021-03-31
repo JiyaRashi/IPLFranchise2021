@@ -7,6 +7,7 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace IPLFranchise2021.ViewModels
@@ -18,6 +19,10 @@ namespace IPLFranchise2021.ViewModels
 
         public ObservableCollection<BowlSide> _allBowlDetails { get; set; }
         public ObservableCollection<Batsman> _allBatsmenDetails { get; set; }
+
+        public ObservableCollection<OtherDetails> _otherPointsDetails { get; set; }
+
+        public ObservableCollection<OtherDetails> _allotherPointsDetails { get; set; }
 
         public int _totalScore;
 
@@ -32,6 +37,9 @@ namespace IPLFranchise2021.ViewModels
             _bowlDetails = new ObservableCollection<BowlSide>((GetAllBowlSide()));
             _allBatsmenDetails = new ObservableCollection<Batsman>();
             _allBowlDetails = new ObservableCollection<BowlSide>();
+            _otherPointsDetails = new ObservableCollection<OtherDetails>();
+            _allotherPointsDetails = new ObservableCollection<OtherDetails>();
+
         }
 
         private bool CanExecute()
@@ -43,7 +51,7 @@ namespace IPLFranchise2021.ViewModels
         {
             AllBatsmenDetails = BatsmanPointsTotalScore(BatsmenDetails);
             AllBowlDetails = BowlPointsTotalScore(BowlDetails);
-
+            AllotherPointsDetails = OtherPoints(OtherPointsDetails);
         }
 
         public int TotalScore
@@ -90,6 +98,19 @@ namespace IPLFranchise2021.ViewModels
             get { return _allBowlDetails; }
             set { _allBowlDetails = value; }
         }
+
+        public ObservableCollection<OtherDetails> OtherPointsDetails
+        {
+            get { return _otherPointsDetails; }
+            set { _otherPointsDetails = value; }
+        }
+
+        public ObservableCollection<OtherDetails> AllotherPointsDetails
+        {
+            get { return _allotherPointsDetails; }
+            set { _allotherPointsDetails = value; }
+        }
+        
 
         public IList<Batsman> GetAllBatsmen()
         {
@@ -153,8 +174,19 @@ namespace IPLFranchise2021.ViewModels
                              (srPoints >= 350) ? 120 :
                              (srPoints <= 50 && balls >= 5) ? -20 : 0;
             int ducks = runs == 0 ? -20 : 0;
+            string[] stringSeparators = new string[] { " b " };
+            string[] otherDetails = details.Split(stringSeparators, StringSplitOptions.None);
+            foreach (string author in otherDetails)
+            {
+                Regex r = new Regex("lbw |b |c |st ");
+                bool containsAny = r.IsMatch(author);
+                if ((author.ToUpper() != "\tNOT OUT\t" && containsAny))
+                {
 
-            return totalScore + runTotalPoints + sixesPoints + fourPoints + srPoints + ducks;
+                    OtherPointsDetails.Add(new OtherDetails() { Name = author.Trim() });
+                }
+            }
+                return totalScore + runTotalPoints + sixesPoints + fourPoints + srPoints + ducks;
         }
 
         public ObservableCollection<BowlSide> BowlPointsTotalScore(ObservableCollection<BowlSide> _bowlDetails)
@@ -200,6 +232,30 @@ namespace IPLFranchise2021.ViewModels
                 (econPoints >= 11) ? -40 : 0;
 
             return _bowlTotalPoints + wicketPoints + maidenPoints + hattrickPoints + econPoints;
+        }
+
+        public ObservableCollection<OtherDetails> OtherPoints(ObservableCollection<OtherDetails> otherDetails)
+        {
+            foreach (var item in otherDetails)
+            {
+                Regex r = new Regex("lbw |b |c |st ");
+                bool containsAny = r.IsMatch(item.ToString());
+
+                bool LBW= item.Name.Contains("lbw ");
+                bool bowled = item.Name.Contains("b ");
+                bool catcher= item.Name.Contains("c ");
+                bool stumbed = item.Name.Contains("st ");
+
+                int points = LBW ? 10 : bowled ? 10 : catcher ? 25 : stumbed ? 10 : 0;
+                _allotherPointsDetails.Add(
+                new OtherDetails()
+                {
+                    Name = item.Name,
+                    OtherTotalScore = points
+                });
+
+            }
+            return _allotherPointsDetails;
         }
     }
 }

@@ -84,6 +84,7 @@
     <Compile Include="Model\Batsman.cs" />
     <Compile Include="Model\BatsmanTotalScore.cs" />
     <Compile Include="Model\BowlSide.cs" />
+    <Compile Include="Model\OtherDetails.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="ViewModels\ScoreDetailsViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
