@@ -14,11 +14,14 @@ namespace IPLFranchise2021.ViewModels
     public class ScoreDetailsViewModel : BindableBase
     {
         public ObservableCollection<Batsman> _batsmenDetails { get; set; }
+        public ObservableCollection<BowlSide> _bowlDetails { get; set; }
 
+        public ObservableCollection<BowlSide> _allBowlDetails { get; set; }
         public ObservableCollection<Batsman> _allBatsmenDetails { get; set; }
 
         public int _totalScore;
 
+        public int _bowlTotalScore;
         public DelegateCommand CalculateScoreDelegateCommand { get; private set; }
 
 
@@ -26,7 +29,9 @@ namespace IPLFranchise2021.ViewModels
         {
             CalculateScoreDelegateCommand = new DelegateCommand(Execute, CanExecute);
             _batsmenDetails = new ObservableCollection<Batsman>((GetAllBatsmen()));
+            _bowlDetails = new ObservableCollection<BowlSide>((GetAllBowlSide()));
             _allBatsmenDetails = new ObservableCollection<Batsman>();
+            _allBowlDetails = new ObservableCollection<BowlSide>();
         }
 
         private bool CanExecute()
@@ -37,6 +42,8 @@ namespace IPLFranchise2021.ViewModels
         private void Execute()
         {
             AllBatsmenDetails = BatsmanPointsTotalScore(BatsmenDetails);
+            AllBowlDetails = BowlPointsTotalScore(BowlDetails);
+
         }
 
         public int TotalScore
@@ -49,10 +56,27 @@ namespace IPLFranchise2021.ViewModels
 
             }
         }
+
+        public int BowlTotalScore
+        {
+            get { return _bowlTotalScore; }
+            set
+            {
+                _bowlTotalScore = value;
+                RaisePropertyChanged();
+
+            }
+        }
         public ObservableCollection<Batsman> BatsmenDetails
         {
             get { return _batsmenDetails; }
             set { _batsmenDetails = value; }
+        }
+
+        public ObservableCollection<BowlSide> BowlDetails
+        {
+            get { return _bowlDetails; }
+            set { _bowlDetails = value; }
         }
 
         public ObservableCollection<Batsman> AllBatsmenDetails
@@ -61,9 +85,15 @@ namespace IPLFranchise2021.ViewModels
             set { _allBatsmenDetails = value; }
         }
 
+        public ObservableCollection<BowlSide> AllBowlDetails
+        {
+            get { return _allBowlDetails; }
+            set { _allBowlDetails = value; }
+        }
+
         public IList<Batsman> GetAllBatsmen()
         {
-            string path = "Data/sampleScore.csv";
+            string path = "Data/sampleBatScore.csv";
             var query =
 
                 File.ReadAllLines(path)
@@ -73,7 +103,18 @@ namespace IPLFranchise2021.ViewModels
 
             return query.ToList();
         }
+        public IList<BowlSide> GetAllBowlSide()
+        {
+            string path = "Data/sampleBowlScore.csv";
+            var query =
 
+                File.ReadAllLines(path)
+                    .Skip(1)
+                    .Where(l => l.Length > 1)
+                    .ToBowl();
+
+            return query.ToList();
+        }
         public ObservableCollection<Batsman> BatsmanPointsTotalScore(ObservableCollection<Batsman> _batsmenDetail)
         {
             if (_allBatsmenDetails == null || _allBatsmenDetails.Count == 0)
@@ -113,8 +154,52 @@ namespace IPLFranchise2021.ViewModels
                              (srPoints <= 50 && balls >= 5) ? -20 : 0;
             int ducks = runs == 0 ? -20 : 0;
 
-            return totalScore + runTotalPoints + sixesPoints+ fourPoints+ srPoints+ ducks;
+            return totalScore + runTotalPoints + sixesPoints + fourPoints + srPoints + ducks;
         }
 
+        public ObservableCollection<BowlSide> BowlPointsTotalScore(ObservableCollection<BowlSide> _bowlDetails)
+        {
+            if (_allBowlDetails == null || _allBowlDetails.Count == 0)
+            {
+                foreach (var item in _bowlDetails)
+                {
+
+                    _allBowlDetails.Add(
+
+                        new BowlSide
+                        {
+                            BowlTotalScore = BowlScoreCalulator(item.OverRuns, item.Overs, item.Wickets, item.Econ,
+                            item.Dot, item.Maiden, item.HatTrick)
+                        });
+                }
+            }
+            return _allBowlDetails;
+        }
+
+        public int BowlScoreCalulator(int overRuns, int overs, int wickets, double Econ,
+            int dot, int maiden, bool hatTrick)
+        {
+            int _bowlTotalPoints = 0;
+
+            int wicketPoints = (wickets == 1) ? 30 :
+                (wickets > 1 && wickets <= 2) ? 60 :
+                (wickets > 2 && wickets <= 3) ? 100 :
+                (wickets > 3 && wickets <= 4) ? 150 :
+                (wickets > 4 && wickets <= 5) ? 250 : 0;
+            int maidenPoints = maiden * 70;
+            int hattrickPoints = hatTrick ? 200 : 0;
+            int econPoints = Convert.ToInt32(Econ);
+            econPoints = (econPoints <= 3) ? 150 :
+                (econPoints == 4) ? 100 :
+                (econPoints == 5) ? 70 :
+                (econPoints == 6) ? 50 :
+                (econPoints == 7) ? 40 :
+                (econPoints == 8) ? -10 :
+                (econPoints == 9) ? -20 :
+                (econPoints == 10) ? -30 :
+                (econPoints >= 11) ? -40 : 0;
+
+            return _bowlTotalPoints + wicketPoints + maidenPoints + hattrickPoints + econPoints;
+        }
     }
 }

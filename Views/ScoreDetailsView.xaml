@@ -6,12 +6,12 @@
              xmlns:local="clr-namespace:IPLFranchise2021.Views"
              mc:Ignorable="d" 
              xmlns:prism="http://prismlibrary.com/"
-             prism:ViewModelLocator.AutoWireViewModel="True"
-             d:DesignHeight="450" d:DesignWidth="800">
+             prism:ViewModelLocator.AutoWireViewModel="True">
+
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="5*"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -36,23 +36,25 @@
                 <DataGridTextColumn Header="Total Score" Binding="{Binding TotalScore}" IsReadOnly="True"/>
             </DataGrid.Columns>
         </DataGrid>
-
-        <Button Command="{Binding CalculateScoreDelegateCommand}" Margin="20 20" FontSize="25" Grid.Row="1" Grid.ColumnSpan="2" Content="Calulate Score"/>
-
-        <!--<DataGrid AutoGenerateColumns="False"  ItemsSource="{Binding Path=AllBatsmenDetails, UpdateSourceTrigger=PropertyChanged}" >
+        <DataGrid AutoGenerateColumns="False"  CanUserSortColumns="False" Grid.Row="1" Grid.Column="0" ItemsSource="{Binding Path=BowlDetails, UpdateSourceTrigger=PropertyChanged}" >
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Total Score" Binding="{Binding TotalScore, Source=TotalScore}"  IsReadOnly="True"/>
+                <DataGridTextColumn  Header="Bowler Name" Binding="{Binding BowlerName}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Overs" Binding="{Binding Overs}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Over Runs" Binding="{Binding OverRuns}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Wickets" Binding="{Binding Wickets}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Econ" Binding="{Binding Econ}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Dot" Binding="{Binding Dot}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Maiden" Binding="{Binding Maiden}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="HatTrick" Binding="{Binding HatTrick}" IsReadOnly="True"/>
             </DataGrid.Columns>
-        </DataGrid>-->
 
-        <!--<ItemsControl Grid.Row="1" Grid.Column="2" ItemsSource="{Binding Path=AllBatsmenDetails, UpdateSourceTrigger=PropertyChanged}">
-        <ItemsControl.ItemTemplate>
-            <DataTemplate>
-                    <StackPanel>
-                    <TextBlock  Text="{Binding TotalScore}" />
-                    </StackPanel>
-                </DataTemplate>
-        </ItemsControl.ItemTemplate>
-        </ItemsControl>-->
+        </DataGrid>
+        <DataGrid AutoGenerateColumns="False" CanUserSortColumns="False" Margin="1 0 0 0" Grid.Row="1" Grid.Column="1" ItemsSource="{Binding Path=AllBowlDetails, UpdateSourceTrigger=PropertyChanged}" >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Total Score" Binding="{Binding BowlTotalScore}" IsReadOnly="True"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Button Command="{Binding CalculateScoreDelegateCommand}" Margin="20 20" FontSize="25" Grid.Row="2" Grid.ColumnSpan="2" Content="Calulate Score"/>
     </Grid>
 </UserControl>

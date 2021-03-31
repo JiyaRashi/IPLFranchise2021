@@ -28,5 +28,26 @@ namespace IPLFranchise2021
                 };
             }
         }
+
+        public static IEnumerable<BowlSide> ToBowl(this IEnumerable<string> source)
+        {
+            foreach (var line in source)
+            {
+
+                var columns = line.Split(',');
+
+                yield return new BowlSide
+                {
+                    BowlerName = columns[0],
+                    Overs = int.Parse(columns[1]),
+                    OverRuns = int.Parse(columns[2]),
+                    Wickets = int.Parse(columns[3]),
+                    Econ = double.Parse(columns[4]),
+                    Dot = int.Parse(columns[5]),
+                    Maiden = int.Parse(columns[6]),
+                    HatTrick = Convert.ToBoolean(columns[7])
+                };
+            }
+        }
     }
 }
