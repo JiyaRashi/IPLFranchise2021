@@ -19,7 +19,8 @@ namespace IPLFranchise2021
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-
+            containerRegistry.RegisterForNavigation<HomeView, HomeViewModel>();
+            containerRegistry.RegisterForNavigation<ScoreDetailsView, ScoreDetailsViewModel>();
         }
 
         protected override void ConfigureViewModelLocator()
@@ -37,5 +38,6 @@ namespace IPLFranchise2021
             // generic type
             ViewModelLocationProvider.Register<ShellView, ShellViewModel>();
         }
+
     }
 }

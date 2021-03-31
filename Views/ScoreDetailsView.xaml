@@ -1,0 +1,24 @@
+﻿<UserControl x:Class="IPLFranchise2021.Views.ScoreDetailsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:IPLFranchise2021.Views"
+             mc:Ignorable="d" 
+             xmlns:prism="http://prismlibrary.com/"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Path=BatsmenDetails}" >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="BatsmanName" Binding="{Binding BatsmanName}"/>
+                <DataGridTextColumn Header="Details" Binding="{Binding Details}"/>
+                <DataGridTextColumn Header="Runs" Binding="{Binding Runs}" />
+                <DataGridTextColumn Header="Balls" Binding="{Binding Balls}"/>
+                <DataGridTextColumn Header="SR" Binding="{Binding SR}" />
+                <DataGridTextColumn Header="Fours" Binding="{Binding Fours}" />
+                <DataGridTextColumn Header="Sixes" Binding="{Binding Sixes}" />
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>

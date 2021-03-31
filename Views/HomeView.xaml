@@ -9,10 +9,10 @@
                prism:ViewModelLocator.AutoWireViewModel="True"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <TextBlock Text="Home View"
-                   HorizontalAlignment="Center"
-                   VerticalAlignment="Center"
-                   FontSize="40"></TextBlock>
+
+        <StackPanel>
+            <Button Command="{Binding CalculateDelegateCommand}" Content="Calculate Score" FontSize="20" Margin="10"/>
+        </StackPanel>
             
     </Grid>
 </UserControl>
