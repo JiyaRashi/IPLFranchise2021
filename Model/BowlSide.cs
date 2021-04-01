@@ -9,7 +9,7 @@ namespace IPLFranchise2021.Model
     public class BowlSide
     {
         public string BowlerName { get; set; }
-        public int Overs { get; set; }
+        public double Overs { get; set; }
         public int OverRuns { get; set; }
         public int Wickets { get; set; }
         public double Econ { get; set; }

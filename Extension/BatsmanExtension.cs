@@ -39,7 +39,7 @@ namespace IPLFranchise2021
                 yield return new BowlSide
                 {
                     BowlerName = columns[0],
-                    Overs = int.Parse(columns[1]),
+                    Overs = double.Parse(columns[1]),
                     OverRuns = int.Parse(columns[2]),
                     Wickets = int.Parse(columns[3]),
                     Econ = double.Parse(columns[4]),
