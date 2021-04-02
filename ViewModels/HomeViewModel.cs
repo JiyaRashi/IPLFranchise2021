@@ -12,13 +12,13 @@ namespace IPLFranchise2021.ViewModels
 {
    public class HomeViewModel :BindableBase
     {
-        public DelegateCommand PointDetailsDelegateCommand { get; private set; }
+        public DelegateCommand IPLScheduleDelegateCommand { get; private set; }
 
         private IRegionManager _regionManger;
         public HomeViewModel(IRegionManager regionManger)
         {
             _regionManger = regionManger;
-            PointDetailsDelegateCommand = new DelegateCommand(Execute, CanExecute);
+            IPLScheduleDelegateCommand = new DelegateCommand(Execute, CanExecute);
         }
 
         private bool CanExecute()
@@ -28,7 +28,7 @@ namespace IPLFranchise2021.ViewModels
 
         private void Execute()
         {
-            _regionManger.RequestNavigate("MainRegion","ScoreDetailsView");
+            _regionManger.RequestNavigate("MainRegion", "IPLScheduleView");
         }
     }
 }

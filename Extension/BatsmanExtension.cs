@@ -49,5 +49,22 @@ namespace IPLFranchise2021
                 };
             }
         }
+
+        public static IEnumerable<IPLSchedule> ToSchedule(this IEnumerable<string> source)
+        {
+            foreach (var line in source)
+            {
+
+                var columns = line.Split(',');
+
+                yield return new IPLSchedule
+                {
+                    Date = columns[0].Trim(),
+                    Match = columns[1].Trim(),
+                    Time = columns[2].Trim(),
+                    Venue = columns[3].Trim(),
+                };
+            }
+        }
     }
 }

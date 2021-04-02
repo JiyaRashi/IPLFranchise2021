@@ -13,17 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace IPLFranchise2021.Views
+namespace IPLFranchise2021.Controls
 {
     /// <summary>
-    /// Interaction logic for ScoreDetailsView.xaml
+    /// Interaction logic for IPScheduleControlL.xaml
     /// </summary>
-    public partial class ScoreDetailsView : UserControl
+    public partial class IPScheduleControlL : UserControl
     {
-        public ScoreDetailsView()
+        public IPScheduleControlL()
         {
             InitializeComponent();
         }
-      
     }
 }

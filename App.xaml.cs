@@ -21,6 +21,7 @@ namespace IPLFranchise2021
         {
             containerRegistry.RegisterForNavigation<HomeView, HomeViewModel>();
             containerRegistry.RegisterForNavigation<ScoreDetailsView, ScoreDetailsViewModel>();
+            containerRegistry.RegisterForNavigation<IPLScheduleView, IPLScheduleViewModel>();
         }
 
         protected override void ConfigureViewModelLocator()

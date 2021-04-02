@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              xmlns:prism="http://prismlibrary.com/" Height="auto" Width="auto"
              prism:ViewModelLocator.AutoWireViewModel="True">
-
+    
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
@@ -15,6 +15,7 @@
             <ColumnDefinition Width="auto"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
@@ -55,7 +56,7 @@
                 <DataGridTextColumn Header="Total Score" Binding="{Binding BowlTotalScore}" IsReadOnly="True"/>
             </DataGrid.Columns>
         </DataGrid>
-        <DataGrid Grid.Row="0" Grid.Column="2" ItemsSource="{Binding Path=AllotherPointsDetails, UpdateSourceTrigger=PropertyChanged}"/>
-        <Button Command="{Binding CalculateScoreDelegateCommand}" Margin="20 20" FontSize="25" Grid.Row="3" Grid.ColumnSpan="2" Content="Calulate Score"/>
+        <DataGrid Grid.Row="0" Grid.Column="2" ItemsSource="{Binding Path=AllotherPointsDetails, UpdateSourceTrigger=PropertyChanged}"/>        
+        <Button Command="{Binding CalculateScoreDelegateCommand}" Margin="20 20" FontSize="25" Grid.Row="4" Grid.ColumnSpan="2" Content="Calulate Score"/>
     </Grid>
 </UserControl>
