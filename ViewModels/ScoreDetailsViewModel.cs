@@ -20,6 +20,8 @@ namespace IPLFranchise2021.ViewModels
         public ObservableCollection<Batsman> _batsmenDetails { get; set; }
         public ObservableCollection<OtherDetails> _otherPointsDetails { get; set; }
         public ObservableCollection<OtherDetails> _allotherPointsDetails { get; set; }
+        public ObservableCollection<OtherDetails> _noDuplicatePointsDetails { get; set; }
+        public ObservableCollection<OtherDetails> noDuplicate { get; set; }
 
         public int _totalScore;
 
@@ -34,7 +36,8 @@ namespace IPLFranchise2021.ViewModels
             _allBowlDetails = new ObservableCollection<BowlSide>();
             _otherPointsDetails = new ObservableCollection<OtherDetails>();
             _allotherPointsDetails = new ObservableCollection<OtherDetails>();
-
+            _noDuplicatePointsDetails = new ObservableCollection<OtherDetails>();
+            noDuplicate = new ObservableCollection<OtherDetails>();
         }
         private bool CanExecute()
         {
@@ -45,7 +48,11 @@ namespace IPLFranchise2021.ViewModels
             AllBatsmenDetails = BatsmanPointsTotalScore(BatsmenDetails);
             AllBowlDetails = BowlPointsTotalScore(BowlDetails);
             AllotherPointsDetails = OtherPoints(OtherPointsDetails);
+            NoDuplicate = NoDuplicateName(OtherPointsDetails);
         }
+
+
+
         public int TotalScore
         {
             get { return _totalScore; }
@@ -99,6 +106,18 @@ namespace IPLFranchise2021.ViewModels
         {
             get { return _allotherPointsDetails; }
             set { _allotherPointsDetails = value; }
+        }
+
+        public ObservableCollection<OtherDetails> NoDuplicatePointsDetails
+        {
+            get { return _noDuplicatePointsDetails; }
+            set { _noDuplicatePointsDetails = value; }
+        }
+
+        public ObservableCollection<OtherDetails> NoDuplicate
+        {
+            get { return noDuplicate; }
+            set { noDuplicate = value; }
         }
         public IList<Batsman> GetAllBatsmen()
         {
@@ -161,7 +180,7 @@ namespace IPLFranchise2021.ViewModels
                              (srPoints >= 350) ? 120 :
                              (srPoints <= 50 && balls >= 5) ? -20 : 0;
             int ducks = runs == 0 ? -20 : 0;
-            string[] stringSeparators = new string[] { " & ", " b "};
+            string[] stringSeparators = new string[] { " & ", " b " };
             string[] otherDetails = details.Split(stringSeparators, StringSplitOptions.None);
             foreach (string author in otherDetails)
             {
@@ -225,7 +244,7 @@ namespace IPLFranchise2021.ViewModels
                 foreach (var item in otherDetails)
                 {
                     //Regex r = new Regex("c sub|c");
-                    
+
                     bool catcher = item.Name.Contains("c ");
                     bool catchersub = item.Name.Contains("c sub");
                     bool LBW = item.Name.Contains("lbw ");
@@ -233,23 +252,57 @@ namespace IPLFranchise2021.ViewModels
                     bool stumbed = item.Name.Contains("st ");
                     bool runout = item.Name.Contains("run out");
 
-                    int points = LBW ? 10 : 
+                    int points = LBW ? 10 :
                         bowled ? 10 :
                         catcher ? 25 :
                         catchersub ? 25 :
-                        stumbed ? 30 : 
-                        runout ? 50: 0;
+                        stumbed ? 30 :
+                        runout ? 50 : 0;
 
-                        _allotherPointsDetails.Add(
-                        new OtherDetails()
-                        {
-                            Name = item.Name,
-                            OtherTotalScore = points
-                        });
+                    _allotherPointsDetails.Add(
+                    new OtherDetails()
+                    {
+                        Name = item.Name,
+                        OtherTotalScore = points
+                    });
 
                 }
             }
             return _allotherPointsDetails;
+        }
+
+        public ObservableCollection<OtherDetails> NoDuplicateName(ObservableCollection<OtherDetails> otherPointsDetails)
+        {
+
+            foreach (var item in otherPointsDetails)
+            {
+                if (duplicateFinder(noDuplicate, item.Name))
+                {
+                    noDuplicate.Add(new OtherDetails()
+                    {
+                        Name = item.Name,
+                        OtherTotalScore = item.OtherTotalScore
+                    });
+                }
+            }
+            return noDuplicate;
+        }
+
+        bool duplicateFinder(ObservableCollection<OtherDetails> duplicate, string name)
+        {
+            string[] stringSeparators = new string[] { "c ", "b ", "run out " };
+            
+
+            foreach (var item in duplicate)
+            {
+                string[] name1 = name.Split(stringSeparators, StringSplitOptions.None);
+                string[] name2 = item.Name.Split(stringSeparators, StringSplitOptions.None);
+                if (name1[1].ToString().Equals(name2[1]) && duplicate.Count > 0)
+                {
+                    return false;
+                }
+            }
+            return true;
         }
     }
 }
