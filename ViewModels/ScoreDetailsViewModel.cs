@@ -20,7 +20,6 @@ namespace IPLFranchise2021.ViewModels
         public ObservableCollection<Batsman> _batsmenDetails { get; set; }
         public ObservableCollection<OtherDetails> _otherPointsDetails { get; set; }
         public ObservableCollection<OtherDetails> _allotherPointsDetails { get; set; }
-        public ObservableCollection<OtherDetails> _noDuplicatePointsDetails { get; set; }
         public ObservableCollection<OtherDetails> noDuplicate { get; set; }
 
         public int _totalScore;
@@ -36,7 +35,6 @@ namespace IPLFranchise2021.ViewModels
             _allBowlDetails = new ObservableCollection<BowlSide>();
             _otherPointsDetails = new ObservableCollection<OtherDetails>();
             _allotherPointsDetails = new ObservableCollection<OtherDetails>();
-            _noDuplicatePointsDetails = new ObservableCollection<OtherDetails>();
             noDuplicate = new ObservableCollection<OtherDetails>();
         }
         private bool CanExecute()
@@ -106,12 +104,6 @@ namespace IPLFranchise2021.ViewModels
         {
             get { return _allotherPointsDetails; }
             set { _allotherPointsDetails = value; }
-        }
-
-        public ObservableCollection<OtherDetails> NoDuplicatePointsDetails
-        {
-            get { return _noDuplicatePointsDetails; }
-            set { _noDuplicatePointsDetails = value; }
         }
 
         public ObservableCollection<OtherDetails> NoDuplicate
@@ -274,6 +266,7 @@ namespace IPLFranchise2021.ViewModels
         public ObservableCollection<OtherDetails> NoDuplicateName(ObservableCollection<OtherDetails> otherPointsDetails)
         {
 
+
             foreach (var item in otherPointsDetails)
             {
                 if (duplicateFinder(noDuplicate, item.Name))
@@ -290,7 +283,7 @@ namespace IPLFranchise2021.ViewModels
 
         bool duplicateFinder(ObservableCollection<OtherDetails> duplicate, string name)
         {
-            string[] stringSeparators = new string[] { "c ", "b ", "run out " };
+            string[] stringSeparators = new string[] { "c ", "b ", "run out ","c sub" };
             
 
             foreach (var item in duplicate)
