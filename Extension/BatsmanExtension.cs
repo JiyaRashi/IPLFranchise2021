@@ -66,5 +66,20 @@ namespace IPLFranchise2021
                 };
             }
         }
+
+        public static IEnumerable<TeamListName> ToNameList(this IEnumerable<string> source)
+        {
+            foreach (var line in source)
+            {
+
+                var columns = line.Split(',');
+
+                yield return new TeamListName
+                {
+                    Name = columns[0].Trim(),
+                    Team = columns[1].Trim(),
+                };
+            }
+        }
     }
 }

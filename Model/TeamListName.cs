@@ -6,11 +6,10 @@ using System.Threading.Tasks;
 
 namespace IPLFranchise2021.Model
 {
-    public class BatsmanTotalScore
+    public class TeamListName
     {
         public string Name { get; set; }
-        public int TotalScore { get; set; }
-        public int Repeted { get; set; }
+        public string Team { get; set; }
 
     }
 }

@@ -85,7 +85,7 @@
     </Compile>
     <Compile Include="Extension\BatsmanExtension.cs" />
     <Compile Include="Model\Batsman.cs" />
-    <Compile Include="Model\BatsmanTotalScore.cs" />
+    <Compile Include="Model\TeamListName.cs" />
     <Compile Include="Model\BowlSide.cs" />
     <Compile Include="Model\IPLSchedule.cs" />
     <Compile Include="Model\NoDuplicate.cs" />
@@ -158,6 +158,7 @@
     <None Include="Data\sampleBowlScore.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Data\TeamPlayers\jollyCricketers.csv" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

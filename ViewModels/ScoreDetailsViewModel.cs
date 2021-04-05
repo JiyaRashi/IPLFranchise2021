@@ -22,6 +22,9 @@ namespace IPLFranchise2021.ViewModels
         public ObservableCollection<OtherDetails> _allotherPointsDetails { get; set; }
         public ObservableCollection<OtherDetails> noDuplicate { get; set; }
 
+        public string[] stringSeparators = new string[] { "c ", "b ", "run out ", "c sub", "lbw " };
+        public Dictionary<string, int> totalDuplicate { get; set; }
+
         public int _totalScore;
 
         public int _bowlTotalScore;
@@ -36,6 +39,8 @@ namespace IPLFranchise2021.ViewModels
             _otherPointsDetails = new ObservableCollection<OtherDetails>();
             _allotherPointsDetails = new ObservableCollection<OtherDetails>();
             noDuplicate = new ObservableCollection<OtherDetails>();
+            totalDuplicate = new Dictionary<string, int>();
+
         }
         private bool CanExecute()
         {
@@ -47,6 +52,7 @@ namespace IPLFranchise2021.ViewModels
             AllBowlDetails = BowlPointsTotalScore(BowlDetails);
             AllotherPointsDetails = OtherPoints(OtherPointsDetails);
             NoDuplicate = NoDuplicateName(OtherPointsDetails);
+            TotalDuplicate = TotalDuplicateName(OtherPointsDetails);
         }
 
 
@@ -110,6 +116,12 @@ namespace IPLFranchise2021.ViewModels
         {
             get { return noDuplicate; }
             set { noDuplicate = value; }
+        }
+
+        public Dictionary<string, int> TotalDuplicate
+        {
+            get { return totalDuplicate; }
+            set { totalDuplicate = value; }
         }
         public IList<Batsman> GetAllBatsmen()
         {
@@ -233,23 +245,24 @@ namespace IPLFranchise2021.ViewModels
         {
             if (_allotherPointsDetails == null || _allotherPointsDetails.Count == 0)
             {
+                string[] stringSeparators = new string[] { " "};
+
                 foreach (var item in otherDetails)
                 {
+                    string[] name1 = item.Name.Split(stringSeparators, StringSplitOptions.None);
                     //Regex r = new Regex("c sub|c");
 
-                    bool catcher = item.Name.Contains("c ");
-                    bool catchersub = item.Name.Contains("c sub");
-                    bool LBW = item.Name.Contains("lbw ");
-                    bool bowled = item.Name.Contains("b ");
-                    bool stumbed = item.Name.Contains("st ");
-                    bool runout = item.Name.Contains("run out");
+                    bool catcher = name1[0].Contains("c");
+                    bool LBW = name1[0].Contains("lbw");
+                    bool bowled = name1[0].Contains("b");
+                    bool stumbed = name1[0].Contains("st");
+                    bool runout = name1[0].Contains("run");
 
                     int points = LBW ? 10 :
                         bowled ? 10 :
                         catcher ? 25 :
-                        catchersub ? 25 :
                         stumbed ? 30 :
-                        runout ? 50 : 0;
+                        runout ? 50 :0;
 
                     _allotherPointsDetails.Add(
                     new OtherDetails()
@@ -259,32 +272,113 @@ namespace IPLFranchise2021.ViewModels
                     });
 
                 }
+
+               
+                
+
             }
             return _allotherPointsDetails;
         }
 
         public ObservableCollection<OtherDetails> NoDuplicateName(ObservableCollection<OtherDetails> otherPointsDetails)
         {
-
-
-            foreach (var item in otherPointsDetails)
+            if (noDuplicate == null || noDuplicate.Count == 0)
             {
-                if (duplicateFinder(noDuplicate, item.Name))
+                var query = from r in otherPointsDetails
+                            group r by r.Name into g
+                            select new { Count = g.Count(), Value = g.Key };
+
+
+                foreach (var item in query)
                 {
+                    bool catcher = item.Value.Contains("c ");
+                    bool catchersub = item.Value.Contains("c sub (");
+                    bool LBW = item.Value.Contains("lbw ");
+                    bool bowled = item.Value.Contains("b ");
+                    bool stumbed = item.Value.Contains("st ");
+                    bool runout = item.Value.Contains("run out ");
+                    bool runoutsub = item.Value.Contains("run out (sub ");
+
+                int points = LBW ? 10 :
+                        bowled ? 10 :
+                        catcher ? 25 :
+                        catchersub ? 25 :
+                        stumbed ? 30 :
+                        runout ? 50 :
+                        runoutsub?50: 0;
+
+                    if (catcher || catchersub || stumbed|| runoutsub)
+                    {
+                        points = (item.Count >= 3) ? item.Count * 25 + 70 : points * item.Count;
+                    }
+                    else
+                    {
+                        points = points * item.Count;
+                    }
+
+
                     noDuplicate.Add(new OtherDetails()
                     {
-                        Name = item.Name,
-                        OtherTotalScore = item.OtherTotalScore
+                        Name = item.Value,
+                        OtherTotalScore = points
                     });
                 }
-            }
+
+           }
+
+            //foreach (var v in query)
+            //{
+            //    noDuplicate.Add(new OtherDetails()
+            //    {
+            //        Name = v.Value,
+            //        OtherTotalScore = v.Count
+            //    });
+            //}
             return noDuplicate;
         }
 
-        bool duplicateFinder(ObservableCollection<OtherDetails> duplicate, string name)
+        public Dictionary<string, int> TotalDuplicateName(ObservableCollection<OtherDetails> otherPointsDetails)
         {
-            string[] stringSeparators = new string[] { "c ", "b ", "run out ","c sub" };
-            
+            //if (totalDuplicate == null || totalDuplicate.Count == 0)
+            //{
+            //    foreach (var item in otherPointsDetails)
+            //    {
+            //        string[] name2 = item.Name.Split(stringSeparators, StringSplitOptions.None);
+            //        string rawName = name2[1];
+
+            //        if (totalDuplicate.Count>0 && totalDuplicate.ContainsKey(rawName))
+            //        {
+            //            int isDuplicate = totalDuplicate[name2[1]];
+            //            totalDuplicate[name2[1]]=isDuplicate * 2;
+
+            //        }
+            //        //string totalDuplicatekey = totalDuplicate;
+            //        if (!totalDuplicate.ContainsKey(rawName))
+            //        {
+            //            totalDuplicate.Add
+            //                (
+            //                  name2[1], item.OtherTotalScore
+            //                );
+            //        }
+            //    }
+
+            //}
+
+            if (totalDuplicate == null || totalDuplicate.Count == 0)
+            {
+                foreach (var item in otherPointsDetails)
+                {
+                }
+            }
+
+
+            return totalDuplicate;
+        }
+
+            bool duplicateFinder(ObservableCollection<OtherDetails> duplicate, string name)
+        {
+           // string[] stringSeparators = new string[] { "c ", "b ", "run out ", "c sub", "lbw " };
+
 
             foreach (var item in duplicate)
             {
