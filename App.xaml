@@ -4,6 +4,10 @@
              xmlns:prism="http://prismlibrary.com/"
              xmlns:local="clr-namespace:IPLFranchise2021">
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Styles/StyleDictionary.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </prism:PrismApplication>

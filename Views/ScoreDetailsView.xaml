@@ -21,6 +21,7 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
         <DataGrid AutoGenerateColumns="False"  CanUserSortColumns="False" Grid.Row="0" Grid.Column="0" ItemsSource="{Binding Path=BatsmenDetails, UpdateSourceTrigger=PropertyChanged}" >
             <DataGrid.Columns>
@@ -32,7 +33,6 @@
                 <DataGridTextColumn Header="Fours" Binding="{Binding Fours}" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Sixes" Binding="{Binding Sixes}" IsReadOnly="True"/>
             </DataGrid.Columns>
-            
         </DataGrid>
         <DataGrid AutoGenerateColumns="False" CanUserSortColumns="False" Margin="1 0 0 0" Grid.Row="0" Grid.Column="1" ItemsSource="{Binding Path=AllBatsmenDetails, UpdateSourceTrigger=PropertyChanged}" >
             <DataGrid.Columns>
@@ -58,6 +58,7 @@
         </DataGrid>
         <DataGrid Grid.Row="0" Grid.Column="2" ItemsSource="{Binding Path=AllotherPointsDetails}"/>
         <DataGrid Grid.Row="1" Grid.Column="2" ItemsSource="{Binding Path=NoDuplicate, UpdateSourceTrigger=PropertyChanged}"/>
-        <Button Command="{Binding CalculateScoreDelegateCommand}" Margin="20 20" FontSize="25" Grid.Row="4" Grid.ColumnSpan="2" Content="Calulate Score"/>
+        <Button  Command="{Binding CalculateScoreDelegateCommand}" Margin="20 20" FontSize="25" Grid.Row="4" Grid.ColumnSpan="2" Content="Calulate Score"/>
+        <TextBlock FontSize="25" Text=" Details Taken from Ipl2020.com " Grid.Row="5" Grid.ColumnSpan="2"/>
     </Grid>
 </UserControl>

@@ -272,10 +272,6 @@ namespace IPLFranchise2021.ViewModels
                     });
 
                 }
-
-               
-                
-
             }
             return _allotherPointsDetails;
         }
@@ -305,7 +301,7 @@ namespace IPLFranchise2021.ViewModels
                         catchersub ? 25 :
                         stumbed ? 30 :
                         runout ? 50 :
-                        runoutsub?50: 0;
+                        runoutsub ? 50: 0;
 
                     if (catcher || catchersub || stumbed|| runoutsub)
                     {
