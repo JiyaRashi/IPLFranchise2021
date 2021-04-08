@@ -22,7 +22,7 @@ namespace IPLFranchise2021.ViewModels
         public ObservableCollection<OtherDetails> _allotherPointsDetails { get; set; }
         public ObservableCollection<OtherDetails> noDuplicate { get; set; }
 
-        public string[] stringSeparators = new string[] { "c ", "b ", "run out ", "c sub", "lbw " };
+        public string[] stringSeparators = new string[] { "c ", "b ", "run out ", "c sub ", "lbw " };
         public Dictionary<string, int> totalDuplicate { get; set; }
 
         public int _totalScore;
@@ -284,26 +284,25 @@ namespace IPLFranchise2021.ViewModels
                             group r by r.Name into g
                             select new { Count = g.Count(), Value = g.Key };
 
+                string[] stringSeparators = new string[] { " " };
 
                 foreach (var item in query)
                 {
-                    bool catcher = item.Value.Contains("c ");
-                    bool catchersub = item.Value.Contains("c sub (");
-                    bool LBW = item.Value.Contains("lbw ");
-                    bool bowled = item.Value.Contains("b ");
-                    bool stumbed = item.Value.Contains("st ");
-                    bool runout = item.Value.Contains("run out ");
-                    bool runoutsub = item.Value.Contains("run out (sub ");
+                    string[] name1 = item.Value.Split(stringSeparators, StringSplitOptions.None);
 
-                int points = LBW ? 10 :
+                    bool catcher = name1[0].Contains("c");
+                    bool LBW = name1[0].Contains("lbw");
+                    bool bowled = name1[0].Contains("b");
+                    bool stumbed = name1[0].Contains("st");
+                    bool runout = name1[0].Contains("run");
+
+                    int points = LBW ? 10 :
                         bowled ? 10 :
                         catcher ? 25 :
-                        catchersub ? 25 :
                         stumbed ? 30 :
-                        runout ? 50 :
-                        runoutsub ? 50: 0;
+                        runout ? 50 : 0;
 
-                    if (catcher || catchersub || stumbed|| runoutsub)
+                    if (catcher ||  stumbed)
                     {
                         points = (item.Count >= 3) ? item.Count * 25 + 70 : points * item.Count;
                     }
