@@ -1,5 +1,6 @@
 ﻿using IPLFranchise2021.Model;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -16,7 +17,11 @@ namespace IPLFranchise2021.Logic
             int dot, int maiden, bool hatTrick);
         int FielderNamePoints(string name);
         bool IsValueableName(string name);
-        int FielderEachTotalPoints(string name, int count);
+        int FielderEachTotalBonousPoints(string name, int count);
+        string GetName(string name, ObservableCollection<Batsman> batsmanName);
+        string GetName(string name);
+        string GetNoDupName(string name);
+        ArrayList GetRunOutpoints(string name);
     }
     public class RunsCalculatorLogic : IRunsCalculatorLogic
     {
@@ -44,7 +49,7 @@ namespace IPLFranchise2021.Logic
                              (srPoints >= 350) ? 120 :
                              (srPoints <= 50 && balls >= 5) ? -20 : 0;
 
-            int ducks = runs == 0 ? -20 : 0;
+            int ducks = (runs == 0 && balls > 0) ? -20 : 0;
 
 
             return totalScore + runTotalPoints + sixesPoints + fourPoints + srPoints + ducks;
@@ -115,12 +120,12 @@ namespace IPLFranchise2021.Logic
             return false; ;
         }
 
-        public int FielderEachTotalPoints(string name, int count)
+        public int FielderEachTotalBonousPoints(string name, int count)
         {
             int points = 0;
             if (name.Contains("c & b"))
             {
-                points = 10;
+                points = 10 * count;
             }
             else
             {
@@ -149,6 +154,95 @@ namespace IPLFranchise2021.Logic
             }
 
             return points;
+        }
+
+        public string GetName(string name, ObservableCollection<Batsman> batsmanName)
+        {
+            ObservableCollection<string> CollectionName = new ObservableCollection<string>();
+
+            string[] spaceSplit = new string[] { " " };
+            string[] slashSplit = new string[] { "/" };
+            List<char> charsToRemove = new List<char>() { ')' };
+
+
+            foreach (var item in batsmanName)
+            {
+                string[] name11 = item.BatsmanName.Split(spaceSplit, StringSplitOptions.None);
+                int value = name11.Length - 1;
+                CollectionName.Add(name11[value].ToUpper());
+            }
+
+            string[] name1 = name.Split(spaceSplit, StringSplitOptions.None);
+
+            if (name1[0].Equals("run"))
+            {
+                string[] name1222 = name.Split(slashSplit, StringSplitOptions.None);
+
+                for (int i = 0; i < name1222.Length; i++)
+                {
+                    string n = name1222[i];
+                    string[] name34341 = n.Split(spaceSplit, StringSplitOptions.None);
+                    int value = name34341.Length - 1;
+                    string str1 = Filter(name34341[value], charsToRemove);
+                    CollectionName.Add(str1.ToUpper());
+                }
+
+            }
+
+            int val = name1.Length - 1;
+
+            string remainName = name1[val].ToUpper();
+            string str = Filter(remainName, charsToRemove);
+            bool r = CollectionName.Any(b => b.Contains(str));
+            return name;
+        }
+
+        public string GetName(string name)
+        {
+            string[] stringSeparators = new string[] { " & ", " b " };
+            string[] sName = name.Split(stringSeparators, StringSplitOptions.None);
+
+            return sName[0].Trim();
+
+        }
+
+        public string GetNoDupName(string name)
+        {
+
+            string[] stringSeparators = new string[] { "lbw", "b", "c", "st" };
+            string[] sName = name.Split(stringSeparators, StringSplitOptions.None);
+
+            return name.Contains("run out") ? name : sName[1].Trim();
+
+        }
+
+        public ArrayList GetRunOutpoints(string name)
+        {
+            ArrayList namely = new ArrayList(); 
+            string[] slashSplit = new string[] { "/" };
+            List<char> charsToRemove = new List<char>() { ')','(' };
+            string[] stringSeparators = new string[] { "run out"};
+            string[] sName = name.Split(stringSeparators, StringSplitOptions.None);
+            string[] runName = sName[1].Split(slashSplit, StringSplitOptions.None);
+            for (int i = 0; i < runName.Length; i++)
+            {
+                string n = runName[i];
+                string str1 = Filter(n, charsToRemove);
+                namely.Add(str1);
+
+            }
+
+            return namely;
+        }
+
+        private string Filter(string str, List<char> charsToRemove)
+        {
+            foreach (char c in charsToRemove)
+            {
+                str = str.Replace(c.ToString(), String.Empty);
+            }
+
+            return str;
         }
     }
 }

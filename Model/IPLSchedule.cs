@@ -12,5 +12,7 @@ namespace IPLFranchise2021.Model
         public string Match { get; set; }
         public string Time { get; set; }
         public string Venue { get; set; }
+        public int MatchNo { get; set; }
+
     }
 }

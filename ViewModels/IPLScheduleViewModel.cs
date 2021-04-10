@@ -44,6 +44,5 @@ namespace IPLFranchise2021.ViewModels
             get { return _iPLScheduleDetails; }
             set { _iPLScheduleDetails = value; }
         }
-       
     }
 }
