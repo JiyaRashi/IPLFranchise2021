@@ -16,7 +16,6 @@ namespace IPLFranchise2021.Model
         public int Dot { get; set; }
         public int Maiden { get; set; }
         public bool HatTrick { get; set; }
-
         public int BowlTotalScore { get; set; }
     }
 }

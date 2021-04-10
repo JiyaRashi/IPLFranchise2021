@@ -1,4 +1,5 @@
-﻿using IPLFranchise2021.Model;
+﻿using IPLFranchise2021.Logic;
+using IPLFranchise2021.Model;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Regions;
@@ -15,12 +16,15 @@ namespace IPLFranchise2021.ViewModels
     public class IPLScheduleViewModel :BindableBase
     {
         public DelegateCommand MatchScoreDelegateCommand { get; private set; }
+        public IDataReaderLogic dataReaderLogic { get; set; }
 
         private IRegionManager _regionManger;
         public ObservableCollection<IPLSchedule> _iPLScheduleDetails { get; set; }
-        public IPLScheduleViewModel(IRegionManager regionManger)
+        public IPLScheduleViewModel(IRegionManager regionManger,
+            IDataReaderLogic DataReaderLogic)
         {
-            _iPLScheduleDetails = new ObservableCollection<IPLSchedule>((GetAllIPLSchedule()));
+            dataReaderLogic = DataReaderLogic;
+            _iPLScheduleDetails = new ObservableCollection<IPLSchedule>((dataReaderLogic.GetAllIPLSchedule()));
             MatchScoreDelegateCommand = new DelegateCommand(Execute, CanExecute);
             _regionManger = regionManger;
         }
@@ -40,17 +44,6 @@ namespace IPLFranchise2021.ViewModels
             get { return _iPLScheduleDetails; }
             set { _iPLScheduleDetails = value; }
         }
-        public IList<IPLSchedule> GetAllIPLSchedule()
-        {
-            string path = "Data/IPL2021Schedule.csv";
-            var query =
-
-                File.ReadAllLines(path)
-                    .Skip(1)
-                    .Where(l => l.Length > 1)
-                    .ToSchedule();
-
-            return query.ToList();
-        }
+       
     }
 }

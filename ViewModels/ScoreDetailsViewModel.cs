@@ -1,4 +1,5 @@
-﻿using IPLFranchise2021.Model;
+﻿using IPLFranchise2021.Logic;
+using IPLFranchise2021.Model;
 using Prism.Commands;
 using Prism.Mvvm;
 using System;
@@ -14,26 +15,34 @@ namespace IPLFranchise2021.ViewModels
 {
     public class ScoreDetailsViewModel : BindableBase
     {
-        public ObservableCollection<BowlSide> _bowlDetails { get; set; }
-        public ObservableCollection<BowlSide> _allBowlDetails { get; set; }
-        public ObservableCollection<Batsman> _allBatsmenDetails { get; set; }
+        public IRunsCalculatorLogic runsCalculatorLogic { get; set; }
+
+        public IDataReaderLogic dataReaderLogic { get; set; }
+
         public ObservableCollection<Batsman> _batsmenDetails { get; set; }
-        public ObservableCollection<OtherDetails> _otherPointsDetails { get; set; }
-        public ObservableCollection<OtherDetails> _allotherPointsDetails { get; set; }
-        public ObservableCollection<OtherDetails> noDuplicate { get; set; }
+        public ObservableCollection<BowlSide> _bowlDetails { get; set; }
+        public ObservableCollection<Batsman> _batsmenTotalPoints { get; set; }
+        public ObservableCollection<BowlSide> _bowlingTotalPoints { get; set; }
+        public ObservableCollection<OtherDetails> _batsmanOutDetails { get; set; }
+        public ObservableCollection<OtherDetails> _fielderNameDupPoints { get; set; }
+        public ObservableCollection<OtherDetails> _fielderPoints { get; set; }
 
         public string[] stringSeparators = new string[] { "c ", "b ", "run out ", "c sub ", "lbw " };
         public DelegateCommand CalculateScoreDelegateCommand { get; private set; }
-        public ScoreDetailsViewModel()
+        public ScoreDetailsViewModel(IRunsCalculatorLogic RunsCalculatorLogic,
+            IDataReaderLogic DataReaderLogic)
         {
+            runsCalculatorLogic = RunsCalculatorLogic;
+            dataReaderLogic = DataReaderLogic;
             CalculateScoreDelegateCommand = new DelegateCommand(Execute, CanExecute);
-            _batsmenDetails = new ObservableCollection<Batsman>((GetAllBatsmen()));
-            _bowlDetails = new ObservableCollection<BowlSide>((GetAllBowlSide()));
-            _allBatsmenDetails = new ObservableCollection<Batsman>();
-            _allBowlDetails = new ObservableCollection<BowlSide>();
-            _otherPointsDetails = new ObservableCollection<OtherDetails>();
-            _allotherPointsDetails = new ObservableCollection<OtherDetails>();
-            noDuplicate = new ObservableCollection<OtherDetails>();
+            _batsmenDetails = new ObservableCollection<Batsman>((dataReaderLogic.GetAllBatsmen()));
+            _bowlDetails = new ObservableCollection<BowlSide>((dataReaderLogic.GetAllBowlSide()));
+            _batsmenTotalPoints = new ObservableCollection<Batsman>();
+            _bowlingTotalPoints = new ObservableCollection<BowlSide>();
+            _fielderNameDupPoints = new ObservableCollection<OtherDetails>();
+            _batsmanOutDetails = new ObservableCollection<OtherDetails>();
+            _fielderPoints = new ObservableCollection<OtherDetails>();
+            
 
         }
         private bool CanExecute()
@@ -42,257 +51,153 @@ namespace IPLFranchise2021.ViewModels
         }
         private void Execute()
         {
-            AllBatsmenDetails = BatsmanPointsTotalScore(BatsmenDetails);
-            AllBowlDetails = BowlPointsTotalScore(BowlDetails);
-            AllotherPointsDetails = OtherPoints(OtherPointsDetails);
-            NoDuplicate = NoDuplicateName(OtherPointsDetails);
+            BatsmenTotalPoints = BatsmanPointsTotalScore(BatsmenDetails);
+            BowlingTotalPoints = BowlPointsTotalScore(BowlDetails);
+            FielderNameDupPoints = FielderEachPoints(BatsmenDetails);
+            FielderPoints = FielderEachTotalPoints(FielderNameDupPoints);
         }
-        
+
+        /// <summary>
+        /// Get Batsman Details
+        /// </summary>
         public ObservableCollection<Batsman> BatsmenDetails
         {
             get { return _batsmenDetails; }
             set { _batsmenDetails = value; }
         }
 
+        /// <summary>
+        /// Get Bowling Details
+        /// </summary>
         public ObservableCollection<BowlSide> BowlDetails
         {
             get { return _bowlDetails; }
             set { _bowlDetails = value; }
         }
-
-        public ObservableCollection<Batsman> AllBatsmenDetails
+        
+        /// <summary>
+        /// Batsman Total Score
+        /// </summary>
+        public ObservableCollection<Batsman> BatsmenTotalPoints
         {
-            get { return _allBatsmenDetails; }
-            set { _allBatsmenDetails = value; }
+            get { return _batsmenTotalPoints; }
+            set { _batsmenTotalPoints = value; }
         }
 
-        public ObservableCollection<BowlSide> AllBowlDetails
+        /// <summary>
+        /// Bowling Total points
+        /// </summary>
+        public ObservableCollection<BowlSide> BowlingTotalPoints
         {
-            get { return _allBowlDetails; }
-            set { _allBowlDetails = value; }
+            get { return _bowlingTotalPoints; }
+            set { _bowlingTotalPoints = value; }
         }
-
-        public ObservableCollection<OtherDetails> OtherPointsDetails
+        public ObservableCollection<OtherDetails> FielderNameDupPoints
         {
-            get { return _otherPointsDetails; }
-            set { _otherPointsDetails = value; }
+            get { return _fielderNameDupPoints; }
+            set { _fielderNameDupPoints = value; }
         }
-        public ObservableCollection<OtherDetails> AllotherPointsDetails
+        public ObservableCollection<OtherDetails> BatsmanOutDetails
         {
-            get { return _allotherPointsDetails; }
-            set { _allotherPointsDetails = value; }
+            get { return _batsmanOutDetails; }
+            set { _batsmanOutDetails = value; }
         }
-
-        public ObservableCollection<OtherDetails> NoDuplicate
+        public ObservableCollection<OtherDetails> FielderPoints
         {
-            get { return noDuplicate; }
-            set { noDuplicate = value; }
+            get { return _fielderPoints; }
+            set { _fielderPoints = value; }
         }
         
-        public IList<Batsman> GetAllBatsmen()
-        {
-            string path = "Data/sampleBatScore.csv";
-            var query =
-
-                File.ReadAllLines(path)
-                    .Skip(1)
-                    .Where(l => l.Length > 1)
-                    .ToBat();
-
-            return query.ToList();
-        }
-        public IList<BowlSide> GetAllBowlSide()
-        {
-            string path = "Data/sampleBowlScore.csv";
-            var query =
-
-                File.ReadAllLines(path)
-                    .Skip(1)
-                    .Where(l => l.Length > 1)
-                    .ToBowl();
-
-            return query.ToList();
-        }
+        /// <summary>
+        /// Batsman Total Score
+        /// </summary>
+        /// <param name="_batsmenDetail"></param>
+        /// <returns></returns>
         public ObservableCollection<Batsman> BatsmanPointsTotalScore(ObservableCollection<Batsman> _batsmenDetail)
         {
-            if (_allBatsmenDetails == null || _allBatsmenDetails.Count == 0)
+            if (_batsmenTotalPoints == null || _batsmenTotalPoints.Count == 0)
             {
                 foreach (var item in _batsmenDetail)
                 {
 
-                    _allBatsmenDetails.Add(
+                    _batsmenTotalPoints.Add(
 
                         new Batsman
                         {
-                            TotalScore = BatsmanScoreCalulator(item.Runs, item.Balls, item.Fours, item.Sixes, item.SR, item.Details)
-                        });
+                            TotalScore = runsCalculatorLogic.BatsmanScoreCalulator
+                            (item.Runs, item.Balls, item.Fours, item.Sixes, item.SR)
+                        }); ;
                 }
+
             }
-            return _allBatsmenDetails;
+            return _batsmenTotalPoints;
         }
-        public int BatsmanScoreCalulator(int runs, int balls, int fours, int sixes, double SR, string details)
-        {
-            int totalScore = 0;
-
-            int runTotalPoints = (runs >= 30 && runs <= 49) ? runs + 30 :
-                                 (runs >= 50 && runs <= 69) ? runs + 50 :
-                                 (runs >= 70 && runs <= 99) ? runs + 70 :
-                                 (runs >= 100) ? runs + 200 :
-                                 runs;
-
-            int sixesPoints = (sixes >= 5 && sixes >= 9) ? sixes * 16 + 70 :
-                              (sixes >= 10) ? sixes * 16 + 150 :
-                              sixes * 16;
-
-            int fourPoints = (fours >= 10 && fours >= 14) ? fours * 9 + 60 :
-                              (fours >= 15) ? fours * 9 + 100 :
-                              fours * 9;
-
-            int srPoints = Convert.ToInt32(SR);
-
-            srPoints = (srPoints >= 250 && srPoints >= 349) ? 70 :
-                             (srPoints >= 350) ? 120 :
-                             (srPoints <= 50 && balls >= 5) ? -20 : 0;
-
-            int ducks = runs == 0 ? -20 : 0;
-
-            string[] stringSeparators = new string[] { " & ", " b " };
-
-            string[] otherDetails = details.Split(stringSeparators, StringSplitOptions.None);
-
-            foreach (string author in otherDetails)
-            {
-                Regex r = new Regex("lbw |b |c |st| & |run out");
-                bool containsAny = r.IsMatch(author);
-                if ((author.ToUpper() != "\tNOT OUT\t" && containsAny))
-                {
-
-                    OtherPointsDetails.Add(new OtherDetails() { Name = author.Trim() });
-                }
-            }
-            return totalScore + runTotalPoints + sixesPoints + fourPoints + srPoints + ducks;
-        }
+       
+        /// <summary>
+        /// Bowling Total Points
+        /// </summary>
+        /// <param name="_bowlDetails"></param>
+        /// <returns></returns>
         public ObservableCollection<BowlSide> BowlPointsTotalScore(ObservableCollection<BowlSide> _bowlDetails)
         {
-            if (_allBowlDetails == null || _allBowlDetails.Count == 0)
+            if (_bowlingTotalPoints == null || _bowlingTotalPoints.Count == 0)
             {
                 foreach (var item in _bowlDetails)
                 {
 
-                    _allBowlDetails.Add(
+                    _bowlingTotalPoints.Add(
 
                         new BowlSide
                         {
-                            BowlTotalScore = BowlScoreCalulator(item.OverRuns, item.Overs, item.Wickets, item.Econ,
+                            BowlTotalScore = runsCalculatorLogic.BowlScoreCalulator(item.OverRuns, item.Overs, item.Wickets, item.Econ,
                             item.Dot, item.Maiden, item.HatTrick)
                         });
                 }
             }
-            return _allBowlDetails;
+            return _bowlingTotalPoints;
         }
-        public int BowlScoreCalulator(int overRuns, double overs, int wickets, double Econ,
-            int dot, int maiden, bool hatTrick)
+        
+        public ObservableCollection<OtherDetails> FielderEachPoints(ObservableCollection<Batsman> batsmanName)
         {
-            int _bowlTotalPoints = 0;
-
-            int wicketPoints = (wickets == 1) ? 30 :
-                (wickets == 2) ? 60 :
-                (wickets == 3) ? 100 :
-                (wickets == 4) ? 150 :
-                (wickets == 5) ? 250 : 0;
-            int maidenPoints = maiden * 70;
-            int hattrickPoints = hatTrick ? 200 : 0;
-            int econPoints = Convert.ToInt32(Econ);
-            econPoints = (econPoints <= 3) ? 150 :
-                (econPoints == 4) ? 100 :
-                (econPoints == 5) ? 70 :
-                (econPoints == 6) ? 50 :
-                (econPoints == 7) ? 40 :
-                (econPoints == 8) ? -10 :
-                (econPoints == 9) ? -20 :
-                (econPoints == 10) ? -30 :
-                (econPoints >= 11) ? -40 : 0;
-
-            return _bowlTotalPoints + wicketPoints + maidenPoints + hattrickPoints + econPoints;
-        }
-        public ObservableCollection<OtherDetails> OtherPoints(ObservableCollection<OtherDetails> otherDetails)
-        {
-            if (_allotherPointsDetails == null || _allotherPointsDetails.Count == 0)
+            if (_fielderNameDupPoints == null || _fielderNameDupPoints.Count == 0)
             {
-                string[] stringSeparators = new string[] { " " };
-
-                foreach (var item in otherDetails)
+                foreach (var item in batsmanName)
                 {
-                    string[] name1 = item.Name.Split(stringSeparators, StringSplitOptions.None);
-
-                    bool catcher = name1[0].Contains("c");
-                    bool LBW = name1[0].Contains("lbw");
-                    bool bowled = name1[0].Contains("b");
-                    bool stumbed = name1[0].Contains("st");
-                    bool runout = name1[0].Contains("run");
-
-                    int points = LBW ? 10 :
-                        bowled ? 10 :
-                        catcher ? 25 :
-                        stumbed ? 30 :
-                        runout ? 50 : 0;
-
-                    _allotherPointsDetails.Add(
-                    new OtherDetails()
+                    if (runsCalculatorLogic.IsValueableName(item.FielderDetails))
                     {
-                        Name = item.Name,
-                        OtherTotalScore = points
-                    });
+                        _fielderNameDupPoints.Add(
+                        new OtherDetails()
+                        {
+                            Name = item.FielderDetails.Trim(),
+                            OtherTotalScore = runsCalculatorLogic.FielderNamePoints(item.FielderDetails),
+                        });
+                    }
 
                 }
             }
-            return _allotherPointsDetails;
+            return _fielderNameDupPoints;
         }
 
-        public ObservableCollection<OtherDetails> NoDuplicateName(ObservableCollection<OtherDetails> otherPointsDetails)
+        public ObservableCollection<OtherDetails> FielderEachTotalPoints(ObservableCollection<OtherDetails> filederNmaeDupPoints)
         {
-            if (noDuplicate == null || noDuplicate.Count == 0)
+            if (_fielderPoints == null || _fielderPoints.Count == 0)
             {
-                var query = from r in otherPointsDetails
+                var query = from r in filederNmaeDupPoints
                             group r by r.Name into g
                             select new { Count = g.Count(), Value = g.Key };
 
                 foreach (var item in query)
                 {
-                    var result = Regex.Match(item.Value, @"^([\w\-]+)");
-
-                    bool catcher = result.Value.Contains("c");
-                    bool LBW = result.Value.Contains("lbw");
-                    bool bowled = result.Value.Contains("b");
-                    bool stumbed = result.Value.Contains("st");
-                    bool runout = result.Value.Contains("run");
-
-                    int points = LBW ? 10 :
-                        bowled ? 10 :
-                        catcher ? 25 :
-                        stumbed ? 30 :
-                        runout ? 50 : 0;
-
-                    if (catcher || stumbed)
-                    {
-                        points = (item.Count >= 3) ? item.Count * 25 + 70 : points * item.Count;
-                    }
-                    else
-                    {
-                        points = points * item.Count;
-                    }
-
-
-                    noDuplicate.Add(new OtherDetails()
+                    _fielderPoints.Add(new OtherDetails()
                     {
                         Name = item.Value,
-                        OtherTotalScore = points
+                        OtherTotalScore = runsCalculatorLogic.FielderEachTotalPoints(item.Value,item.Count)
                     });
                 }
 
             }
             
-            return noDuplicate;
+            return _fielderPoints;
         }
         
     }

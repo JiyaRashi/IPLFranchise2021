@@ -19,7 +19,7 @@ namespace IPLFranchise2021
                 yield return new Batsman
                 {
                     BatsmanName = columns[0],
-                    Details = columns[1],
+                    FielderDetails = columns[1],
                     Runs = int.Parse(columns[2]),
                     Balls = int.Parse(columns[3]),
                     SR = double.Parse(columns[4]),

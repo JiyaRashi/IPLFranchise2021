@@ -1,4 +1,5 @@
-﻿using IPLFranchise2021.ViewModels;
+﻿using IPLFranchise2021.Logic;
+using IPLFranchise2021.ViewModels;
 using IPLFranchise2021.Views;
 using Prism.Ioc;
 using Prism.Mvvm;
@@ -22,6 +23,8 @@ namespace IPLFranchise2021
             containerRegistry.RegisterForNavigation<HomeView, HomeViewModel>();
             containerRegistry.RegisterForNavigation<ScoreDetailsView, ScoreDetailsViewModel>();
             containerRegistry.RegisterForNavigation<IPLScheduleView, IPLScheduleViewModel>();
+            containerRegistry.Register<IRunsCalculatorLogic, RunsCalculatorLogic>();
+            containerRegistry.Register<IDataReaderLogic, DataReaderLogic>();
         }
 
         protected override void ConfigureViewModelLocator()

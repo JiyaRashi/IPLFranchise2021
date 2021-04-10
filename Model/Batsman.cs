@@ -9,7 +9,7 @@ namespace IPLFranchise2021.Model
     public class Batsman
     {
         public string BatsmanName { get; set; }
-        public string Details { get; set; }
+        public string FielderDetails { get; set; }
         public int Runs { get; set; }
         public int Balls { get; set; }
         public int Fours { get; set; }

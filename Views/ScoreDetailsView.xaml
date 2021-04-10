@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:IPLFranchise2021.Views"
              mc:Ignorable="d" 
-             xmlns:prism="http://prismlibrary.com/" Height="800" Width="1000"
+             xmlns:prism="http://prismlibrary.com/" Height="800" Width="1150"
              prism:ViewModelLocator.AutoWireViewModel="True">
     
     <Grid>
@@ -26,7 +26,7 @@
         <DataGrid AutoGenerateColumns="False"  CanUserSortColumns="False" Grid.Row="0" Grid.Column="0" ItemsSource="{Binding Path=BatsmenDetails, UpdateSourceTrigger=PropertyChanged}" >
             <DataGrid.Columns>
                 <DataGridTextColumn  Header="BatsmanName" Binding="{Binding BatsmanName}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Details" Binding="{Binding Details}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Details" Binding="{Binding FielderDetails}" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Runs" Binding="{Binding Runs}" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Balls" Binding="{Binding Balls}" IsReadOnly="True"/>
                 <DataGridTextColumn Header="SR" Binding="{Binding SR}" IsReadOnly="True"/>
@@ -34,7 +34,7 @@
                 <DataGridTextColumn Header="Sixes" Binding="{Binding Sixes}" IsReadOnly="True"/>
             </DataGrid.Columns>
         </DataGrid>
-        <DataGrid AutoGenerateColumns="False" CanUserSortColumns="False" Margin="1 0 0 0" Grid.Row="0" Grid.Column="1" ItemsSource="{Binding Path=AllBatsmenDetails, UpdateSourceTrigger=PropertyChanged}" >
+        <DataGrid AutoGenerateColumns="False" CanUserSortColumns="False" Margin="1 0 0 0" Grid.Row="0" Grid.Column="1" ItemsSource="{Binding Path=BatsmenTotalPoints, UpdateSourceTrigger=PropertyChanged}" >
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Total Score" Binding="{Binding TotalScore}" IsReadOnly="True"/>
             </DataGrid.Columns>
@@ -51,14 +51,15 @@
                 <DataGridTextColumn Header="HatTrick" Binding="{Binding HatTrick}" IsReadOnly="True"/>
             </DataGrid.Columns>
         </DataGrid>
-        <DataGrid AutoGenerateColumns="False" CanUserSortColumns="False" Margin="1 0 0 0" Grid.Row="1" Grid.Column="1" ItemsSource="{Binding Path=AllBowlDetails, UpdateSourceTrigger=PropertyChanged}" >
+        <DataGrid AutoGenerateColumns="False" CanUserSortColumns="False" Margin="1 0 0 0" Grid.Row="1" Grid.Column="1" ItemsSource="{Binding Path=BowlingTotalPoints, UpdateSourceTrigger=PropertyChanged}" >
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Total Score" Binding="{Binding BowlTotalScore}" IsReadOnly="True"/>
             </DataGrid.Columns>
         </DataGrid>
-        <DataGrid Grid.Row="0" Grid.Column="2" ItemsSource="{Binding Path=AllotherPointsDetails}"/>
-        <DataGrid Grid.Row="1" Grid.Column="2" ItemsSource="{Binding Path=NoDuplicate, UpdateSourceTrigger=PropertyChanged}"/>
+
+        <DataGrid Grid.Row="0" Grid.Column="2" ItemsSource="{Binding Path=FielderPoints}"/>
+        <DataGrid Grid.Row="1" Grid.Column="2" ItemsSource="{Binding Path=dgd, UpdateSourceTrigger=PropertyChanged}"/>
         <Button  Command="{Binding CalculateScoreDelegateCommand}" Margin="20 20" FontSize="25" Grid.Row="4" Grid.ColumnSpan="2" Content="Calulate Score"/>
-        <TextBlock FontSize="25" Text=" Details Taken from Ipl2020.com " Grid.Row="5" Grid.ColumnSpan="2"/>
+        <TextBlock FontSize="25" Text=" Details Taken from Iplt20.com " Grid.Row="5" Grid.ColumnSpan="2"/>
     </Grid>
 </UserControl>
