@@ -23,8 +23,6 @@ namespace IPLFranchise2021.ViewModels
         public ObservableCollection<OtherDetails> noDuplicate { get; set; }
 
         public string[] stringSeparators = new string[] { "c ", "b ", "run out ", "c sub ", "lbw " };
-        public Dictionary<string, int> totalDuplicate { get; set; }
-
         public DelegateCommand CalculateScoreDelegateCommand { get; private set; }
         public ScoreDetailsViewModel()
         {
@@ -36,7 +34,6 @@ namespace IPLFranchise2021.ViewModels
             _otherPointsDetails = new ObservableCollection<OtherDetails>();
             _allotherPointsDetails = new ObservableCollection<OtherDetails>();
             noDuplicate = new ObservableCollection<OtherDetails>();
-            totalDuplicate = new Dictionary<string, int>();
 
         }
         private bool CanExecute()
