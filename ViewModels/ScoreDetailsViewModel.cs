@@ -291,15 +291,7 @@ namespace IPLFranchise2021.ViewModels
                 }
 
             }
-
-            //foreach (var v in query)
-            //{
-            //    noDuplicate.Add(new OtherDetails()
-            //    {
-            //        Name = v.Value,
-            //        OtherTotalScore = v.Count
-            //    });
-            //}
+            
             return noDuplicate;
         }
         
