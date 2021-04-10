@@ -257,8 +257,6 @@ namespace IPLFranchise2021.ViewModels
                             group r by r.Name into g
                             select new { Count = g.Count(), Value = g.Key };
 
-
-
                 foreach (var item in query)
                 {
                     var result = Regex.Match(item.Value, @"^([\w\-]+)");
