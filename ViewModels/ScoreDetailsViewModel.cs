@@ -25,9 +25,6 @@ namespace IPLFranchise2021.ViewModels
         public string[] stringSeparators = new string[] { "c ", "b ", "run out ", "c sub ", "lbw " };
         public Dictionary<string, int> totalDuplicate { get; set; }
 
-        public int _totalScore;
-
-        public int _bowlTotalScore;
         public DelegateCommand CalculateScoreDelegateCommand { get; private set; }
         public ScoreDetailsViewModel()
         {
@@ -52,31 +49,8 @@ namespace IPLFranchise2021.ViewModels
             AllBowlDetails = BowlPointsTotalScore(BowlDetails);
             AllotherPointsDetails = OtherPoints(OtherPointsDetails);
             NoDuplicate = NoDuplicateName(OtherPointsDetails);
-            TotalDuplicate = TotalDuplicateName(OtherPointsDetails);
         }
-
-
-
-        public int TotalScore
-        {
-            get { return _totalScore; }
-            set
-            {
-                _totalScore = value;
-                RaisePropertyChanged();
-
-            }
-        }
-        public int BowlTotalScore
-        {
-            get { return _bowlTotalScore; }
-            set
-            {
-                _bowlTotalScore = value;
-                RaisePropertyChanged();
-
-            }
-        }
+        
         public ObservableCollection<Batsman> BatsmenDetails
         {
             get { return _batsmenDetails; }
@@ -117,12 +91,7 @@ namespace IPLFranchise2021.ViewModels
             get { return noDuplicate; }
             set { noDuplicate = value; }
         }
-
-        public Dictionary<string, int> TotalDuplicate
-        {
-            get { return totalDuplicate; }
-            set { totalDuplicate = value; }
-        }
+        
         public IList<Batsman> GetAllBatsmen()
         {
             string path = "Data/sampleBatScore.csv";
@@ -173,19 +142,27 @@ namespace IPLFranchise2021.ViewModels
                                  (runs >= 70 && runs <= 99) ? runs + 70 :
                                  (runs >= 100) ? runs + 200 :
                                  runs;
+
             int sixesPoints = (sixes >= 5 && sixes >= 9) ? sixes * 16 + 70 :
                               (sixes >= 10) ? sixes * 16 + 150 :
                               sixes * 16;
+
             int fourPoints = (fours >= 10 && fours >= 14) ? fours * 9 + 60 :
                               (fours >= 15) ? fours * 9 + 100 :
                               fours * 9;
+
             int srPoints = Convert.ToInt32(SR);
+
             srPoints = (srPoints >= 250 && srPoints >= 349) ? 70 :
                              (srPoints >= 350) ? 120 :
                              (srPoints <= 50 && balls >= 5) ? -20 : 0;
+
             int ducks = runs == 0 ? -20 : 0;
+
             string[] stringSeparators = new string[] { " & ", " b " };
+
             string[] otherDetails = details.Split(stringSeparators, StringSplitOptions.None);
+
             foreach (string author in otherDetails)
             {
                 Regex r = new Regex("lbw |b |c |st| & |run out");
@@ -222,10 +199,10 @@ namespace IPLFranchise2021.ViewModels
             int _bowlTotalPoints = 0;
 
             int wicketPoints = (wickets == 1) ? 30 :
-                (wickets > 1 && wickets <= 2) ? 60 :
-                (wickets > 2 && wickets <= 3) ? 100 :
-                (wickets > 3 && wickets <= 4) ? 150 :
-                (wickets > 4 && wickets <= 5) ? 250 : 0;
+                (wickets == 2) ? 60 :
+                (wickets == 3) ? 100 :
+                (wickets == 4) ? 150 :
+                (wickets == 5) ? 250 : 0;
             int maidenPoints = maiden * 70;
             int hattrickPoints = hatTrick ? 200 : 0;
             int econPoints = Convert.ToInt32(Econ);
@@ -245,12 +222,11 @@ namespace IPLFranchise2021.ViewModels
         {
             if (_allotherPointsDetails == null || _allotherPointsDetails.Count == 0)
             {
-                string[] stringSeparators = new string[] { " "};
+                string[] stringSeparators = new string[] { " " };
 
                 foreach (var item in otherDetails)
                 {
                     string[] name1 = item.Name.Split(stringSeparators, StringSplitOptions.None);
-                    //Regex r = new Regex("c sub|c");
 
                     bool catcher = name1[0].Contains("c");
                     bool LBW = name1[0].Contains("lbw");
@@ -262,7 +238,7 @@ namespace IPLFranchise2021.ViewModels
                         bowled ? 10 :
                         catcher ? 25 :
                         stumbed ? 30 :
-                        runout ? 50 :0;
+                        runout ? 50 : 0;
 
                     _allotherPointsDetails.Add(
                     new OtherDetails()
@@ -284,17 +260,17 @@ namespace IPLFranchise2021.ViewModels
                             group r by r.Name into g
                             select new { Count = g.Count(), Value = g.Key };
 
-                string[] stringSeparators = new string[] { " " };
+
 
                 foreach (var item in query)
                 {
-                    string[] name1 = item.Value.Split(stringSeparators, StringSplitOptions.None);
+                    var result = Regex.Match(item.Value, @"^([\w\-]+)");
 
-                    bool catcher = name1[0].Contains("c");
-                    bool LBW = name1[0].Contains("lbw");
-                    bool bowled = name1[0].Contains("b");
-                    bool stumbed = name1[0].Contains("st");
-                    bool runout = name1[0].Contains("run");
+                    bool catcher = result.Value.Contains("c");
+                    bool LBW = result.Value.Contains("lbw");
+                    bool bowled = result.Value.Contains("b");
+                    bool stumbed = result.Value.Contains("st");
+                    bool runout = result.Value.Contains("run");
 
                     int points = LBW ? 10 :
                         bowled ? 10 :
@@ -302,7 +278,7 @@ namespace IPLFranchise2021.ViewModels
                         stumbed ? 30 :
                         runout ? 50 : 0;
 
-                    if (catcher ||  stumbed)
+                    if (catcher || stumbed)
                     {
                         points = (item.Count >= 3) ? item.Count * 25 + 70 : points * item.Count;
                     }
@@ -319,7 +295,7 @@ namespace IPLFranchise2021.ViewModels
                     });
                 }
 
-           }
+            }
 
             //foreach (var v in query)
             //{
@@ -331,60 +307,6 @@ namespace IPLFranchise2021.ViewModels
             //}
             return noDuplicate;
         }
-
-        public Dictionary<string, int> TotalDuplicateName(ObservableCollection<OtherDetails> otherPointsDetails)
-        {
-            //if (totalDuplicate == null || totalDuplicate.Count == 0)
-            //{
-            //    foreach (var item in otherPointsDetails)
-            //    {
-            //        string[] name2 = item.Name.Split(stringSeparators, StringSplitOptions.None);
-            //        string rawName = name2[1];
-
-            //        if (totalDuplicate.Count>0 && totalDuplicate.ContainsKey(rawName))
-            //        {
-            //            int isDuplicate = totalDuplicate[name2[1]];
-            //            totalDuplicate[name2[1]]=isDuplicate * 2;
-
-            //        }
-            //        //string totalDuplicatekey = totalDuplicate;
-            //        if (!totalDuplicate.ContainsKey(rawName))
-            //        {
-            //            totalDuplicate.Add
-            //                (
-            //                  name2[1], item.OtherTotalScore
-            //                );
-            //        }
-            //    }
-
-            //}
-
-            if (totalDuplicate == null || totalDuplicate.Count == 0)
-            {
-                foreach (var item in otherPointsDetails)
-                {
-                }
-            }
-
-
-            return totalDuplicate;
-        }
-
-            bool duplicateFinder(ObservableCollection<OtherDetails> duplicate, string name)
-        {
-           // string[] stringSeparators = new string[] { "c ", "b ", "run out ", "c sub", "lbw " };
-
-
-            foreach (var item in duplicate)
-            {
-                string[] name1 = name.Split(stringSeparators, StringSplitOptions.None);
-                string[] name2 = item.Name.Split(stringSeparators, StringSplitOptions.None);
-                if (name1[1].ToString().Equals(name2[1]) && duplicate.Count > 0)
-                {
-                    return false;
-                }
-            }
-            return true;
-        }
+        
     }
 }
