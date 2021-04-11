@@ -17,9 +17,7 @@ namespace IPLFranchise2021.ViewModels
     public class ScoreDetailsViewModel : BindableBase
     {
         public IRunsCalculatorLogic runsCalculatorLogic { get; set; }
-
         public IDataReaderLogic dataReaderLogic { get; set; }
-
         public ObservableCollection<Batsman> _batsmenDetails { get; set; }
         public ObservableCollection<BowlSide> _bowlDetails { get; set; }
         public ObservableCollection<Batsman> _batsmenTotalPoints { get; set; }
@@ -27,9 +25,7 @@ namespace IPLFranchise2021.ViewModels
         public ObservableCollection<OtherDetails> _fielderNameDupPoints { get; set; }
         public ObservableCollection<OtherDetails> _fielderBonousPoints { get; set; }
         public ObservableCollection<OtherDetails> _splittedName { get; set; }
-
         public ObservableCollection<OtherDetails> _fielderTotalPoints { get; set; }
-
         public DelegateCommand CalculateScoreDelegateCommand { get; private set; }
         public ScoreDetailsViewModel(IRunsCalculatorLogic RunsCalculatorLogic,
             IDataReaderLogic DataReaderLogic)
@@ -115,8 +111,6 @@ namespace IPLFranchise2021.ViewModels
             get { return _fielderTotalPoints; }
             set { _fielderTotalPoints = value; }
         }
-
-
 
         /// <summary>
         /// Batsman Total Score

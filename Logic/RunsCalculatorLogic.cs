@@ -83,15 +83,16 @@ namespace IPLFranchise2021.Logic
 
         public int FielderNamePoints(string name)
         {
-            string[] stringSeparators = new string[] { " " };
+            string[] stringSeparators = new string[] {" & ", " b " };
 
             string[] name1 = name.Split(stringSeparators, StringSplitOptions.None);
+            int j = (name1[0].Length < 4) ? 1 : 0;
 
-            bool catcher = name1[0].Contains("c");
-            bool LBW = name1[0].Contains("lbw");
-            bool bowled = name1[0].Contains("b");
-            bool stumbed = name1[0].Contains("st");
-            bool runout = name1[0].Contains("run");
+            bool catcher = name1[j].Contains("c ");
+            bool LBW = name1[j].Contains("lbw ");
+            bool bowled = name1[j].Contains("b ");
+            bool stumbed = name1[j].Contains("st ");
+            bool runout = name1[j].Contains("run ");
 
             int points = LBW ? 10 :
                 bowled ? 10 :
@@ -132,8 +133,8 @@ namespace IPLFranchise2021.Logic
                 var result = Regex.Match(name, @"^([\w\-]+)");
 
                 bool LBW = result.Value.Contains("lbw");
-                bool bowled = result.Value.Contains("b");
                 bool catcher = result.Value.Contains("c");
+                bool bowled = result.Value.Contains("b");
                 bool stumbed = result.Value.Contains("st");
                 bool runout = result.Value.Contains("run");
 
@@ -199,10 +200,11 @@ namespace IPLFranchise2021.Logic
 
         public string GetName(string name)
         {
-            string[] stringSeparators = new string[] { " & ", " b " };
+            string[] stringSeparators = new string[] { " & ", " b ","c & "};
             string[] sName = name.Split(stringSeparators, StringSplitOptions.None);
-
-            return sName[0].Trim();
+            //int s = sName[0].Length;
+            //int ss = sName[1].Length;
+            return (sName[0].Length <4)? sName[1].Trim(): sName[0].Trim();
 
         }
 
