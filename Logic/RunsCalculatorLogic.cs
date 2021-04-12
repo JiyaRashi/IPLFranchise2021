@@ -28,6 +28,8 @@ namespace IPLFranchise2021.Logic
         public int BatsmanScoreCalulator(int runs, int balls, int fours, int sixes, double SR)
         {
             int totalScore = 0;
+            int FourBouns = 5;
+            int SixBonus = 10;
 
             int runTotalPoints = (runs >= 30 && runs <= 49) ? runs + 30 :
                                  (runs >= 50 && runs <= 69) ? runs + 50 :
@@ -35,13 +37,13 @@ namespace IPLFranchise2021.Logic
                                  (runs >= 100) ? runs + 200 :
                                  runs;
 
-            int sixesPoints = (sixes >= 5 && sixes >= 9) ? sixes * 16 + 70 :
-                              (sixes >= 10) ? sixes * 16 + 150 :
-                              sixes * 16;
+            int sixesPoints = (sixes >= 5 && sixes >= 9) ? sixes * SixBonus + 70 :
+                              (sixes >= 10) ? sixes * SixBonus + 150 :
+                              sixes * SixBonus;
 
-            int fourPoints = (fours >= 10 && fours >= 14) ? fours * 9 + 60 :
-                              (fours >= 15) ? fours * 9 + 100 :
-                              fours * 9;
+            int fourPoints = (fours >= 10 && fours >= 14) ? fours * FourBouns + 60 :
+                              (fours >= 15) ? fours * FourBouns + 100 :
+                              fours * FourBouns;
 
             int srPoints = Convert.ToInt32(SR);
 
