@@ -164,126 +164,34 @@
     <None Include="Data\IPL2021Schedule.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Data\MatchPoints\1 - Copy %281%29\sampleBatScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %281%29\sampleBowlScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %2810%29\sampleBatScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %2810%29\sampleBowlScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %2811%29\sampleBatScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %2811%29\sampleBowlScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %2812%29\sampleBatScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %2812%29\sampleBowlScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %2813%29\sampleBatScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %2813%29\sampleBowlScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %2814%29\sampleBatScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %2814%29\sampleBowlScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %2815%29\sampleBatScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %2815%29\sampleBowlScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %2816%29\sampleBatScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %2816%29\sampleBowlScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %2817%29\sampleBatScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %2817%29\sampleBowlScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %2818%29\sampleBatScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %2818%29\sampleBowlScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %2819%29\sampleBatScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %2819%29\sampleBowlScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %282%29\sampleBatScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %282%29\sampleBowlScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %2820%29\sampleBatScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %2820%29\sampleBowlScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %2821%29\sampleBatScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %2821%29\sampleBowlScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %2822%29\sampleBatScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %2822%29\sampleBowlScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %2823%29\sampleBatScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %2823%29\sampleBowlScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %2824%29\sampleBatScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %2824%29\sampleBowlScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %2825%29\sampleBatScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %2825%29\sampleBowlScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %2826%29\sampleBatScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %2826%29\sampleBowlScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %2827%29\sampleBatScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %2827%29\sampleBowlScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %2828%29\sampleBatScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %2828%29\sampleBowlScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %2829%29\sampleBatScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %2829%29\sampleBowlScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %283%29\sampleBatScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %283%29\sampleBowlScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %2830%29\sampleBatScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %2830%29\sampleBowlScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %2831%29\sampleBatScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %2831%29\sampleBowlScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %2832%29\sampleBatScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %2832%29\sampleBowlScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %2833%29\sampleBatScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %2833%29\sampleBowlScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %2834%29\sampleBatScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %2834%29\sampleBowlScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %2835%29\sampleBatScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %2835%29\sampleBowlScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %2836%29\sampleBatScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %2836%29\sampleBowlScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %2837%29\sampleBatScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %2837%29\sampleBowlScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %2838%29\sampleBatScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %2838%29\sampleBowlScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %2839%29\sampleBatScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %2839%29\sampleBowlScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %284%29\sampleBatScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %284%29\sampleBowlScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %2840%29\sampleBatScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %2840%29\sampleBowlScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %2841%29\sampleBatScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %2841%29\sampleBowlScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %2842%29\sampleBatScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %2842%29\sampleBowlScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %2843%29\sampleBatScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %2843%29\sampleBowlScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %2844%29\sampleBatScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %2844%29\sampleBowlScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %2845%29\sampleBatScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %2845%29\sampleBowlScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %2846%29\sampleBatScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %2846%29\sampleBowlScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %2847%29\sampleBatScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %2847%29\sampleBowlScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %2848%29\sampleBatScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %2848%29\sampleBowlScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %2849%29\sampleBatScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %2849%29\sampleBowlScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %285%29\sampleBatScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %285%29\sampleBowlScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %2850%29\sampleBatScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %2850%29\sampleBowlScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %2851%29\sampleBatScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %2851%29\sampleBowlScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %2852%29\sampleBatScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %2852%29\sampleBowlScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %2853%29\sampleBatScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %2853%29\sampleBowlScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %2854%29\sampleBatScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %2854%29\sampleBowlScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %2855%29\sampleBatScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %2855%29\sampleBowlScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %2856%29\sampleBatScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %2856%29\sampleBowlScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %2857%29\sampleBatScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %2857%29\sampleBowlScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %2858%29\sampleBatScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %2858%29\sampleBowlScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %2859%29\sampleBatScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %2859%29\sampleBowlScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %286%29\sampleBatScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %286%29\sampleBowlScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %2860%29\sampleBatScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %2860%29\sampleBowlScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %287%29\sampleBatScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %287%29\sampleBowlScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %288%29\sampleBatScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %288%29\sampleBowlScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %289%29\sampleBatScore.csv" />
-    <None Include="Data\MatchPoints\1 - Copy %289%29\sampleBowlScore.csv" />
+    <None Include="Data\MatchPoints\1\BatScore.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\MatchPoints\1\BowlScore.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\MatchPoints\2\BatScore.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\MatchPoints\2\BowlScore.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\MatchPoints\3\BatScore.csv" />
+    <None Include="Data\MatchPoints\3\BowlScore.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\MatchPoints\4\BatScore.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\MatchPoints\4\BowlScore.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\MatchPoints\5\BatScore.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\MatchPoints\5\BowlScore.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Data\sampleBatScore.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
