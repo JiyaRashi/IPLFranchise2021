@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace IPLFranchise2021
 {
-   public static class BatsmanExtension
+    public static class BatsmanExtension
     {
         public static IEnumerable<Batsman> ToBat(this IEnumerable<string> source)
         {
@@ -63,6 +63,7 @@ namespace IPLFranchise2021
                     Match = columns[1].Trim(),
                     Time = columns[2].Trim(),
                     Venue = columns[3].Trim(),
+                    MatchNo = int.Parse(columns[5])
                 };
             }
         }

@@ -15,17 +15,19 @@ namespace IPLFranchise2021.ViewModels
 {
     public class IPLScheduleViewModel :BindableBase
     {
-        public DelegateCommand MatchScoreDelegateCommand { get; private set; }
+        public DelegateCommand<IPLSchedule> MatchScoreDelegateCommand { get; private set; }
+
+        private IPLSchedule _iPLSchedule;
         public IDataReaderLogic dataReaderLogic { get; set; }
 
         private IRegionManager _regionManger;
-        public ObservableCollection<IPLSchedule> _iPLScheduleDetails { get; set; }
+        public ObservableCollection<IPLSchedule> _iPLScheduleDetails;
         public IPLScheduleViewModel(IRegionManager regionManger,
             IDataReaderLogic DataReaderLogic)
         {
             dataReaderLogic = DataReaderLogic;
             _iPLScheduleDetails = new ObservableCollection<IPLSchedule>((dataReaderLogic.GetAllIPLSchedule()));
-            MatchScoreDelegateCommand = new DelegateCommand(Execute, CanExecute);
+            MatchScoreDelegateCommand = new DelegateCommand<IPLSchedule>(Execute);
             _regionManger = regionManger;
         }
 
@@ -34,7 +36,7 @@ namespace IPLFranchise2021.ViewModels
             return true;
         }
 
-        private void Execute()
+        private void Execute(IPLSchedule schedule)
         {
             _regionManger.RequestNavigate("MainRegion", "ScoreDetailsView");
         }
@@ -42,7 +44,13 @@ namespace IPLFranchise2021.ViewModels
         public ObservableCollection<IPLSchedule> IPLScheduleDetails
         {
             get { return _iPLScheduleDetails; }
-            set { _iPLScheduleDetails = value; }
+            set { SetProperty(ref _iPLScheduleDetails, value); }
+        }
+
+        public IPLSchedule IPLSchedule_
+        {
+            get { return _iPLSchedule; }
+            set { SetProperty(ref _iPLSchedule, value); }
         }
     }
 }
