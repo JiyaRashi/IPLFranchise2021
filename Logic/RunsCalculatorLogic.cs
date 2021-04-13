@@ -37,11 +37,11 @@ namespace IPLFranchise2021.Logic
                                  (runs >= 100) ? runs + 200 :
                                  runs;
 
-            int sixesPoints = (sixes >= 5 && sixes >= 9) ? sixes * SixBonus + 70 :
+            int sixesPoints = (sixes >= 5 && sixes <= 9) ? sixes * SixBonus + 70 :
                               (sixes >= 10) ? sixes * SixBonus + 150 :
                               sixes * SixBonus;
 
-            int fourPoints = (fours >= 10 && fours >= 14) ? fours * FourBouns + 60 :
+            int fourPoints = (fours >= 10 && fours <= 14) ? fours * FourBouns + 60 :
                               (fours >= 15) ? fours * FourBouns + 100 :
                               fours * FourBouns;
 
