@@ -1,7 +1,13 @@
-﻿using IPLFranchise2021.Logic;
+﻿using IPLFranchise2021.Event;
+using IPLFranchise2021.Logic;
 using IPLFranchise2021.Model;
+using IPLFranchise2021.Repository;
 using Prism.Commands;
+using Prism.Events;
+using Prism.Ioc;
+using Prism.Modularity;
 using Prism.Mvvm;
+using Prism.Regions;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -14,33 +20,56 @@ using System.Threading.Tasks;
 
 namespace IPLFranchise2021.ViewModels
 {
-    public class ScoreDetailsViewModel : BindableBase
+    public class ScoreDetailsViewModel : BindableBase, INavigationAware
     {
+        IRegionNavigationJournal _journal;
+        public IEventAggregator _eventAggregator { get; set; }
         public IRunsCalculatorLogic runsCalculatorLogic { get; set; }
+        public ILoadRepository loadRepository { get; set; }
         public IDataReaderLogic dataReaderLogic { get; set; }
-        public ObservableCollection<Batsman> _batsmenDetails { get; set; }
-        public ObservableCollection<BowlSide> _bowlDetails { get; set; }
-        public ObservableCollection<Batsman> _batsmenTotalPoints { get; set; }
-        public ObservableCollection<BowlSide> _bowlingTotalPoints { get; set; }
-        public ObservableCollection<OtherDetails> _fielderNameDupPoints { get; set; }
-        public ObservableCollection<OtherDetails> _fielderBonousPoints { get; set; }
-        public ObservableCollection<OtherDetails> _splittedName { get; set; }
-        public ObservableCollection<OtherDetails> _fielderTotalPoints { get; set; }
+        public ObservableCollection<Batsman> _batsmenDetails;
+        public ObservableCollection<BowlSide> _bowlDetails;
+        public ObservableCollection<Batsman> _batsmenTotalPoints;
+        public ObservableCollection<BowlSide> _bowlingTotalPoints;
+        public ObservableCollection<OtherDetails> _fielderNameDupPoints;
+        public ObservableCollection<OtherDetails> _fielderBonousPoints;
+        public ObservableCollection<OtherDetails> _splittedName;
+        public ObservableCollection<OtherDetails> _fielderTotalPoints;
         public DelegateCommand CalculateScoreDelegateCommand { get; private set; }
-        public ScoreDetailsViewModel(IRunsCalculatorLogic RunsCalculatorLogic,
+        public DelegateCommand GoBackDelegateCommand { get; set; }
+
+        private int _matchNo;
+        private IPLSchedule _selectedMatch;
+       
+        public ScoreDetailsViewModel(IRunsCalculatorLogic RunsCalculatorLogic, ILoadRepository LoadRepository, IEventAggregator eventAggregator,
             IDataReaderLogic DataReaderLogic)
         {
-            runsCalculatorLogic = RunsCalculatorLogic;
             dataReaderLogic = DataReaderLogic;
+            runsCalculatorLogic = RunsCalculatorLogic;
+            loadRepository= LoadRepository;
+            _eventAggregator = eventAggregator;
+            _eventAggregator.GetEvent<MatchNoEvent>().Subscribe(MatchNoReceived);
             CalculateScoreDelegateCommand = new DelegateCommand(Execute, CanExecute);
-            _batsmenDetails = new ObservableCollection<Batsman>((dataReaderLogic.GetAllBatsmen()));
-            _bowlDetails = new ObservableCollection<BowlSide>((dataReaderLogic.GetAllBowlSide()));
             _batsmenTotalPoints = new ObservableCollection<Batsman>();
             _bowlingTotalPoints = new ObservableCollection<BowlSide>();
-            _fielderNameDupPoints = new ObservableCollection<OtherDetails>();
             _fielderBonousPoints = new ObservableCollection<OtherDetails>();
-            _splittedName = new ObservableCollection<OtherDetails>();
             _fielderTotalPoints = new ObservableCollection<OtherDetails>();
+            _splittedName = new ObservableCollection<OtherDetails>();
+            _fielderNameDupPoints = new ObservableCollection<OtherDetails>();
+            _bowlDetails = new ObservableCollection<BowlSide>();
+            _batsmenDetails = new ObservableCollection<Batsman>();
+            GoBackDelegateCommand = new DelegateCommand(GoBack);
+
+        }
+
+        public int MatchNo
+        {
+            get { return _matchNo; }
+            set { _matchNo = value; }
+        }
+        private void MatchNoReceived(int obj)
+        {
+            _matchNo = obj;
         }
         private bool CanExecute()
         {
@@ -61,7 +90,12 @@ namespace IPLFranchise2021.ViewModels
         public ObservableCollection<Batsman> BatsmenDetails
         {
             get { return _batsmenDetails; }
-            set { _batsmenDetails = value; }
+            set 
+            { 
+                SetProperty(ref _batsmenDetails, value);
+                RaisePropertyChanged("BatsmenDetails");
+
+            }
         }
 
         /// <summary>
@@ -70,7 +104,10 @@ namespace IPLFranchise2021.ViewModels
         public ObservableCollection<BowlSide> BowlDetails
         {
             get { return _bowlDetails; }
-            set { _bowlDetails = value; }
+            set {
+                SetProperty(ref _bowlDetails, value);
+                RaisePropertyChanged("BowlDetails");
+            }
         }
 
         /// <summary>
@@ -79,7 +116,10 @@ namespace IPLFranchise2021.ViewModels
         public ObservableCollection<Batsman> BatsmenTotalPoints
         {
             get { return _batsmenTotalPoints; }
-            set { _batsmenTotalPoints = value; }
+            set {
+                SetProperty(ref _batsmenTotalPoints, value);
+                RaisePropertyChanged();
+            }
         }
 
         /// <summary>
@@ -88,28 +128,53 @@ namespace IPLFranchise2021.ViewModels
         public ObservableCollection<BowlSide> BowlingTotalPoints
         {
             get { return _bowlingTotalPoints; }
-            set { _bowlingTotalPoints = value; }
+            set { 
+                SetProperty(ref _bowlingTotalPoints, value);
+                RaisePropertyChanged();
+            }
         }
         public ObservableCollection<OtherDetails> FielderNameDupPoints
         {
             get { return _fielderNameDupPoints; }
-            set { _fielderNameDupPoints = value; }
+            set { 
+                SetProperty(ref _fielderNameDupPoints, value);
+                RaisePropertyChanged("FielderNameDupPoints");
+            }
         }
         public ObservableCollection<OtherDetails> SplittedName
         {
             get { return _splittedName; }
-            set { _splittedName = value; }
+            set { 
+                SetProperty(ref _splittedName, value);
+                RaisePropertyChanged("SplittedName");
+            }
         }
         public ObservableCollection<OtherDetails> FielderBonousPoints
         {
             get { return _fielderBonousPoints; }
-            set { _fielderBonousPoints = value; }
+            set { 
+                SetProperty(ref _fielderBonousPoints, value);
+                RaisePropertyChanged("FielderBonousPoints");
+
+            }
+        }
+
+        public IPLSchedule SelectedMatch
+        {
+            get { return _selectedMatch; }
+            set { 
+                SetProperty(ref _selectedMatch, value);
+                RaisePropertyChanged("SelectedMatch");
+            }
         }
 
         public ObservableCollection<OtherDetails> FielderTotalPoints
         {
             get { return _fielderTotalPoints; }
-            set { _fielderTotalPoints = value; }
+            set { 
+                SetProperty(ref _fielderTotalPoints, value);
+                RaisePropertyChanged("FielderTotalPoints");
+            }
         }
 
         /// <summary>
@@ -260,6 +325,90 @@ namespace IPLFranchise2021.ViewModels
                 }
             }
             return _fielderTotalPoints;
+        }
+
+        public void OnNavigatedTo(NavigationContext navigationContext)
+        {
+            _journal = navigationContext.NavigationService.Journal;
+
+            var _selectedMatch = navigationContext.Parameters["schedule"] as IPLSchedule;
+            if (_selectedMatch != null)
+                SelectedMatch = _selectedMatch;
+            BatsmenDetails=GetAllBatsmen();
+            BowlDetails = GetAllBowlSide();
+        }
+
+        public bool IsNavigationTarget(NavigationContext navigationContext)
+        {
+            return true;
+        }
+
+        public void OnNavigatedFrom(NavigationContext navigationContext)
+        {
+        }
+
+        private void GoBack()
+        {
+            _journal.GoBack();
+        }
+
+        public ObservableCollection<Batsman> GetAllBatsmen()
+        {
+
+            string path = $"Data/MatchPoints/{SelectedMatch.MatchNo}/BatScore.csv";
+            StreamReader sr = new StreamReader(path);
+            ObservableCollection<Batsman> importingData = new ObservableCollection<Batsman>();
+
+              var source = File.ReadAllLines(path)
+                    .Skip(1)
+                    .Where(l => l.Length > 1);
+
+            foreach (var line in source)
+            {
+                var columns = line.Split(',');
+                importingData.Add(new Batsman
+                { 
+                    BatsmanName = columns[0],
+                    FielderDetails = columns[1],
+                    Runs = int.Parse(columns[2]),
+                    Balls = int.Parse(columns[3]),
+                    SR = double.Parse(columns[4]),
+                    Fours = int.Parse(columns[5]),
+                    Sixes = int.Parse(columns[6]),
+                });
+            }
+
+            return importingData;
+        }
+
+        public ObservableCollection<BowlSide> GetAllBowlSide()
+        {
+            string path = $"Data/MatchPoints/{SelectedMatch.MatchNo}/BowlScore.csv";
+            StreamReader sr = new StreamReader(path);
+            ObservableCollection<BowlSide> importingData = new ObservableCollection<BowlSide>();
+
+            var source = File.ReadAllLines(path)
+                  .Skip(1)
+                  .Where(l => l.Length > 1);
+            foreach (var line in source)
+            {
+
+                var columns = line.Split(',');
+
+                importingData.Add(new BowlSide
+                {
+                    BowlerName = columns[0],
+                    Overs = double.Parse(columns[1]),
+                    OverRuns = int.Parse(columns[2]),
+                    Wickets = int.Parse(columns[3]),
+                    Econ = double.Parse(columns[4]),
+                    Dot = int.Parse(columns[5]),
+                    Maiden = int.Parse(columns[6]),
+                    HatTrick = Convert.ToBoolean(columns[7])
+                });
+            }
+
+            return importingData;
         }
 
     }

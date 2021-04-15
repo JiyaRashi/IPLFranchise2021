@@ -1,6 +1,8 @@
-﻿using IPLFranchise2021.Logic;
+﻿using IPLFranchise2021.Event;
+using IPLFranchise2021.Logic;
 using IPLFranchise2021.Model;
 using Prism.Commands;
+using Prism.Events;
 using Prism.Mvvm;
 using Prism.Regions;
 using System;
@@ -15,6 +17,8 @@ namespace IPLFranchise2021.ViewModels
 {
     public class IPLScheduleViewModel :BindableBase
     {
+        public IEventAggregator _eventAggregator { get; set; }
+
         public DelegateCommand<IPLSchedule> MatchScoreDelegateCommand { get; private set; }
 
         private IPLSchedule _iPLSchedule;
@@ -22,10 +26,11 @@ namespace IPLFranchise2021.ViewModels
 
         private IRegionManager _regionManger;
         public ObservableCollection<IPLSchedule> _iPLScheduleDetails;
-        public IPLScheduleViewModel(IRegionManager regionManger,
+        public IPLScheduleViewModel(IRegionManager regionManger, IEventAggregator eventAggregator,
             IDataReaderLogic DataReaderLogic)
         {
             dataReaderLogic = DataReaderLogic;
+            _eventAggregator = eventAggregator;
             _iPLScheduleDetails = new ObservableCollection<IPLSchedule>((dataReaderLogic.GetAllIPLSchedule()));
             MatchScoreDelegateCommand = new DelegateCommand<IPLSchedule>(Execute);
             _regionManger = regionManger;
@@ -38,7 +43,13 @@ namespace IPLFranchise2021.ViewModels
 
         private void Execute(IPLSchedule schedule)
         {
-            _regionManger.RequestNavigate("MainRegion", "ScoreDetailsView");
+            _eventAggregator.GetEvent<MatchNoEvent>().Publish(schedule.MatchNo);
+
+            var parameters = new NavigationParameters();
+            parameters.Add("schedule", schedule);
+
+            if (schedule != null)
+                _regionManger.RequestNavigate("MainRegion", "ScoreDetailsView", parameters);
         }
 
         public ObservableCollection<IPLSchedule> IPLScheduleDetails
@@ -47,7 +58,7 @@ namespace IPLFranchise2021.ViewModels
             set { SetProperty(ref _iPLScheduleDetails, value); }
         }
 
-        public IPLSchedule IPLSchedule_
+        public IPLSchedule IPLSchedule
         {
             get { return _iPLSchedule; }
             set { SetProperty(ref _iPLSchedule, value); }

@@ -89,7 +89,9 @@
     <Compile Include="Controls\IPScheduleControl.xaml.cs">
       <DependentUpon>IPScheduleControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Event\MatchNoEvent.cs" />
     <Compile Include="Extension\BatsmanExtension.cs" />
+    <Compile Include="Repository\LoadRepository.cs" />
     <Compile Include="Logic\DataReaderLogic.cs" />
     <Compile Include="Logic\RunsCalculatorLogic.cs" />
     <Compile Include="Model\Batsman.cs" />
@@ -171,12 +173,14 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Data\MatchPoints\2\BatScore.csv">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Data\MatchPoints\2\BowlScore.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\MatchPoints\3\BatScore.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Data\MatchPoints\3\BatScore.csv" />
     <None Include="Data\MatchPoints\3\BowlScore.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -190,6 +194,18 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Data\MatchPoints\5\BowlScore.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\MatchPoints\6\BatScore.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\MatchPoints\6\BowlScore.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\MatchPoints\7\BatScore.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\MatchPoints\7\BowlScore.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Data\sampleBatScore.csv">

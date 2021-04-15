@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:IPLFranchise2021.Views"
              mc:Ignorable="d" 
-             xmlns:prism="http://prismlibrary.com/" Height="800" Width="1000"
+             xmlns:prism="http://prismlibrary.com/" Height="800" Width="1100"
              prism:ViewModelLocator.AutoWireViewModel="True">
     <Grid ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="True">
         <Grid.ColumnDefinitions>
@@ -58,7 +58,9 @@
 
         <DataGrid Grid.Row="0" Grid.Column="2" ItemsSource="{Binding Path=FielderNameDupPoints}"/>
         <DataGrid Grid.Row="1" Grid.Column="2" ItemsSource="{Binding Path=FielderTotalPoints, UpdateSourceTrigger=PropertyChanged}"/>
-        <Button  Command="{Binding CalculateScoreDelegateCommand}" Margin="20 20" FontSize="25" Grid.Row="3" Grid.ColumnSpan="2" Content="Calulate Score"/>
+        <Button  Command="{Binding CalculateScoreDelegateCommand}" Margin="20 20" FontSize="25" Grid.Row="3" Grid.Column="1" Content="Calulate Score"/>
+        <Button  Command="{Binding GoBackDelegateCommand}" Margin="20 20" FontSize="25" Grid.Row="3" Grid.Column="2" Content="Go Back"/>
+
         <TextBlock FontSize="25" Text="Details Taken from Iplt20.com " Grid.Row="4" Grid.ColumnSpan="2"/>
     </Grid>
 </UserControl>

@@ -47,7 +47,7 @@ namespace IPLFranchise2021.Logic
 
             int srPoints = Convert.ToInt32(SR);
 
-            srPoints = (srPoints >= 250 && srPoints >= 349) ? 70 :
+            srPoints = (srPoints >= 250 && srPoints <= 349) ? 70 :
                              (srPoints >= 350) ? 120 :
                              (srPoints <= 50 && balls >= 5) ? -20 : 0;
 
@@ -76,8 +76,8 @@ namespace IPLFranchise2021.Logic
                 (econPoints == 7) ? 40 :
                 (econPoints == 8) ? -10 :
                 (econPoints == 9) ? -20 :
-                (econPoints == 10) ? -30 :
-                (econPoints >= 11) ? -40 : 0;
+                (econPoints == 10 || econPoints == 11) ? -30 :
+                (econPoints >= 12) ? -40 : 0;
 
             return _bowlTotalPoints + wicketPoints + maidenPoints + hattrickPoints + econPoints;
         }

@@ -1,4 +1,6 @@
-﻿using IPLFranchise2021.Model;
+﻿using IPLFranchise2021.Event;
+using IPLFranchise2021.Model;
+using Prism.Events;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -16,9 +18,29 @@ namespace IPLFranchise2021.Logic
     }
     public class DataReaderLogic: IDataReaderLogic
     {
+        private int _matchNo;
+        public IEventAggregator _eventAggregator { get; set; }
+
+        public DataReaderLogic(IEventAggregator eventAggregator)
+        {
+            _eventAggregator = eventAggregator;
+            //_eventAggregator.GetEvent<MatchNoEvent>().Subscribe(MatchNoReceived);
+        }
+
+        private void MatchNoReceived(int obj)
+        {
+            _matchNo = obj;
+        }
+
+        public int MatchNo
+        {
+            get { return _matchNo; }
+            set { _matchNo = value; }
+        }
         public IList<Batsman> GetAllBatsmen()
         {
-            string path = "Data/sampleBatScore.csv";
+            
+            string path = $"Data/MatchPoints/{MatchNo}/BatScore.csv";
             var query =
 
                 File.ReadAllLines(path)
@@ -30,7 +52,7 @@ namespace IPLFranchise2021.Logic
         }
         public IList<BowlSide> GetAllBowlSide()
         {
-            string path = "Data/sampleBowlScore.csv";
+            string path = $"Data/MatchPoints/{MatchNo}/BowlScore.csv";
             var query =
 
                 File.ReadAllLines(path)
