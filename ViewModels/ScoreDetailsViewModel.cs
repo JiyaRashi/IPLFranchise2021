@@ -29,12 +29,12 @@ namespace IPLFranchise2021.ViewModels
         public IDataReaderLogic dataReaderLogic { get; set; }
         public ObservableCollection<Batsman> _batsmenDetails;
         public ObservableCollection<BowlSide> _bowlDetails;
-        public ObservableCollection<Batsman> _batsmenTotalPoints;
-        public ObservableCollection<BowlSide> _bowlingTotalPoints;
-        public ObservableCollection<OtherDetails> _fielderNameDupPoints;
-        public ObservableCollection<OtherDetails> _fielderBonousPoints;
-        public ObservableCollection<OtherDetails> _splittedName;
-        public ObservableCollection<OtherDetails> _fielderTotalPoints;
+        public ObservableCollection<Batsman> _batsmenTotalPoints = new ObservableCollection<Batsman>();
+        public ObservableCollection<BowlSide> _bowlingTotalPoints = new ObservableCollection<BowlSide>();
+        public ObservableCollection<OtherDetails> _fielderNameDupPoints = new ObservableCollection<OtherDetails>();
+        public ObservableCollection<OtherDetails> _fielderBonousPoints = new ObservableCollection<OtherDetails>();
+        public ObservableCollection<OtherDetails> _splittedName = new ObservableCollection<OtherDetails>();
+        public ObservableCollection<OtherDetails> _fielderTotalPoints = new ObservableCollection<OtherDetails>();
         public DelegateCommand CalculateScoreDelegateCommand { get; private set; }
         public DelegateCommand GoBackDelegateCommand { get; set; }
 
@@ -50,14 +50,14 @@ namespace IPLFranchise2021.ViewModels
             _eventAggregator = eventAggregator;
             _eventAggregator.GetEvent<MatchNoEvent>().Subscribe(MatchNoReceived);
             CalculateScoreDelegateCommand = new DelegateCommand(Execute, CanExecute);
-            _batsmenTotalPoints = new ObservableCollection<Batsman>();
-            _bowlingTotalPoints = new ObservableCollection<BowlSide>();
-            _fielderBonousPoints = new ObservableCollection<OtherDetails>();
-            _fielderTotalPoints = new ObservableCollection<OtherDetails>();
-            _splittedName = new ObservableCollection<OtherDetails>();
-            _fielderNameDupPoints = new ObservableCollection<OtherDetails>();
-            _bowlDetails = new ObservableCollection<BowlSide>();
-            _batsmenDetails = new ObservableCollection<Batsman>();
+            //_batsmenTotalPoints = new ObservableCollection<Batsman>();
+            //_bowlingTotalPoints = new ObservableCollection<BowlSide>();
+            //_fielderBonousPoints = new ObservableCollection<OtherDetails>();
+            //_fielderTotalPoints = new ObservableCollection<OtherDetails>();
+            //_splittedName = new ObservableCollection<OtherDetails>();
+            //_fielderNameDupPoints = new ObservableCollection<OtherDetails>();
+            //_bowlDetails = new ObservableCollection<BowlSide>();
+            //_batsmenDetails = new ObservableCollection<Batsman>();
             GoBackDelegateCommand = new DelegateCommand(GoBack);
 
         }
@@ -329,6 +329,16 @@ namespace IPLFranchise2021.ViewModels
 
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
+            _batsmenTotalPoints = new ObservableCollection<Batsman>();
+            _batsmenTotalPoints = new ObservableCollection<Batsman>();
+            _bowlingTotalPoints = new ObservableCollection<BowlSide>();
+            _fielderBonousPoints = new ObservableCollection<OtherDetails>();
+            _fielderTotalPoints = new ObservableCollection<OtherDetails>();
+            _splittedName = new ObservableCollection<OtherDetails>();
+            _fielderNameDupPoints = new ObservableCollection<OtherDetails>();
+            _bowlDetails = new ObservableCollection<BowlSide>();
+            _batsmenDetails = new ObservableCollection<Batsman>();
+
             _journal = navigationContext.NavigationService.Journal;
 
             var _selectedMatch = navigationContext.Parameters["schedule"] as IPLSchedule;
@@ -345,10 +355,18 @@ namespace IPLFranchise2021.ViewModels
 
         public void OnNavigatedFrom(NavigationContext navigationContext)
         {
+
         }
 
         private void GoBack()
         {
+            BatsmenTotalPoints = null;
+            BowlingTotalPoints = null;
+            FielderNameDupPoints = null;
+            FielderBonousPoints = null;
+            FielderTotalPoints = null;
+
+            // _journal.Clear();
             _journal.GoBack();
         }
 
@@ -369,7 +387,7 @@ namespace IPLFranchise2021.ViewModels
                 importingData.Add(new Batsman
                 { 
                     BatsmanName = columns[0],
-                    FielderDetails = columns[1],
+                    FielderDetails = columns[1].Trim(),
                     Runs = int.Parse(columns[2]),
                     Balls = int.Parse(columns[3]),
                     SR = double.Parse(columns[4]),
@@ -410,6 +428,5 @@ namespace IPLFranchise2021.ViewModels
 
             return importingData;
         }
-
     }
 }

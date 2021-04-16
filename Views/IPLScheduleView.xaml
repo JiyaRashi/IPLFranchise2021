@@ -12,6 +12,7 @@
     <UserControl.Resources>
         <Style x:Key="textblockStyle" TargetType="{x:Type TextBlock}">
             <Setter Property="FontSize" Value="14" />
+            <Setter Property="Foreground" Value="Black"/>
         </Style>
         <Style x:Key="buttonStyle" TargetType="{x:Type Button}">
             <Setter Property="Background" Value="LightBlue" />
@@ -34,8 +35,9 @@
             </Button>
         </DataTemplate>
     </UserControl.Resources>
-    <ScrollViewer VerticalScrollBarVisibility="Auto">
-        <ListBox Name="listofMatch" ItemsSource="{Binding IPLScheduleDetails}">
+    <ScrollViewer  VerticalScrollBarVisibility="Auto">
+        <ListBox Name="listofMatch" ItemsSource="{Binding IPLScheduleDetails}" Background="AliceBlue">
+            
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
                     <UniformGrid Columns="4" />
@@ -43,13 +45,15 @@
             </ListBox.ItemsPanel>
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel Width="350" Margin="5" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Border BorderThickness="2">
+                        <StackPanel Background="#87CEEB" Width="350" Margin="5" HorizontalAlignment="Center" VerticalAlignment="Center">
                         <TextBlock Style="{StaticResource textblockStyle}" HorizontalAlignment="Center" FontWeight="Heavy" Text="{Binding MatchNo}" />
                         <TextBlock Style="{StaticResource textblockStyle}" HorizontalAlignment="Center" Text="{Binding Date}" />
                         <TextBlock Style="{StaticResource textblockStyle}" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding Match}" />
                         <TextBlock Style="{StaticResource textblockStyle}" HorizontalAlignment="Center" Text="{Binding Time}" />
                         <TextBlock Style="{StaticResource textblockStyle}" HorizontalAlignment="Center" Text="{Binding Venue}" />
                     </StackPanel>
+                    </Border>
                 </DataTemplate>
             </ListBox.ItemTemplate>
             <i:Interaction.Triggers>
@@ -57,28 +61,6 @@
                     <i:InvokeCommandAction Command="{Binding MatchScoreDelegateCommand}" CommandParameter="{Binding SelectedItem,ElementName=listofMatch}"/>
                 </i:EventTrigger>
             </i:Interaction.Triggers>
-            <!--<ListBox.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <WrapPanel Margin="5" />
-                </ItemsPanelTemplate>
-            </ListBox.ItemsPanel>
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <Button Margin="5" 
-                            Command="{Binding DataContext.MatchScoreDelegateCommand,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type ListBox}}}"
-                            CommandParameter="{Binding IPLSchedule}"
-                           Style="{StaticResource buttonStyle}" HorizontalContentAlignment="Center" HorizontalAlignment="Center">
-                        <Button.Content>
-                            <StackPanel Width="350" Margin="10" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                <TextBlock Style="{StaticResource textblockStyle}" HorizontalAlignment="Center" Text="{Binding Date}" />
-                                <TextBlock Style="{StaticResource textblockStyle}" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding Match}" />
-                                <TextBlock Style="{StaticResource textblockStyle}" HorizontalAlignment="Center" Text="{Binding Time}" />
-                                <TextBlock Style="{StaticResource textblockStyle}" HorizontalAlignment="Center" Text="{Binding Venue}" />
-                            </StackPanel>
-                        </Button.Content>
-                    </Button>
-                </DataTemplate>
-            </ListBox.ItemTemplate>-->
         </ListBox>
     </ScrollViewer>
 </UserControl>
