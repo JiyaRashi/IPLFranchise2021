@@ -49,7 +49,7 @@ namespace IPLFranchise2021.Logic
 
             srPoints = (srPoints >= 250 && srPoints <= 349) ? 70 :
                              (srPoints >= 350) ? 120 :
-                             (srPoints <= 50 && balls >= 5) ? -20 : 0;
+                             (srPoints <= 50 && balls >= 5 && runs !=0) ? -20 : 0;
 
             int ducks = (runs == 0 && balls > 0) ? -20 : 0;
 
@@ -213,7 +213,7 @@ namespace IPLFranchise2021.Logic
         public string GetNoDupName(string name)
         {
 
-            string[] stringSeparators = new string[] { "lbw", "b", "c", "st" };
+            string[] stringSeparators = new string[] { "lbw ", "b ", "c ", "st " };
             string[] sName = name.Split(stringSeparators, StringSplitOptions.None);
 
             return name.Contains("run out") ? name : sName[1].Trim();
