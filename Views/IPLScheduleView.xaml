@@ -12,7 +12,12 @@
     <UserControl.Resources>
         <Style x:Key="textblockStyle" TargetType="{x:Type TextBlock}">
             <Setter Property="FontSize" Value="14" />
-            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Foreground" Value="Blue"/>
+            <Setter Property="FontWeight" Value="Bold" />
+        </Style>
+        <Style x:Key="textblockStyle_" TargetType="{x:Type TextBlock}">
+            <Setter Property="FontSize" Value="17" />
+            <Setter Property="Foreground" Value="Red"/>
         </Style>
         <Style x:Key="buttonStyle" TargetType="{x:Type Button}">
             <Setter Property="Background" Value="LightBlue" />
@@ -36,7 +41,7 @@
         </DataTemplate>
     </UserControl.Resources>
     <ScrollViewer  VerticalScrollBarVisibility="Auto">
-        <ListBox Name="listofMatch" ItemsSource="{Binding IPLScheduleDetails}" Background="AliceBlue">
+        <ListBox Name="listofMatch" ItemsSource="{Binding IPLScheduleDetails}" Background="WhiteSmoke">
             
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
@@ -46,8 +51,8 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Border BorderThickness="2">
-                        <StackPanel Background="#87CEEc" Width="350" Margin="5" HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <TextBlock Style="{StaticResource textblockStyle}" HorizontalAlignment="Center" FontWeight="Heavy" Text="{Binding MatchNo}" />
+                        <StackPanel Background="WhiteSmoke" Width="350" Margin="5" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <TextBlock Style="{StaticResource textblockStyle_}" HorizontalAlignment="Center" FontWeight="Heavy" Text="{Binding MatchNo}" />
                         <TextBlock Style="{StaticResource textblockStyle}" HorizontalAlignment="Center" Text="{Binding Date}" />
                         <TextBlock Style="{StaticResource textblockStyle}" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding Match}" />
                         <TextBlock Style="{StaticResource textblockStyle}" HorizontalAlignment="Center" Text="{Binding Time}" />
