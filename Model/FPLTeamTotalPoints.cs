@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace IPLFranchise2021.Model
 {
-    public class TeamListName
+    public class FPLTeamTotalPoints
     {
-        public string Name { get; set; }
-        public string Team { get; set; }
-
+        public string FPLTeam { get; set; }
+        public int Points { get; set; }
     }
 }

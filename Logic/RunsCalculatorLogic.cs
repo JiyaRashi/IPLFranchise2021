@@ -212,11 +212,19 @@ namespace IPLFranchise2021.Logic
 
         public string GetNoDupName(string name)
         {
-
-            string[] stringSeparators = new string[] { "lbw ", "b ", "c ", "st " };
+            List<char> charsToRemove = new List<char>() { ')', '(' };
+            string[] stringSeparators = new string[] { "lbw ", "b ", "c ", "st ", "sub " };
             string[] sName = name.Split(stringSeparators, StringSplitOptions.None);
 
-            return name.Contains("run out") ? name : sName[1].Trim();
+            string _name= name.Contains("run out") ? name : sName[1].Trim();
+            string _name2= (_name == "") ? sName[2].Trim() : _name;
+            ArrayList namely = new ArrayList();
+            if (_name2.Contains("("))
+            {
+                return _name2 = Filter(_name2, charsToRemove);
+            }
+
+            return _name2;
 
         }
 

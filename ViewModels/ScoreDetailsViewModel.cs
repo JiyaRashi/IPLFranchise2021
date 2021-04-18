@@ -37,22 +37,33 @@ namespace IPLFranchise2021.ViewModels
         public ObservableCollection<OtherDetails> _fielderTotalPoints = new ObservableCollection<OtherDetails>();
         public ObservableCollection<OtherDetails> _nameCollectionTotalPoints = new ObservableCollection<OtherDetails>();
 
+        public ObservableCollection<FPLTotalPoints> _fPLTotalPoints = new ObservableCollection<FPLTotalPoints>();
+        public ObservableCollection<FPLTeamTotalPoints> _fPLteamTotalPoints = new ObservableCollection<FPLTeamTotalPoints>();
+
+        public Dictionary<string,string> _fPLTeamLists = new Dictionary<string, string>();
+
         public DelegateCommand CalculateScoreDelegateCommand { get; private set; }
+
+        public DelegateCommand FPLTeamDelegateCommand { get; private set; }
+
+        
         public DelegateCommand GoBackDelegateCommand { get; set; }
 
         private int _matchNo;
         private IPLSchedule _selectedMatch;
-       
+
         public ScoreDetailsViewModel(IRunsCalculatorLogic RunsCalculatorLogic, ILoadRepository LoadRepository, IEventAggregator eventAggregator,
             IDataReaderLogic DataReaderLogic)
         {
             dataReaderLogic = DataReaderLogic;
             runsCalculatorLogic = RunsCalculatorLogic;
-            loadRepository= LoadRepository;
+            loadRepository = LoadRepository;
             _eventAggregator = eventAggregator;
             _eventAggregator.GetEvent<MatchNoEvent>().Subscribe(MatchNoReceived);
             CalculateScoreDelegateCommand = new DelegateCommand(Execute, CanExecute);
             GoBackDelegateCommand = new DelegateCommand(GoBack);
+            FPLTeamDelegateCommand = new DelegateCommand(GetFPLTeamPoints);
+            FPLTeamLists = dataReaderLogic.GetAllFPLTeam();
         }
 
         public int MatchNo
@@ -76,18 +87,51 @@ namespace IPLFranchise2021.ViewModels
             FielderBonousPoints = FielderBonousTotalPoints(FielderNameDupPoints);
             FielderTotalPoints = GetFielderTotalPoints(FielderBonousPoints);
             NameCollectionTotalPoints = AddNameScore(BatsmenDetails, BatsmenTotalPoints, BowlDetails, BowlingTotalPoints, FielderTotalPoints);
+            FPLTotal_Points = AddTeamNametoList(NameCollectionTotalPoints,FPLTeamLists);
         }
 
         /// <summary>
         /// Get Batsman Details
         /// </summary>
-            public ObservableCollection<OtherDetails> NameCollectionTotalPoints
+        public ObservableCollection<OtherDetails> NameCollectionTotalPoints
         {
             get { return _nameCollectionTotalPoints; }
             set
             {
                 SetProperty(ref _nameCollectionTotalPoints, value);
                 RaisePropertyChanged("NameCollectionTotalPoints");
+
+            }
+        }
+
+        public ObservableCollection<FPLTotalPoints> FPLTotal_Points
+        {
+            get { return _fPLTotalPoints; }
+            set
+            {
+                SetProperty(ref _fPLTotalPoints, value);
+                RaisePropertyChanged("FPLTotal_Points");
+
+            }
+        }
+
+        public ObservableCollection<FPLTeamTotalPoints> FPLteamTotalPoints
+        {
+            get { return _fPLteamTotalPoints; }
+            set
+            {
+                SetProperty(ref _fPLteamTotalPoints, value);
+                RaisePropertyChanged("FPLteamTotalPoints");
+
+            }
+        }
+
+        public Dictionary<string, string> FPLTeamLists
+        {
+            get { return _fPLTeamLists; }
+            set
+            {
+                SetProperty(ref _fPLTeamLists, value);
 
             }
         }
@@ -109,7 +153,8 @@ namespace IPLFranchise2021.ViewModels
         public ObservableCollection<BowlSide> BowlDetails
         {
             get { return _bowlDetails; }
-            set {
+            set
+            {
                 SetProperty(ref _bowlDetails, value);
                 RaisePropertyChanged("BowlDetails");
             }
@@ -121,7 +166,8 @@ namespace IPLFranchise2021.ViewModels
         public ObservableCollection<Batsman> BatsmenTotalPoints
         {
             get { return _batsmenTotalPoints; }
-            set {
+            set
+            {
                 SetProperty(ref _batsmenTotalPoints, value);
                 RaisePropertyChanged();
             }
@@ -133,7 +179,8 @@ namespace IPLFranchise2021.ViewModels
         public ObservableCollection<BowlSide> BowlingTotalPoints
         {
             get { return _bowlingTotalPoints; }
-            set { 
+            set
+            {
                 SetProperty(ref _bowlingTotalPoints, value);
                 RaisePropertyChanged();
             }
@@ -141,7 +188,8 @@ namespace IPLFranchise2021.ViewModels
         public ObservableCollection<OtherDetails> FielderNameDupPoints
         {
             get { return _fielderNameDupPoints; }
-            set { 
+            set
+            {
                 SetProperty(ref _fielderNameDupPoints, value);
                 RaisePropertyChanged("FielderNameDupPoints");
             }
@@ -149,7 +197,8 @@ namespace IPLFranchise2021.ViewModels
         public ObservableCollection<OtherDetails> SplittedName
         {
             get { return _splittedName; }
-            set { 
+            set
+            {
                 SetProperty(ref _splittedName, value);
                 RaisePropertyChanged("SplittedName");
             }
@@ -157,7 +206,8 @@ namespace IPLFranchise2021.ViewModels
         public ObservableCollection<OtherDetails> FielderBonousPoints
         {
             get { return _fielderBonousPoints; }
-            set { 
+            set
+            {
                 SetProperty(ref _fielderBonousPoints, value);
                 RaisePropertyChanged("FielderBonousPoints");
 
@@ -167,7 +217,8 @@ namespace IPLFranchise2021.ViewModels
         public IPLSchedule SelectedMatch
         {
             get { return _selectedMatch; }
-            set { 
+            set
+            {
                 SetProperty(ref _selectedMatch, value);
                 RaisePropertyChanged("SelectedMatch");
             }
@@ -176,7 +227,8 @@ namespace IPLFranchise2021.ViewModels
         public ObservableCollection<OtherDetails> FielderTotalPoints
         {
             get { return _fielderTotalPoints; }
-            set { 
+            set
+            {
                 SetProperty(ref _fielderTotalPoints, value);
                 RaisePropertyChanged("FielderTotalPoints");
             }
@@ -283,13 +335,13 @@ namespace IPLFranchise2021.ViewModels
                     {
                         ArrayList runoutName = runsCalculatorLogic.GetRunOutpoints(item.Name);
 
-                        if(runoutName.Count==1)
+                        if (runoutName.Count == 1)
                         {
                             string n = (string)runoutName[0];
                             _splittedName.Add(new OtherDetails()
                             {
-                                Name =n.Trim(),
-                                OtherTotalScore =50
+                                Name = n.Trim(),
+                                OtherTotalScore = 50
                             });
                         }
                         else
@@ -301,10 +353,10 @@ namespace IPLFranchise2021.ViewModels
                                 {
                                     Name = runsCalculatorLogic.GetName(n),
                                     OtherTotalScore = (i == 0) ? 30 : (i == 1) ? 20 : 0
-                                }) ;
+                                });
                             }
                         }
-                        
+
                     }
                     else
                     {
@@ -343,14 +395,16 @@ namespace IPLFranchise2021.ViewModels
             _fielderNameDupPoints = new ObservableCollection<OtherDetails>();
             _bowlDetails = new ObservableCollection<BowlSide>();
             _batsmenDetails = new ObservableCollection<Batsman>();
-           
+
             _nameCollectionTotalPoints = new ObservableCollection<OtherDetails>();
+            _fPLTotalPoints = new ObservableCollection<FPLTotalPoints>();
+            _fPLteamTotalPoints = new ObservableCollection<FPLTeamTotalPoints>();
             _journal = navigationContext.NavigationService.Journal;
 
             var _selectedMatch = navigationContext.Parameters["schedule"] as IPLSchedule;
             if (_selectedMatch != null)
                 SelectedMatch = _selectedMatch;
-            BatsmenDetails=GetAllBatsmen();
+            BatsmenDetails = GetAllBatsmen();
             BowlDetails = GetAllBowlSide();
         }
 
@@ -372,8 +426,163 @@ namespace IPLFranchise2021.ViewModels
             FielderBonousPoints = null;
             FielderTotalPoints = null;
             NameCollectionTotalPoints = null;
+            FPLteamTotalPoints = null;
+            FPLTotal_Points = null;
             // _journal.Clear();
             _journal.GoBack();
+        }
+
+        public ObservableCollection<OtherDetails> AddNameScore(ObservableCollection<Batsman> Batname, ObservableCollection<Batsman> BatTotalpoints,
+            ObservableCollection<BowlSide> Bowlname, ObservableCollection<BowlSide> BowlTotalpoints, ObservableCollection<OtherDetails> FilederPoints)
+        {
+            ObservableCollection<OtherDetails> _nameTotalPoints = new ObservableCollection<OtherDetails>();
+            if (_nameTotalPoints == null || _nameTotalPoints.Count == 0)
+            {
+                string[] slashSplit = new string[] { "\t" };
+                for (int i = 0; i <= Batname.Count - 1; i++)
+                {
+                    string[] runName = Batname[i].BatsmanName.Split(slashSplit, StringSplitOptions.None);
+                    _nameTotalPoints.Add(new OtherDetails() { Name = runName[0], OtherTotalScore = BatTotalpoints[i].TotalScore });
+
+                }
+
+                for (int i = 0; i <= Bowlname.Count - 1; i++)
+                {
+                    string[] runName = Bowlname[i].BowlerName.Split(slashSplit, StringSplitOptions.None);
+                    _nameTotalPoints.Add(new OtherDetails() { Name = runName[0], OtherTotalScore = BowlTotalpoints[i].BowlTotalScore });
+
+                }
+
+                for (int i = 0; i <= FilederPoints.Count - 1; i++)
+                {
+                    string[] runName = FilederPoints[i].Name.Split(slashSplit, StringSplitOptions.None);
+                    _nameTotalPoints.Add(new OtherDetails() { Name = runName[0], OtherTotalScore = FilederPoints[i].OtherTotalScore });
+
+                }
+            }
+            var result = from r in _nameTotalPoints
+                         group r by r.Name into g
+                         select new { Count = g.Sum(x => x.OtherTotalScore), Value = g.Key };
+            //string[] slashSplit = new string[] { "\t" };
+            //for (int i = 0; i <= Batname.Count- 1; i++)
+            //{
+            //    string[] runName = Batname[i].BatsmanName.Split(slashSplit, StringSplitOptions.None);
+            //    _nameScore.Add(runName[0], BatTotalpoints[i].TotalScore);
+            //}
+
+            //for (int i = 0; i <= Bowlname.Count - 1; i++)
+            //{
+            //    string[] runName = Bowlname[i].BowlerName.Split(slashSplit, StringSplitOptions.None);
+
+            //    if (_nameScore.ContainsKey(runName[0]))
+            //    {
+            //        //int value
+            //        int batvalue = _nameScore[runName[0]];
+            //        int bowValue = BowlTotalpoints[i].BowlTotalScore;
+            //        _nameScore[runName[0]] = batvalue + bowValue;
+            //    }
+            //    else
+            //    {
+            //        _nameScore.Add(runName[0], BowlTotalpoints[i].BowlTotalScore);
+            //    }
+            //}
+
+            //for (int i = 0; i <= FilederPoints.Count - 1; i++)
+            //{
+            //    string vvv = FilederPoints[i].Name;
+
+            //    if (_nameScore.ContainsKey(vvv))
+            //    {
+            //        int exitsVal = _nameScore[FilederPoints[i].Name];
+            //        int currentValue = FilederPoints[i].OtherTotalScore;
+            //        _nameScore[FilederPoints[i].Name] = exitsVal + currentValue;
+
+            //    }
+            //    else
+            //    {
+            //        _nameScore.Add(FilederPoints[i].Name, FilederPoints[i].OtherTotalScore);
+            //    }
+            //}
+
+            foreach (var item in result)
+            {
+                _nameCollectionTotalPoints.Add(new OtherDetails() { Name = item.Value, OtherTotalScore = item.Count });
+            }
+
+            return _nameCollectionTotalPoints;
+        }
+
+
+        public ObservableCollection<FPLTotalPoints> AddTeamNametoList(ObservableCollection<OtherDetails> NameTotalPoints, Dictionary<string, string> FPLteamList)
+        {
+            string[] slashSplit = new string[] { "\t" };
+            if (_fPLTotalPoints == null || _fPLTotalPoints.Count == 0)
+            {
+                for (int i = 0; i <= NameTotalPoints.Count - 1; i++)
+                {
+                    string name1 = NameTotalPoints[i].Name;
+                    if (FPLteamList.ContainsKey(name1))
+                    {
+                        string fplTeam = FPLteamList[name1];
+                        _fPLTotalPoints.Add(new FPLTotalPoints()
+                        {
+                            PlayerName = NameTotalPoints[i].Name,
+                            Points = NameTotalPoints[i].OtherTotalScore,
+                            FPLTeam = fplTeam
+                        });
+
+                    }
+                }
+
+            }
+            return _fPLTotalPoints;
+
+        }
+
+        public void GetFPLTeamPoints()
+        {
+
+            FPLteamTotalPoints = GetTeamTotalPoints(FPLTotal_Points);
+        }
+
+        public ObservableCollection<FPLTeamTotalPoints> GetTeamTotalPoints(ObservableCollection<FPLTotalPoints> NameTotalPoints)
+        {
+            if (_fPLteamTotalPoints == null || _fPLteamTotalPoints.Count == 0)
+            {
+                ObservableCollection<FPLTotalPoints> _checkStatrMOM = new ObservableCollection<FPLTotalPoints>();
+                foreach (var item in NameTotalPoints)
+                {
+                    int _pointsStar = (item.IsStar) ? item.Points * 2 : 0;
+                    int _pointsMom = (item.IsMoM) ? item.Points + 100 : 0;
+
+                    _checkStatrMOM.Add(new FPLTotalPoints()
+                    {
+                        PlayerName = item.PlayerName,
+                        FPLTeam = item.FPLTeam,
+                        IsStar = item.IsStar,
+                        IsMoM = item.IsMoM,
+                        Points = 
+                        (item.IsMoM && item.IsStar) ? _pointsStar + 200 : 
+                        (!item.IsMoM && !item.IsStar) ? item.Points :
+                        (item.IsMoM) ? _pointsMom :
+                        (item.IsStar) ? _pointsStar : item.Points                       
+                    }); 
+                }
+                var result = from r in _checkStatrMOM
+                             group r by r.FPLTeam into g
+                             select new { Count = g.Sum(x => x.Points), Value = g.Key };
+
+                foreach (var item in result)
+                {
+                    _fPLteamTotalPoints.Add( new FPLTeamTotalPoints() 
+                    { 
+                        FPLTeam = item.Value,
+                        Points = item.Count 
+                    });
+                }
+            }
+
+            return _fPLteamTotalPoints;
         }
 
         public ObservableCollection<Batsman> GetAllBatsmen()
@@ -383,15 +592,15 @@ namespace IPLFranchise2021.ViewModels
             StreamReader sr = new StreamReader(path);
             ObservableCollection<Batsman> importingData = new ObservableCollection<Batsman>();
 
-              var source = File.ReadAllLines(path)
-                    .Skip(1)
-                    .Where(l => l.Length > 1);
+            var source = File.ReadAllLines(path)
+                  .Skip(1)
+                  .Where(l => l.Length > 1);
 
             foreach (var line in source)
             {
                 var columns = line.Split(',');
                 importingData.Add(new Batsman
-                { 
+                {
                     BatsmanName = columns[0],
                     FielderDetails = columns[1].Trim(),
                     Runs = int.Parse(columns[2]),
@@ -435,84 +644,6 @@ namespace IPLFranchise2021.ViewModels
             return importingData;
         }
 
-        public ObservableCollection<OtherDetails> AddNameScore(ObservableCollection<Batsman> Batname, ObservableCollection<Batsman> BatTotalpoints,
-            ObservableCollection<BowlSide> Bowlname, ObservableCollection<BowlSide> BowlTotalpoints, ObservableCollection<OtherDetails> FilederPoints)
-        {
-            ObservableCollection<OtherDetails> _nameTotalPoints = new ObservableCollection<OtherDetails>();
-            if (_nameTotalPoints == null || _nameTotalPoints.Count == 0)
-            {
-                string[] slashSplit = new string[] { "\t" };
-                for (int i = 0; i <= Batname.Count - 1; i++)
-                {
-                    string[] runName = Batname[i].BatsmanName.Split(slashSplit, StringSplitOptions.None);
-                    _nameTotalPoints.Add(new OtherDetails() { Name = runName[0], OtherTotalScore = BatTotalpoints[i].TotalScore });
-
-                }
-
-                for (int i = 0; i <= Bowlname.Count - 1; i++)
-                {
-                    string[] runName = Bowlname[i].BowlerName.Split(slashSplit, StringSplitOptions.None);
-                    _nameTotalPoints.Add(new OtherDetails() { Name = runName[0], OtherTotalScore = BowlTotalpoints[i].BowlTotalScore });
-
-                }
-
-                for (int i = 0; i <= FilederPoints.Count - 1; i++)
-                {
-                    string[] runName = FilederPoints[i].Name.Split(slashSplit, StringSplitOptions.None);
-                    _nameTotalPoints.Add(new OtherDetails() { Name = runName[0], OtherTotalScore = FilederPoints[i].OtherTotalScore });
-
-                }
-            }
-                var result = from r in _nameTotalPoints
-                             group r by r.Name into g
-                             select new { Count = g.Sum(x => x.OtherTotalScore), Value = g.Key };
-                //string[] slashSplit = new string[] { "\t" };
-                //for (int i = 0; i <= Batname.Count- 1; i++)
-                //{
-                //    string[] runName = Batname[i].BatsmanName.Split(slashSplit, StringSplitOptions.None);
-                //    _nameScore.Add(runName[0], BatTotalpoints[i].TotalScore);
-                //}
-
-                //for (int i = 0; i <= Bowlname.Count - 1; i++)
-                //{
-                //    string[] runName = Bowlname[i].BowlerName.Split(slashSplit, StringSplitOptions.None);
-
-                //    if (_nameScore.ContainsKey(runName[0]))
-                //    {
-                //        //int value
-                //        int batvalue = _nameScore[runName[0]];
-                //        int bowValue = BowlTotalpoints[i].BowlTotalScore;
-                //        _nameScore[runName[0]] = batvalue + bowValue;
-                //    }
-                //    else
-                //    {
-                //        _nameScore.Add(runName[0], BowlTotalpoints[i].BowlTotalScore);
-                //    }
-                //}
-
-                //for (int i = 0; i <= FilederPoints.Count - 1; i++)
-                //{
-                //    string vvv = FilederPoints[i].Name;
-
-                //    if (_nameScore.ContainsKey(vvv))
-                //    {
-                //        int exitsVal = _nameScore[FilederPoints[i].Name];
-                //        int currentValue = FilederPoints[i].OtherTotalScore;
-                //        _nameScore[FilederPoints[i].Name] = exitsVal + currentValue;
-
-                //    }
-                //    else
-                //    {
-                //        _nameScore.Add(FilederPoints[i].Name, FilederPoints[i].OtherTotalScore);
-                //    }
-                //}
-
-                foreach (var item in result)
-                {
-                    _nameCollectionTotalPoints.Add(new OtherDetails() { Name = item.Value, OtherTotalScore = item.Count });
-                }
-
-            return _nameCollectionTotalPoints;
-        }
+        
     }
 }

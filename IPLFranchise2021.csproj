@@ -91,11 +91,13 @@
     </Compile>
     <Compile Include="Event\MatchNoEvent.cs" />
     <Compile Include="Extension\BatsmanExtension.cs" />
+    <Compile Include="Model\FPLTeamList.cs" />
+    <Compile Include="Model\FPLTeamTotalPoints.cs" />
+    <Compile Include="Model\FPLTotalPoints.cs" />
     <Compile Include="Repository\LoadRepository.cs" />
     <Compile Include="Logic\DataReaderLogic.cs" />
     <Compile Include="Logic\RunsCalculatorLogic.cs" />
     <Compile Include="Model\Batsman.cs" />
-    <Compile Include="Model\TeamListName.cs" />
     <Compile Include="Model\BowlSide.cs" />
     <Compile Include="Model\IPLSchedule.cs" />
     <Compile Include="Model\NoDuplicate.cs" />
@@ -163,9 +165,24 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="Data\FPLTeamList.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Data\IPL2021Schedule.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Data\MatchPoints\10\BatScore.csv" />
+    <None Include="Data\MatchPoints\10\BowlScore.csv" />
+    <None Include="Data\MatchPoints\11\BatScore.csv" />
+    <None Include="Data\MatchPoints\11\BowlScore.csv" />
+    <None Include="Data\MatchPoints\12\BatScore.csv" />
+    <None Include="Data\MatchPoints\12\BowlScore.csv" />
+    <None Include="Data\MatchPoints\13\BatScore.csv" />
+    <None Include="Data\MatchPoints\13\BowlScore.csv" />
+    <None Include="Data\MatchPoints\14\BatScore.csv" />
+    <None Include="Data\MatchPoints\14\BowlScore.csv" />
+    <None Include="Data\MatchPoints\15\BatScore.csv" />
+    <None Include="Data\MatchPoints\15\BowlScore.csv" />
     <None Include="Data\MatchPoints\1\BatScore.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -212,6 +229,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Data\MatchPoints\8\BowlScore.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\MatchPoints\9\BatScore.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\MatchPoints\9\BowlScore.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Data\sampleBatScore.csv">

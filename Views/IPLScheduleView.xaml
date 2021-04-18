@@ -46,7 +46,7 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Border BorderThickness="2">
-                        <StackPanel Background="#87CEEB" Width="350" Margin="5" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <StackPanel Background="#87CEEc" Width="350" Margin="5" HorizontalAlignment="Center" VerticalAlignment="Center">
                         <TextBlock Style="{StaticResource textblockStyle}" HorizontalAlignment="Center" FontWeight="Heavy" Text="{Binding MatchNo}" />
                         <TextBlock Style="{StaticResource textblockStyle}" HorizontalAlignment="Center" Text="{Binding Date}" />
                         <TextBlock Style="{StaticResource textblockStyle}" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding Match}" />

@@ -3,6 +3,7 @@ using IPLFranchise2021.Model;
 using Prism.Events;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,8 @@ namespace IPLFranchise2021.Logic
         IList<Batsman> GetAllBatsmen();
         IList<BowlSide> GetAllBowlSide();
         IList<IPLSchedule> GetAllIPLSchedule();
+
+        Dictionary<string,string> GetAllFPLTeam();
     }
     public class DataReaderLogic: IDataReaderLogic
     {
@@ -74,6 +77,32 @@ namespace IPLFranchise2021.Logic
                     .ToSchedule();
 
             return query.ToList();
+        }
+
+        public Dictionary<string,string> GetAllFPLTeam()
+        {
+            string path = $"Data/FPLTeamList.csv";
+            StreamReader sr = new StreamReader(path);
+            Dictionary<string, string> importingData = new Dictionary<string, string>();
+
+            var source = File.ReadAllLines(path)
+                  .Skip(1)
+                  .Where(l => l.Length > 1);
+            foreach (var line in source)
+            {
+
+                var columns = line.Split(',');
+
+                importingData.Add(columns[0].Trim(), columns[1].Trim());
+
+                //importingData.Add(new FPLTeamList
+                //{
+                //    PlayerName = columns[0],
+                //    FPLTeam = columns[1],
+                //});
+            }
+
+            return importingData;
         }
     }
 }
