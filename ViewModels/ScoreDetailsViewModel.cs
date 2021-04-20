@@ -571,6 +571,7 @@ namespace IPLFranchise2021.ViewModels
                 var result = from r in _checkStatrMOM
                              group r by r.FPLTeam into g
                              select new { Count = g.Sum(x => x.Points), Value = g.Key };
+                result = result.OrderByDescending(x => x.Count);
 
                 foreach (var item in result)
                 {

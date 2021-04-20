@@ -171,10 +171,18 @@
     <None Include="Data\IPL2021Schedule.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Data\MatchPoints\10\BatScore.csv" />
-    <None Include="Data\MatchPoints\10\BowlScore.csv" />
-    <None Include="Data\MatchPoints\11\BatScore.csv" />
-    <None Include="Data\MatchPoints\11\BowlScore.csv" />
+    <None Include="Data\MatchPoints\10\BatScore.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\MatchPoints\10\BowlScore.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\MatchPoints\11\BatScore.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\MatchPoints\11\BowlScore.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Data\MatchPoints\12\BatScore.csv" />
     <None Include="Data\MatchPoints\12\BowlScore.csv" />
     <None Include="Data\MatchPoints\13\BatScore.csv" />
