@@ -341,7 +341,7 @@ namespace IPLFranchise2021.ViewModels
                             _splittedName.Add(new OtherDetails()
                             {
                                 Name = n.Trim(),
-                                OtherTotalScore = 50
+                                OtherTotalScore = item.OtherTotalScore
                             });
                         }
                         else

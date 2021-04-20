@@ -183,8 +183,12 @@
     <None Include="Data\MatchPoints\11\BowlScore.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Data\MatchPoints\12\BatScore.csv" />
-    <None Include="Data\MatchPoints\12\BowlScore.csv" />
+    <None Include="Data\MatchPoints\12\BatScore.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\MatchPoints\12\BowlScore.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Data\MatchPoints\13\BatScore.csv" />
     <None Include="Data\MatchPoints\13\BowlScore.csv" />
     <None Include="Data\MatchPoints\14\BatScore.csv" />
