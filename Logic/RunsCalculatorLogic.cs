@@ -49,7 +49,7 @@ namespace IPLFranchise2021.Logic
 
             srPoints = (srPoints >= 250 && srPoints <= 349) ? 70 :
                              (srPoints >= 350) ? 120 :
-                             (srPoints <= 50 && balls >= 5 && runs !=0) ? -20 : 0;
+                             (srPoints <= 50 && balls >= 5 && runs !=0) ? -10 : 0;
 
             int ducks = (runs == 0 && balls > 0) ? -20 : 0;
 
@@ -68,18 +68,19 @@ namespace IPLFranchise2021.Logic
                 (wickets == 5) ? 250 : 0;
             int maidenPoints = maiden * 70;
             int hattrickPoints = hatTrick ? 200 : 0;
-            int econPoints = Convert.ToInt32(Econ);
-            econPoints = (econPoints <= 3) ? 150 :
-                (econPoints == 4) ? 100 :
-                (econPoints == 5) ? 70 :
-                (econPoints == 6) ? 50 :
-                (econPoints == 7) ? 40 :
-                (econPoints == 8) ? -10 :
-                (econPoints == 9) ? -20 :
-                (econPoints == 10 || econPoints == 11) ? -30 :
-                (econPoints >= 12) ? -40 : 0;
+            //int econPoints = Convert.ToInt32(Econ);
+            Econ = (Econ <= 3.00) ? 150 :
+                (Econ >= 3.01) && (Econ <= 4.00) ? 100 :
+                (Econ >= 4.01) && (Econ <= 5.00) ? 70 :
+                (Econ >= 5.01) && (Econ <= 6.00) ? 50 :
+                (Econ >= 6.01) && (Econ <= 7.00) ? 40 :
+                (Econ >= 7.01) && (Econ <= 7.99) ? 0 :
+                (Econ >= 8.00) && (Econ <= 8.99) ? -10 :
+                (Econ >= 9.00) && (Econ <= 9.99) ? -20 :
+                (Econ >= 10.00 && Econ == 11.99) ? -30 :
+                (Econ >= 12.00) ? -40 : 0;
 
-            return _bowlTotalPoints + wicketPoints + maidenPoints + hattrickPoints + econPoints;
+            return _bowlTotalPoints + wicketPoints + maidenPoints + hattrickPoints + Convert.ToInt32(Econ);
         }
 
 
