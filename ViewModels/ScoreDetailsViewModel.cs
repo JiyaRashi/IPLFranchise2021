@@ -316,7 +316,7 @@ namespace IPLFranchise2021.ViewModels
                 {
                     _fielderBonousPoints.Add(new OtherDetails()
                     {
-                        Name = runsCalculatorLogic.GetName(item.Value),
+                        Name = runsCalculatorLogic.GetValName(item.Value),
                         OtherTotalScore = runsCalculatorLogic.FielderEachTotalBonousPoints(item.Value, item.Count)
                     });
                 }

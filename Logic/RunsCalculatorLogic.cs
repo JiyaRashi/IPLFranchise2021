@@ -20,6 +20,7 @@ namespace IPLFranchise2021.Logic
         int FielderEachTotalBonousPoints(string name, int count);
         string GetName(string name, ObservableCollection<Batsman> batsmanName);
         string GetName(string name);
+        string GetValName(string name);
         string GetNoDupName(string name);
         ArrayList GetRunOutpoints(string name);
     }
@@ -86,23 +87,30 @@ namespace IPLFranchise2021.Logic
 
         public int FielderNamePoints(string name)
         {
-            string[] stringSeparators = new string[] {" & ", " b " };
+            if (name.Contains("c & b"))
+            {
+                return 35;
+            }
+            else
+            {
+                string[] stringSeparators = new string[] { " & ", " b " };
 
-            string[] name1 = name.Split(stringSeparators, StringSplitOptions.None);
-            int j = (name1[0].Length < 4) ? 1 : 0;
+                string[] name1 = name.Split(stringSeparators, StringSplitOptions.None);
+                int j = (name1[0].Length < 4) ? 1 : 0;
 
-            bool catcher = name1[j].Contains("c ");
-            bool LBW = name1[j].Contains("lbw ");
-            bool bowled = name1[j].Contains("b ");
-            bool stumbed = name1[j].Contains("st ");
-            bool runout = name1[j].Contains("run ");
+                bool catcher = name1[j].Contains("c ");
+                bool LBW = name1[j].Contains("lbw ");
+                bool bowled = name1[j].Contains("b ");
+                bool stumbed = name1[j].Contains("st ");
+                bool runout = name1[j].Contains("run ");
 
-            int points = LBW ? 10 :
-                bowled ? 10 :
-                catcher ? 25 :
-                stumbed ? 30 :
-                runout ? 50 : 0;
-            return points;
+                int points = LBW ? 10 :
+                    bowled ? 10 :
+                    catcher ? 25 :
+                    stumbed ? 30 :
+                    runout ? 50 : 0;
+                return points;
+            }
         }
         public bool IsValueableName(string name)
         {
@@ -129,7 +137,7 @@ namespace IPLFranchise2021.Logic
             int points = 0;
             if (name.Contains("c & b"))
             {
-                points = 10 * count;
+                points = 35 * count;
             }
             else
             {
@@ -203,11 +211,51 @@ namespace IPLFranchise2021.Logic
 
         public string GetName(string name)
         {
-            string[] stringSeparators = new string[] { " & ", " b ","c & "};
-            string[] sName = name.Split(stringSeparators, StringSplitOptions.None);
-            //int s = sName[0].Length;
-            //int ss = sName[1].Length;
-            return (sName[0].Length <4)? sName[1].Trim(): sName[0].Trim();
+            if (name.Contains("c & b"))
+            {
+                //string[] stringSeparators = new string[] { "c & b" };
+                //string[] sName = name.Split(stringSeparators, StringSplitOptions.None);
+                return (name.Trim());
+            }
+            else
+            {
+                string[] stringSeparators = new string[] { " & ", " b ", "c & " };
+                string[] sName = name.Split(stringSeparators, StringSplitOptions.None);
+                //int s = sName[0].Length;
+                //int ss = sName[1].Length;
+                return (sName[0].Length < 4) ? sName[1].Trim() : sName[0].Trim();
+            }
+
+            //string[] stringSeparators = new string[] { "c & b", " b ", "c & " };
+            //string[] sName = name.Split(stringSeparators, StringSplitOptions.None);
+            ////int s = sName[0].Length;
+            ////int ss = sName[1].Length;
+            //return (sName[0].Length < 4) ? sName[1].Trim() : sName[0].Trim();
+
+        }
+
+        public string GetValName(string name)
+        {
+            if (name.Contains("c & b"))
+            {
+                string[] stringSeparators = new string[] { "c & b" };
+                string[] sName = name.Split(stringSeparators, StringSplitOptions.None);
+                return (sName[1].Trim());
+            }
+            else
+            {
+                string[] stringSeparators = new string[] { " & ", " b ", "c & " };
+                string[] sName = name.Split(stringSeparators, StringSplitOptions.None);
+                //int s = sName[0].Length;
+                //int ss = sName[1].Length;
+                return (sName[0].Length < 4) ? sName[1].Trim() : sName[0].Trim();
+            }
+
+            //string[] stringSeparators = new string[] { "c & b", " b ", "c & " };
+            //string[] sName = name.Split(stringSeparators, StringSplitOptions.None);
+            ////int s = sName[0].Length;
+            ////int ss = sName[1].Length;
+            //return (sName[0].Length < 4) ? sName[1].Trim() : sName[0].Trim();
 
         }
 
@@ -216,17 +264,22 @@ namespace IPLFranchise2021.Logic
             List<char> charsToRemove = new List<char>() { ')', '(' };
             string[] stringSeparators = new string[] { "lbw ", "b ", "c ", "st ", "sub " };
             string[] sName = name.Split(stringSeparators, StringSplitOptions.None);
-
-            string _name= name.Contains("run out") ? name : sName[1].Trim();
-            string _name2= (_name == "") ? sName[2].Trim() : _name;
-            ArrayList namely = new ArrayList();
-            if (_name2.Contains("("))
+            if (sName.Length == 1)
             {
-                return _name2 = Filter(_name2, charsToRemove);
+                return name;
             }
+            else
+            {
+                string _name = name.Contains("run out") ? name : sName[1].Trim();
+                string _name2 = (_name == "") ? sName[2].Trim() : _name;
+                ArrayList namely = new ArrayList();
+                if (_name2.Contains("("))
+                {
+                    return _name2 = Filter(_name2, charsToRemove);
+                }
 
-            return _name2;
-
+                return _name2;
+            }
         }
 
         public ArrayList GetRunOutpoints(string name)
