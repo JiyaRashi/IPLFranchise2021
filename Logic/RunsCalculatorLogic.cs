@@ -52,7 +52,7 @@ namespace IPLFranchise2021.Logic
                              (srPoints >= 350) ? 120 :
                              (srPoints <= 50 && balls >= 5 && runs !=0) ? -10 : 0;
 
-            int ducks = (runs == 0 && balls > 0) ? -20 : 0;
+            int ducks = (runs == 0) ? -20 : 0;
 
 
             return totalScore + runTotalPoints + sixesPoints + fourPoints + srPoints + ducks;
