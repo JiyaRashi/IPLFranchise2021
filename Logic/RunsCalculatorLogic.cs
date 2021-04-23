@@ -78,7 +78,7 @@ namespace IPLFranchise2021.Logic
                 (Econ >= 7.01) && (Econ <= 7.99) ? 0 :
                 (Econ >= 8.00) && (Econ <= 8.99) ? -10 :
                 (Econ >= 9.00) && (Econ <= 9.99) ? -20 :
-                (Econ >= 10.00 && Econ == 11.99) ? -30 :
+                (Econ >= 10.00 && Econ <= 11.99) ? -30 :
                 (Econ >= 12.00) ? -40 : 0;
 
             return _bowlTotalPoints + wicketPoints + maidenPoints + hattrickPoints + Convert.ToInt32(Econ);
