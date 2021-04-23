@@ -101,20 +101,20 @@
     <Compile Include="Controls\IPScheduleControl.xaml.cs">
       <DependentUpon>IPScheduleControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Data\FPL.Context.cs">
+    <Compile Include="Data\Sql\SqlDataDB.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>FPL.Context.tt</DependentUpon>
+      <DependentUpon>SqlDataDB.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Data\FPL.cs">
+    <Compile Include="Data\Sql\SqlDataDB.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>FPL.tt</DependentUpon>
+      <DependentUpon>SqlDataDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Data\FPL.Designer.cs">
+    <Compile Include="Data\Sql\SqlDataDB.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>FPL.edmx</DependentUpon>
+      <DependentUpon>SqlDataDB.edmx</DependentUpon>
     </Compile>
     <Compile Include="Event\MatchNoEvent.cs" />
     <Compile Include="Extension\BatsmanExtension.cs" />
@@ -192,13 +192,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EntityDeploy Include="Data\FPL.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>FPL.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <None Include="Data\FPL.edmx.diagram">
-      <DependentUpon>FPL.edmx</DependentUpon>
-    </None>
     <None Include="Data\FPLTeamList.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -469,6 +462,13 @@
     <None Include="Data\sampleBowlScore.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <EntityDeploy Include="Data\Sql\SqlDataDB.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>SqlDataDB.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Data\Sql\SqlDataDB.edmx.diagram">
+      <DependentUpon>SqlDataDB.edmx</DependentUpon>
+    </None>
     <None Include="Data\TeamPlayers\jollyCricketers.csv" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -480,19 +480,19 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Data\FPL.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>FPL.edmx</DependentUpon>
-      <LastGenOutput>FPL.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Data\FPL.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>FPL.edmx</DependentUpon>
-      <LastGenOutput>FPL.cs</LastGenOutput>
-    </Content>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+    <Content Include="Data\Sql\SqlDataDB.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SqlDataDB.edmx</DependentUpon>
+      <LastGenOutput>SqlDataDB.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\Sql\SqlDataDB.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SqlDataDB.edmx</DependentUpon>
+      <LastGenOutput>SqlDataDB.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

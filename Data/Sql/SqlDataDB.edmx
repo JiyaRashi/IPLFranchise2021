@@ -22,13 +22,13 @@ warning 6013: The table/view 'FPL_DB.dbo.FPLTeamPoints' does not have a primary 
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="FPL_DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityContainer Name="FPL_DBEntities" annotation:LazyLoadingEnabled="true" />
+        <EntityContainer Name="FPL_DB_Entities" annotation:LazyLoadingEnabled="true" />
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="FPL_DBModelStoreContainer" CdmEntityContainer="FPL_DBEntities" />
+        <EntityContainerMapping StorageEntityContainer="FPL_DBModelStoreContainer" CdmEntityContainer="FPL_DB_Entities" />
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

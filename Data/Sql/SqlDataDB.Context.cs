@@ -7,16 +7,16 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace IPLFranchise2021.Data
+namespace IPLFranchise2021.Data.Sql
 {
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class FPL_DBEntities : DbContext
+    public partial class FPL_DB_Entities : DbContext
     {
-        public FPL_DBEntities()
-            : base("name=FPL_DBEntities")
+        public FPL_DB_Entities()
+            : base("name=FPL_DB_Entities")
         {
         }
     
