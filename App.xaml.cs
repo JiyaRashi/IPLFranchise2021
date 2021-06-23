@@ -28,7 +28,7 @@ namespace IPLFranchise2021
             containerRegistry.Register<IRunsCalculatorLogic, RunsCalculatorLogic>();
             containerRegistry.Register<IDataReaderLogic, DataReaderLogic>();
             containerRegistry.Register<ILoadRepository, LoadRepository>();
-
+            containerRegistry.Register<ISqlQueries, SqlQueries>();
         }
 
         protected override void ConfigureViewModelLocator()

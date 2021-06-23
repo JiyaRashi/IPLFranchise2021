@@ -26,6 +26,8 @@ namespace IPLFranchise2021.ViewModels
         public IEventAggregator _eventAggregator { get; set; }
         public IRunsCalculatorLogic runsCalculatorLogic { get; set; }
         public ILoadRepository loadRepository { get; set; }
+
+        public ISqlQueries sqlQueries { get; set; }
         public IDataReaderLogic dataReaderLogic { get; set; }
         public ObservableCollection<Batsman> _batsmenDetails;
         public ObservableCollection<BowlSide> _bowlDetails;
@@ -53,12 +55,13 @@ namespace IPLFranchise2021.ViewModels
         private IPLSchedule _selectedMatch;
 
         public ScoreDetailsViewModel(IRunsCalculatorLogic RunsCalculatorLogic, ILoadRepository LoadRepository, IEventAggregator eventAggregator,
-            IDataReaderLogic DataReaderLogic)
+            IDataReaderLogic DataReaderLogic, ISqlQueries SqlQueries)
         {
             dataReaderLogic = DataReaderLogic;
             runsCalculatorLogic = RunsCalculatorLogic;
             loadRepository = LoadRepository;
             _eventAggregator = eventAggregator;
+            sqlQueries = SqlQueries;
             _eventAggregator.GetEvent<MatchNoEvent>().Subscribe(MatchNoReceived);
             CalculateScoreDelegateCommand = new DelegateCommand(Execute, CanExecute);
             GoBackDelegateCommand = new DelegateCommand(GoBack);
@@ -462,6 +465,7 @@ namespace IPLFranchise2021.ViewModels
             }
             var result = from r in _nameTotalPoints
                          group r by r.Name into g
+                         orderby g.Key
                          select new { Count = g.Sum(x => x.OtherTotalScore), Value = g.Key };
             //string[] slashSplit = new string[] { "\t" };
             //for (int i = 0; i <= Batname.Count- 1; i++)
@@ -504,6 +508,7 @@ namespace IPLFranchise2021.ViewModels
             //    }
             //}
 
+
             foreach (var item in result)
             {
                 _nameCollectionTotalPoints.Add(new OtherDetails() { Name = item.Value, OtherTotalScore = item.Count });
@@ -533,8 +538,8 @@ namespace IPLFranchise2021.ViewModels
 
                     }
                 }
-
             }
+
             return _fPLTotalPoints;
 
         }
@@ -543,6 +548,7 @@ namespace IPLFranchise2021.ViewModels
         {
 
             FPLteamTotalPoints = GetTeamTotalPoints(FPLTotal_Points);
+           // sqlQueries.InsertDBFPLTeamTotalPoints(FPLteamTotalPoints, SelectedMatch);
         }
 
         public ObservableCollection<FPLTeamTotalPoints> GetTeamTotalPoints(ObservableCollection<FPLTotalPoints> NameTotalPoints)
