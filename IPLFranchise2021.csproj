@@ -271,6 +271,9 @@
     <None Include="Data\MatchPoints\1\BowlScore.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Data\MatchPoints\1\SuperStars.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Data\MatchPoints\20\BatScore.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -335,6 +338,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Data\MatchPoints\2\BowlScore.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\MatchPoints\2\SuperStars.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Data\MatchPoints\30\BatScore.csv">
@@ -402,6 +408,9 @@
     </None>
     <None Include="Data\MatchPoints\3\BowlScore.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\MatchPoints\3\SuperStars.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Data\MatchPoints\40\BatScore.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

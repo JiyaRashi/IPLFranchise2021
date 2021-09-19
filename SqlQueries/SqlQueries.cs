@@ -13,33 +13,30 @@ namespace IPLFranchise2021
     {
         public void InsertDBFPLTeamTotalPoints(ObservableCollection<FPLTeamTotalPoints> FPLTeamPoints,IPLSchedule IPLSchedule)
         {
-            SqlConnection conn;
             string connectionString = @"Data Source = localhost\SQLEXPRESS;Trusted_Connection=True; Initial Catalog = FPL_DB;";
            
-            SqlConnection connection = new SqlConnection(connectionString);
-           
-
-            using (conn = new SqlConnection(connectionString))
+            using (var conn = new SqlConnection(connectionString))
             {
-                conn.Open();
-                string queryInsert = "INSERT INTO FPLTeamPoints (TeamName, TeamPoints,Date,MatchNo,Match,Matchyear) " +
+                string insertFPLTotoalPoints = "INSERT INTO FPLTeamPoints (TeamName, TeamPoints,Date,MatchNo,Match,Matchyear) " +
                "VALUES (@TeamName,@TeamPoints,@Date,@MatchNo,@Match,@Matchyear)";
-                using (SqlCommand query = new SqlCommand(queryInsert))
-                {
-                    query.Connection = conn;
-
+                
                     foreach (var item in FPLTeamPoints)
                     {
-                        //query.Parameters.Add("@ID", SqlDbType.Int, 150).Value =;
-                        query.Parameters.Add("@TeamName", SqlDbType.NVarChar, 150).Value = item.FPLTeam;
-                        query.Parameters.Add("@TeamPoints", SqlDbType.Int, 150).Value = item.Points;
-                        query.Parameters.Add("@Date", SqlDbType.NVarChar, 150).Value = IPLSchedule.Date;
-                        query.Parameters.Add("@MatchNo", SqlDbType.Int, 150).Value = IPLSchedule.MatchNo;
-                        query.Parameters.Add("@Match", SqlDbType.NVarChar, 250).Value = IPLSchedule.Match;
-                        query.Parameters.Add("@Matchyear", SqlDbType.Int, 250).Value = 2021;
-                        query.ExecuteNonQuery();
+                    var query = new SqlCommand(insertFPLTotoalPoints, conn);
+                    //query.Parameters.Add("@ID", SqlDbType.Int, 150).Value =;
+                        query.Parameters.AddWithValue("@TeamName", item.FPLTeam);
+                        query.Parameters.AddWithValue("@TeamPoints", item.Points);
+                        query.Parameters.AddWithValue("@Date", IPLSchedule.Date);
+                        query.Parameters.AddWithValue("@MatchNo", IPLSchedule.MatchNo);
+                        query.Parameters.AddWithValue("@Match", IPLSchedule.Match);
+                        query.Parameters.AddWithValue("@Matchyear", 2021);
+                    conn.Close();
+                    conn.Open();
+
+                    query.ExecuteNonQuery();
                     }
-                }
+                
+                
                 conn.Close();
 
             }

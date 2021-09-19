@@ -16,10 +16,10 @@ namespace IPLFranchise2021.Logic
         IList<Batsman> GetAllBatsmen();
         IList<BowlSide> GetAllBowlSide();
         IList<IPLSchedule> GetAllIPLSchedule();
-
         Dictionary<string,string> GetAllFPLTeam();
+        Dictionary<string, string> GetFPLTeamStars(int matchNo);
     }
-    public class DataReaderLogic: IDataReaderLogic
+    public class DataReaderLogic : IDataReaderLogic
     {
         private int _matchNo;
         public IEventAggregator _eventAggregator { get; set; }
@@ -42,7 +42,7 @@ namespace IPLFranchise2021.Logic
         }
         public IList<Batsman> GetAllBatsmen()
         {
-            
+
             string path = $"Data/MatchPoints/{MatchNo}/BatScore.csv";
             var query =
 
@@ -79,9 +79,9 @@ namespace IPLFranchise2021.Logic
             return query.ToList();
         }
 
-        public Dictionary<string,string> GetAllFPLTeam()
+        public Dictionary<string, string> GetAllFPLTeam()
         {
-            string path = (MatchNo>= 29)?$"Data/FPLTeamList2sthalft.csv" : $"Data/FPLTeamList1sthalft.csv";
+            string path = (MatchNo >= 29) ? $"Data/FPLTeamList2sthalft.csv" : $"Data/FPLTeamList1sthalft.csv";
             StreamReader sr = new StreamReader(path);
             Dictionary<string, string> importingData = new Dictionary<string, string>();
 
@@ -102,6 +102,22 @@ namespace IPLFranchise2021.Logic
                 //});
             }
 
+            return importingData;
+        }
+
+        public Dictionary<string, string> GetFPLTeamStars(int matchNo)
+        {
+            string path = $"Data/MatchPoints/{matchNo}/SuperStars.csv";
+            StreamReader sr = new StreamReader(path);
+            Dictionary<string, string> importingData = new Dictionary<string, string>();
+            var source = File.ReadAllLines(path)
+                  .Skip(1)
+                  .Where(l => l.Length > 1);
+            foreach (var line in source)
+            {
+                var columns = line.Split(',');
+                importingData.Add(columns[0].Trim(), columns[1].Trim());
+            }
             return importingData;
         }
     }
