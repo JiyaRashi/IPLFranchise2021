@@ -9,6 +9,7 @@ namespace IPLFranchise2021.Model
     public class IPLSchedule
     {
         public string Date { get; set; }
+        public string Day { get; set; }
         public string Match { get; set; }
         public string Time { get; set; }
         public string Venue { get; set; }

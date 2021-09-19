@@ -31,7 +31,7 @@
                            Style="{StaticResource buttonStyle}" HorizontalContentAlignment="Center" HorizontalAlignment="Center">
                 <Button.Content>
                     <StackPanel Width="350" Margin="10" HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <TextBlock Style="{StaticResource textblockStyle}" HorizontalAlignment="Center" Text="{Binding Date}" />
+                        <!--<TextBlock Style="{StaticResource textblockStyle}" HorizontalAlignment="Center" Text="{Binding Date}" />-->
                         <TextBlock Style="{StaticResource textblockStyle}" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding Match}" />
                         <TextBlock Style="{StaticResource textblockStyle}" HorizontalAlignment="Center" Text="{Binding Time}" />
                         <TextBlock Style="{StaticResource textblockStyle}" HorizontalAlignment="Center" Text="{Binding Venue}" />
@@ -45,7 +45,7 @@
             
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <UniformGrid Columns="4" />
+                    <UniformGrid Columns="5" />
                 </ItemsPanelTemplate>
             </ListBox.ItemsPanel>
             <ListBox.ItemTemplate>
@@ -53,9 +53,16 @@
                     <Border BorderThickness="2">
                         <StackPanel Background="WhiteSmoke" Width="350" Margin="5" HorizontalAlignment="Center" VerticalAlignment="Center">
                         <TextBlock Style="{StaticResource textblockStyle_}" HorizontalAlignment="Center" FontWeight="Heavy" Text="{Binding MatchNo}" />
-                        <TextBlock Style="{StaticResource textblockStyle}" HorizontalAlignment="Center" Text="{Binding Date}" />
+                            <TextBlock Style="{StaticResource textblockStyle}" HorizontalAlignment="Center" >
+                                <TextBlock.Text>
+                                    <MultiBinding StringFormat="{}{0}, {1}, {2}">
+                                        <Binding Path="Date" />
+                                        <Binding Path="Day" />
+                                        <Binding Path="Time" />
+                                    </MultiBinding>
+                                </TextBlock.Text>
+                            </TextBlock>
                         <TextBlock Style="{StaticResource textblockStyle}" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding Match}" />
-                        <TextBlock Style="{StaticResource textblockStyle}" HorizontalAlignment="Center" Text="{Binding Time}" />
                         <TextBlock Style="{StaticResource textblockStyle}" HorizontalAlignment="Center" Text="{Binding Venue}" />
                     </StackPanel>
                     </Border>

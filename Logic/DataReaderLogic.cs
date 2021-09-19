@@ -27,7 +27,7 @@ namespace IPLFranchise2021.Logic
         public DataReaderLogic(IEventAggregator eventAggregator)
         {
             _eventAggregator = eventAggregator;
-            //_eventAggregator.GetEvent<MatchNoEvent>().Subscribe(MatchNoReceived);
+            _eventAggregator.GetEvent<MatchNoEvent>().Subscribe(MatchNoReceived);
         }
 
         private void MatchNoReceived(int obj)
@@ -81,7 +81,7 @@ namespace IPLFranchise2021.Logic
 
         public Dictionary<string,string> GetAllFPLTeam()
         {
-            string path = $"Data/FPLTeamList.csv";
+            string path = (MatchNo>= 29)?$"Data/FPLTeamList2sthalft.csv" : $"Data/FPLTeamList1sthalft.csv";
             StreamReader sr = new StreamReader(path);
             Dictionary<string, string> importingData = new Dictionary<string, string>();
 

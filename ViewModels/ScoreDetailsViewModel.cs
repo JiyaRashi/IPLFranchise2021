@@ -53,6 +53,11 @@ namespace IPLFranchise2021.ViewModels
 
         private int _matchNo;
         private IPLSchedule _selectedMatch;
+        public int MatchNo
+        {
+            get { return _matchNo; }
+            set { _matchNo = value; }
+        }
 
         public ScoreDetailsViewModel(IRunsCalculatorLogic RunsCalculatorLogic, ILoadRepository LoadRepository, IEventAggregator eventAggregator,
             IDataReaderLogic DataReaderLogic, ISqlQueries SqlQueries)
@@ -69,11 +74,7 @@ namespace IPLFranchise2021.ViewModels
             FPLTeamLists = dataReaderLogic.GetAllFPLTeam();
         }
 
-        public int MatchNo
-        {
-            get { return _matchNo; }
-            set { _matchNo = value; }
-        }
+        
         private void MatchNoReceived(int obj)
         {
             _matchNo = obj;

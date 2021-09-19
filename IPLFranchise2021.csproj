@@ -196,8 +196,11 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="Data\FPLTeamList.csv">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <None Include="Data\FPLTeamList1sthalft.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\FPLTeamList2sthalft.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Data\IPL2021Schedule.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

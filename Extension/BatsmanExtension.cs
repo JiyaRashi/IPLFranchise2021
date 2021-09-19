@@ -60,9 +60,10 @@ namespace IPLFranchise2021
                 yield return new IPLSchedule
                 {
                     Date = columns[0].Trim(),
-                    Match = columns[1].Trim(),
-                    Time = columns[2].Trim(),
-                    Venue = columns[3].Trim(),
+                    Day = columns[1].Trim(),
+                    Match = columns[2].Trim(),
+                    Time = columns[3].Trim(),
+                    Venue = columns[4].Trim(),
                     MatchNo = int.Parse(columns[5])
                 };
             }
