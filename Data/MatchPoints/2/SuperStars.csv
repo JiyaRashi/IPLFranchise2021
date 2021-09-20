@@ -1,8 +1,8 @@
 FPLTeam		Name MoM
-Faf du Plessis	,False
-Shikhar Dhawan	,True
-Ajinkya Rahane	,False
-Rishabh Pant,False
-Prithvi Shaw,False
-Suresh Raina	,False
-MS Dhoni,False
+Faf du Plessis	,True,False
+Shikhar Dhawan	,True,True
+Ajinkya Rahane	,True,False
+Rishabh Pant,True,False
+Prithvi Shaw,True,False
+Suresh Raina	,True,False
+MS Dhoni,True,False

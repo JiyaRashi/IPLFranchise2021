@@ -44,7 +44,7 @@ namespace IPLFranchise2021.ViewModels
 
         public Dictionary<string,string> _fPLTeamLists = new Dictionary<string, string>();
 
-        public Dictionary<string, string> _fPLSuperStar = new Dictionary<string, string>();
+        public IList<SuperStars> _fPLSuperStar = new List<SuperStars>();
 
         public DelegateCommand CalculateScoreDelegateCommand { get; private set; }
 
@@ -58,7 +58,11 @@ namespace IPLFranchise2021.ViewModels
         public int MatchNo
         {
             get { return _matchNo; }
-            set { _matchNo = value; }
+            set 
+            { 
+                _matchNo = value;
+                RaisePropertyChanged("MatchNo");
+            }
         }
 
         public ScoreDetailsViewModel(IRunsCalculatorLogic RunsCalculatorLogic, ILoadRepository LoadRepository, IEventAggregator eventAggregator,
@@ -79,7 +83,7 @@ namespace IPLFranchise2021.ViewModels
 
         private void MatchNoReceived(int obj)
         {
-            _matchNo = obj;
+            _matchNo = _selectedMatch.MatchNo;
         }
         private bool CanExecute()
         {
@@ -143,7 +147,7 @@ namespace IPLFranchise2021.ViewModels
             }
         }
 
-        public Dictionary<string, string> FPLSuperStar
+        public IList<SuperStars> FPLSuperStar
         {
             get { return _fPLSuperStar; }
             set
@@ -423,6 +427,7 @@ namespace IPLFranchise2021.ViewModels
             var _selectedMatch = navigationContext.Parameters["schedule"] as IPLSchedule;
             if (_selectedMatch != null)
                 SelectedMatch = _selectedMatch;
+            MatchNo=SelectedMatch.MatchNo;
             BatsmenDetails = GetAllBatsmen();
             BowlDetails = GetAllBowlSide();
         }
@@ -539,7 +544,7 @@ namespace IPLFranchise2021.ViewModels
             string[] slashSplit = new string[] { "\t" };
             if (_fPLTotalPoints == null || _fPLTotalPoints.Count == 0)
             {
-                var isMoM = FPLSuperStar.FirstOrDefault(x => x.Value == "True");
+               // var isMoM = FPLSuperStar.FirstOrDefault(x => x.Value == "True");
 
                 for (int i = 0; i <= NameTotalPoints.Count - 1; i++)
                 {
@@ -548,13 +553,19 @@ namespace IPLFranchise2021.ViewModels
                     if (FPLteamList.ContainsKey(name1))
                     {
                         string fplTeam = FPLteamList[name1];
-                        bool isStar = FPLSuperStar.ContainsKey(name1);
+
+                        bool isStar = FPLSuperStar.Where(z => z.Name == name1).Select(s => s.IsStar).FirstOrDefault();
+                        bool isMoM = FPLSuperStar.Where(z => z.Name == name1 ).Select(s => s.IsMoM).FirstOrDefault();
+
+                        // var _CollectionStars = FPLSuperStar.Take(FPLSuperStar.Count - 1).ToDictionary(n=>n.Key);
+                        //bool isStar = _CollectionStars.ContainsKey(name1);
+                        //var _isMoM = FPLSuperStar.LastOrDefault();
                         _fPLTotalPoints.Add(new FPLTotalPoints()
                         {
                             PlayerName = NameTotalPoints[i].Name,
                             Points = NameTotalPoints[i].OtherTotalScore,
                             IsStar = isStar,
-                            IsMoM = isMoM.Key == NameTotalPoints[i].Name ? true : false,
+                            IsMoM = isMoM,
                             FPLTeam = fplTeam
                         }); 
 
@@ -569,7 +580,7 @@ namespace IPLFranchise2021.ViewModels
         public void GetFPLTeamPoints()
         {
             FPLteamTotalPoints = GetTeamTotalPoints(FPLTotal_Points);
-            sqlQueries.InsertDBFPLTeamTotalPoints(FPLteamTotalPoints, SelectedMatch);
+            //sqlQueries.InsertDBFPLTeamTotalPoints(FPLteamTotalPoints, SelectedMatch);
         }
 
         public ObservableCollection<FPLTeamTotalPoints> GetTeamTotalPoints(ObservableCollection<FPLTotalPoints> NameTotalPoints)

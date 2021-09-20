@@ -87,6 +87,7 @@
         <Button  Command="{Binding GoBackDelegateCommand}" Margin="20 20" FontSize="25" Grid.Row="4" Grid.Column="1" Content="Go Back"/>
         <Button  Command="{Binding FPLTeamDelegateCommand}" Margin="20 20" FontSize="25" Grid.Row="4" Grid.Column="2" Content="FPL Team Points"/>
 
-        <TextBlock FontSize="25" Text="Details Taken from Iplt20.com " Grid.Row="5" Grid.ColumnSpan="2"/>
+        <TextBlock FontSize="25" Text="Details Taken from Iplt20.com" Grid.Row="6" Grid.ColumnSpan="2"/>
+        <TextBlock FontSize="25" Text="{Binding MatchNo}" Grid.Row="5" Grid.ColumnSpan="2"/>
     </Grid>
 </UserControl>

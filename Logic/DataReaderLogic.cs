@@ -17,7 +17,7 @@ namespace IPLFranchise2021.Logic
         IList<BowlSide> GetAllBowlSide();
         IList<IPLSchedule> GetAllIPLSchedule();
         Dictionary<string,string> GetAllFPLTeam();
-        Dictionary<string, string> GetFPLTeamStars(int matchNo);
+        IList<SuperStars> GetFPLTeamStars(int matchNo);
     }
     public class DataReaderLogic : IDataReaderLogic
     {
@@ -105,20 +105,21 @@ namespace IPLFranchise2021.Logic
             return importingData;
         }
 
-        public Dictionary<string, string> GetFPLTeamStars(int matchNo)
+        public IList<SuperStars> GetFPLTeamStars(int matchNo)
         {
             string path = $"Data/MatchPoints/{matchNo}/SuperStars.csv";
             StreamReader sr = new StreamReader(path);
             Dictionary<string, string> importingData = new Dictionary<string, string>();
             var source = File.ReadAllLines(path)
                   .Skip(1)
-                  .Where(l => l.Length > 1);
-            foreach (var line in source)
-            {
-                var columns = line.Split(',');
-                importingData.Add(columns[0].Trim(), columns[1].Trim());
-            }
-            return importingData;
+                  .Where(l => l.Length > 1)
+                  .ToSuperStars();
+            //foreach (var line in source)
+            //{
+            //    var columns = line.Split(',');
+            //    importingData.Add(columns[0].Trim(), columns[1].Trim());
+            //}
+            return source.ToList();
         }
     }
 }

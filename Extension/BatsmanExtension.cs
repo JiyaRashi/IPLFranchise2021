@@ -69,6 +69,22 @@ namespace IPLFranchise2021
             }
         }
 
+        public static IEnumerable<SuperStars> ToSuperStars(this IEnumerable<string> source)
+        {
+            foreach (var line in source)
+            {
+
+                var columns = line.Split(',');
+
+                yield return new SuperStars
+                {
+                    Name = columns[0].Trim(),
+                    IsStar = bool.Parse(columns[1].Trim()),
+                    IsMoM = bool.Parse(columns[2].Trim())
+                };
+            }
+        }
+
         //public static IEnumerable<FPLTeamListName> ToNameList(this IEnumerable<string> source)
         //{
         //    foreach (var line in source)

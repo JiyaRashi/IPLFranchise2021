@@ -1,8 +1,9 @@
-FPLTeam		Name
-Rohit Sharma	,False
-Trent Boult	,False
-Hardik Pandya	,False
-Suryakumar Yadav,False
-Devdutt Padikkal,False
-Virat Kohli	,False
-Jasprit Bumrah	,False
+Name isStar Ismom
+Rohit Sharma	,True,False
+Trent Boult	,True,False
+Hardik Pandya	,True,False
+Suryakumar Yadav,True,False
+Devdutt Padikkal,True,False
+Virat Kohli	,True,False
+Jasprit Bumrah	,True,False
+Harshal Patel,False,True

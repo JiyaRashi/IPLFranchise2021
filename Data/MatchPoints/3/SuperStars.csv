@@ -1,8 +1,8 @@
 FPLTeam		Name
-Nitish Rana	,True
-Manish Pandey	,False
-Jonny Bairstow	,False
-Abdul Samad,False
-Dinesh Karthik,False
-David Warner,False
-Rashid Khan	,False
+Nitish Rana	,True,True
+Manish Pandey,	True,False
+Jonny Bairstow	,	True,False
+Abdul Samad,	True,False
+Dinesh Karthik,	True,False
+David Warner,	True,False
+Rashid Khan	,	True,False

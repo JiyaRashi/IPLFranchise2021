@@ -14,15 +14,27 @@ namespace IPLFranchise2021
         public void InsertDBFPLTeamTotalPoints(ObservableCollection<FPLTeamTotalPoints> FPLTeamPoints,IPLSchedule IPLSchedule)
         {
             string connectionString = @"Data Source = localhost\SQLEXPRESS;Trusted_Connection=True; Initial Catalog = FPL_DB;";
-           
+            
+
             using (var conn = new SqlConnection(connectionString))
             {
+                string selectFPLMatch = "Select MatchNo from FPLTeamPoints where MatchNo=@MatchNo";
                 string insertFPLTotoalPoints = "INSERT INTO FPLTeamPoints (TeamName, TeamPoints,Date,MatchNo,Match,Matchyear) " +
                "VALUES (@TeamName,@TeamPoints,@Date,@MatchNo,@Match,@Matchyear)";
-                
-                    foreach (var item in FPLTeamPoints)
+                var SelectMatchNoQuery = new SqlCommand(selectFPLMatch, conn);
+                SelectMatchNoQuery.Parameters.AddWithValue("@MatchNo", IPLSchedule.MatchNo);
+                conn.Close();
+                conn.Open();
+                int result = (int)(SelectMatchNoQuery.ExecuteScalar());
+                string UpdateFPLTotoalPointsQuery = "Update FPLTeamPoints SET TeamName=TeamName, TeamPoints=@TeamPoints,Date=@Date,MatchNo=@MatchNo,Match=@Match,Matchyear=@Matchyear where MatchNo=@MatchNo";
+                SqlCommand insertquery = new SqlCommand(insertFPLTotoalPoints, conn);
+                SqlCommand updateQuery = new SqlCommand(UpdateFPLTotoalPointsQuery, conn);
+                updateQuery.Parameters.AddWithValue("@MatchNo", IPLSchedule.MatchNo);
+
+                SqlCommand query = result > 0 ? updateQuery : insertquery;
+                foreach (var item in FPLTeamPoints)
                     {
-                    var query = new SqlCommand(insertFPLTotoalPoints, conn);
+                    
                     //query.Parameters.Add("@ID", SqlDbType.Int, 150).Value =;
                         query.Parameters.AddWithValue("@TeamName", item.FPLTeam);
                         query.Parameters.AddWithValue("@TeamPoints", item.Points);
