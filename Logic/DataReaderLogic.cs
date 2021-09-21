@@ -16,7 +16,7 @@ namespace IPLFranchise2021.Logic
         IList<Batsman> GetAllBatsmen();
         IList<BowlSide> GetAllBowlSide();
         IList<IPLSchedule> GetAllIPLSchedule();
-        Dictionary<string,string> GetAllFPLTeam();
+        Dictionary<string,string> GetAllFPLTeam(int matchNo);
         IList<SuperStars> GetFPLTeamStars(int matchNo);
     }
     public class DataReaderLogic : IDataReaderLogic
@@ -79,9 +79,9 @@ namespace IPLFranchise2021.Logic
             return query.ToList();
         }
 
-        public Dictionary<string, string> GetAllFPLTeam()
+        public Dictionary<string, string> GetAllFPLTeam(int matchNo)
         {
-            string path = (MatchNo >= 29) ? $"Data/FPLTeamList2sthalft.csv" : $"Data/FPLTeamList1sthalft.csv";
+            string path = (matchNo >= 29) ? $"Data/FPLTeamList2sthalft.csv" : $"Data/FPLTeamList1sthalft.csv";
             StreamReader sr = new StreamReader(path);
             Dictionary<string, string> importingData = new Dictionary<string, string>();
 

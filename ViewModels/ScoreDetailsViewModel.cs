@@ -77,7 +77,6 @@ namespace IPLFranchise2021.ViewModels
             CalculateScoreDelegateCommand = new DelegateCommand(Execute, CanExecute);
             GoBackDelegateCommand = new DelegateCommand(GoBack);
             FPLTeamDelegateCommand = new DelegateCommand(GetFPLTeamPoints);
-            FPLTeamLists = dataReaderLogic.GetAllFPLTeam();
         }
 
 
@@ -98,7 +97,9 @@ namespace IPLFranchise2021.ViewModels
             FielderTotalPoints = GetFielderTotalPoints(FielderBonousPoints);
             NameCollectionTotalPoints = AddNameScore(BatsmenDetails, BatsmenTotalPoints, BowlDetails, BowlingTotalPoints, FielderTotalPoints);
             FPLSuperStar = dataReaderLogic.GetFPLTeamStars(SelectedMatch.MatchNo);
+            FPLTeamLists = dataReaderLogic.GetAllFPLTeam(SelectedMatch.MatchNo);
             FPLTotal_Points = AddTeamNametoList(NameCollectionTotalPoints,FPLTeamLists);
+
         }
 
         /// <summary>
