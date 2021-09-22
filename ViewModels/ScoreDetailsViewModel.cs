@@ -581,7 +581,7 @@ namespace IPLFranchise2021.ViewModels
         public void GetFPLTeamPoints()
         {
             FPLteamTotalPoints = GetTeamTotalPoints(FPLTotal_Points);
-            //sqlQueries.InsertDBFPLTeamTotalPoints(FPLteamTotalPoints, SelectedMatch);
+           // sqlQueries.InsertDBFPLTeamTotalPoints(FPLteamTotalPoints, SelectedMatch);
         }
 
         public ObservableCollection<FPLTeamTotalPoints> GetTeamTotalPoints(ObservableCollection<FPLTotalPoints> NameTotalPoints)

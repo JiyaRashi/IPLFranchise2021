@@ -27,13 +27,23 @@ namespace IPLFranchise2021
                 //SelectMatchNoQuery.Parameters.AddWithValue("@MatchNo", IPLSchedule.MatchNo);
                 SqlCommand cmd = new SqlCommand("SP_GetMatchNo", conn);
                 cmd.CommandType = CommandType.StoredProcedure;
-                SqlParameter parm = new SqlParameter("@return", SqlDbType.Int);
-                parm.Direction = ParameterDirection.ReturnValue;
-                cmd.Parameters.Add(parm);
+
+                IDbDataParameter IniParameter = cmd.CreateParameter();
+                IniParameter.ParameterName = "@MatchNo";
+                IniParameter.Value = IPLSchedule.MatchNo;
+
+                IDbDataParameter ReturnParameter = cmd.CreateParameter();
+                ReturnParameter.Direction = ParameterDirection.ReturnValue;
+                cmd.Parameters.Add(IniParameter);
+                cmd.Parameters.Add(ReturnParameter);
+
+                // SqlParameter parm = new SqlParameter("@return", SqlDbType.Int);
+                //parm.Direction = ParameterDirection.Output;
+                //cmd.Parameters.Add(parm);
                 conn.Close();
                 conn.Open();
                 cmd.ExecuteNonQuery();
-                int count = Convert.ToInt32(parm.Value); ;
+                int count =(int)ReturnParameter.Value; 
                 // string UpdateFPLTotoalPointsQuery = "Update FPLTeamPoints SET TeamName=TeamName, TeamPoints=@TeamPoints,Date=@Date,MatchNo=@MatchNo,Match=@Match,Matchyear=@Matchyear where MatchNo=@MatchNo";
                 // SqlCommand insertquery = new SqlCommand(insertFPLTotoalPoints, conn);
                 // SqlCommand updateQuery = new SqlCommand(UpdateFPLTotoalPointsQuery, conn);
