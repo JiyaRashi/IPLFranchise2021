@@ -101,6 +101,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Common\PointsValue.cs" />
     <Compile Include="Controls\IPScheduleControl.xaml.cs">
       <DependentUpon>IPScheduleControl.xaml</DependentUpon>
     </Compile>
@@ -435,6 +436,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Data\MatchPoints\33\BowlScore.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\MatchPoints\33\SuperStars.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Data\MatchPoints\34\BatScore.csv">

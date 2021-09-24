@@ -1,17 +1,15 @@
-Batsmen				Runs		Balls		SR		4s		6s
-KL Rahul	,	run out (Ravindra Jadeja)	,	5	,	7	,	71.42	,	1	,	0
-Mayank Agarwal	,	b Deepak Chahar	,	0	,	2	,	0	,	0	,	0
-Chris Gayle	,	c Ravindra Jadeja b Deepak Chahar	,	10	,	10	,	100	,	2	,	0
-Deepak Hooda	,	c Faf du Plessis b Deepak Chahar	,	10	,	15	,	66.66	,	1	,	0
-Nicholas Pooran	,	c Shardul Thakur b Deepak Chahar	,	0	,	2	,	0	,	0	,	0
-Shahrukh Khan	,	c Ravindra Jadeja b Sam Curran	,	47	,	36	,	130.55	,	4	,	2
-Jhye Richardson	,	b Moeen Ali	,	15	,	22	,	68.18	,	2	,	0
-Murugan Ashwin	,	c Faf du Plessis b Dwayne Bravo	,	6	,	14	,	42.85	,	0	,	0
-Mohammad Shami	,	NOT OUT	,	9	,	12	,	75	,	0	,	0
-Riley Meredith	,	NOT OUT	,	0	,	0	,	0	,	0	,	0
-Ruturaj Gaikwad	,	c Deepak Hooda b Arshdeep Singh	,	5	,	16	,	31.25	,	0	,	0
-Faf du Plessis	,	NOT OUT	,	36	,	33	,	109.09	,	3	,	1
-Moeen Ali	,	c Shahrukh Khan b Murugan Ashwin	,	46	,	31	,	148.38	,	7	,	1
-Suresh Raina	,	c KL Rahul b Mohammad Shami	,	8	,	9	,	88.88	,	1	,	0
-Ambati Rayudu	,	c Nicholas Pooran b Mohammad Shami	,	0	,	1	,	0	,	0	,	0
-Sam Curran	,	NOT OUT	,	5	,	4	,	125	,	1	,	0
+Batsmen	,		,	Runs	,	Balls	,	SR	,	4s	,	6s
+David Warner	,	c Axar Patel b Anrich Nortje	,	0	,	3	,	0	,	0	,	0
+Wriddhiman Saha	,	c Shikhar Dhawan b Kagiso Rabada	,	18	,	17	,	105.88	,	2	,	1
+Kane Williamson	,	c Shimron Hetmyer b Axar Patel	,	18	,	26	,	69.23	,	1	,	0
+Manish Pandey	,	c & b Kagiso Rabada	,	17	,	16	,	106.25	,	1	,	0
+Kedar Jadhav	,	lbw Anrich Nortje	,	3	,	8	,	37.5	,	0	,	0
+Abdul Samad	,	c Rishabh Pant b Kagiso Rabada	,	28	,	21	,	133.33	,	2	,	1
+Jason Holder	,	c Prithvi Shaw b Axar Patel	,	10	,	9	,	111.11	,	0	,	1
+Rashid Khan	,	run out (sub [Steve Smith]/Rishabh Pant)	,	22	,	19	,	115.78	,	2	,	1
+Bhuvneshwar Kumar	,	NOT OUT	,	5	,	3	,	166.66	,	1	,	0
+Sandeep Sharma	,	run out (Rishabh Pant)	,	0	,	1	,	0	,	0	,	0
+Prithvi Shaw	,	c Kane Williamson b Khaleel Ahmed	,	11	,	8	,	137.5	,	2	,	0
+Shikhar Dhawan	,	c Abdul Samad b Rashid Khan	,	42	,	37	,	113.51	,	6	,	1
+Shreyas Iyer	,	NOT OUT	,	47	,	41	,	114.63	,	2	,	2
+Rishabh Pant	,	NOT OUT	,	35	,	21	,	166.66	,	3	,	2

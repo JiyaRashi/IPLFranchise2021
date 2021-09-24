@@ -275,7 +275,7 @@ namespace IPLFranchise2021.ViewModels
                         new Batsman
                         {
                             TotalScore = runsCalculatorLogic.BatsmanScoreCalulator
-                            (item.Runs, item.Balls, item.Fours, item.Sixes, item.SR)
+                            (item.Runs, item.Balls, item.Fours, item.Sixes, item.SR,item.FielderDetails)
                         }); ;
                 }
 

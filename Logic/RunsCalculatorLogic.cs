@@ -1,4 +1,5 @@
-﻿using IPLFranchise2021.Model;
+﻿using IPLFranchise2021.Common;
+using IPLFranchise2021.Model;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -12,7 +13,7 @@ namespace IPLFranchise2021.Logic
 {
     public interface IRunsCalculatorLogic
     {
-        int BatsmanScoreCalulator(int runs, int balls, int fours, int sixes, double SR);
+        int BatsmanScoreCalulator(int runs, int balls, int fours, int sixes, double SR,string FielderDetails);
         int BowlScoreCalulator(int overRuns, double overs, int wickets, double Econ,
             int dot, int maiden, bool hatTrick);
         int FielderNamePoints(string name);
@@ -26,25 +27,23 @@ namespace IPLFranchise2021.Logic
     }
     public class RunsCalculatorLogic : IRunsCalculatorLogic
     {
-        public int BatsmanScoreCalulator(int runs, int balls, int fours, int sixes, double SR)
+        public int BatsmanScoreCalulator(int runs, int balls, int fours, int sixes, double SR,string FielderDetails)
         {
             int totalScore = 0;
-            int FourBouns = 5;
-            int SixBonus = 10;
 
-            int runTotalPoints = (runs >= 30 && runs <= 49) ? runs + 30 :
-                                 (runs >= 50 && runs <= 69) ? runs + 50 :
-                                 (runs >= 70 && runs <= 99) ? runs + 70 :
-                                 (runs >= 100) ? runs + 200 :
+            int runTotalPoints = (runs >= PointsValue.BatRunMargin_30 && runs <= PointsValue.BatRunMargin_49) ? runs + PointsValue.BatRun30_Bonus_49 :
+                                 (runs >= PointsValue.BatRunMargin_50 && runs <= PointsValue.BatRunMargin_69) ? runs + PointsValue.BatRun50_Bonus_69 :
+                                 (runs >= PointsValue.BatRunMargin_70 && runs <= PointsValue.BatRunMargin_99) ? runs + PointsValue.BatRun70_Bonus_99 :
+                                 (runs >= PointsValue.BatRunMargin_100) ? runs + PointsValue.BatRunAbove100_Bonus :
                                  runs;
 
-            int sixesPoints = (sixes >= 5 && sixes <= 9) ? sixes * SixBonus + 70 :
-                              (sixes >= 10) ? sixes * SixBonus + 150 :
-                              sixes * SixBonus;
+            int sixesPoints = (sixes >= 5 && sixes <= 9) ? sixes * PointsValue.SixBonus + 70 :
+                              (sixes >= 10) ? sixes * PointsValue.SixBonus + 150 :
+                              sixes * PointsValue.SixBonus;
 
-            int fourPoints = (fours >= 10 && fours <= 14) ? fours * FourBouns + 60 :
-                              (fours >= 15) ? fours * FourBouns + 100 :
-                              fours * FourBouns;
+            int fourPoints = (fours >= 10 && fours <= 14) ? fours * PointsValue.FourBouns + 60 :
+                              (fours >= 15) ? fours * PointsValue.FourBouns + 100 :
+                              fours * PointsValue.FourBouns;
 
             int srPoints = Convert.ToInt32(SR);
 
@@ -52,7 +51,9 @@ namespace IPLFranchise2021.Logic
                              (srPoints >= 350) ? 120 :
                              (srPoints <= 50 && balls >= 5 && runs !=0) ? -10 : 0;
 
-            int ducks = (runs == 0) ? -20 : 0;
+            int ducks = (runs == 0 && (!FielderDetails.Trim().ToUpper().Contains("NOT OUT"))) ? -20 : 
+            (runs == 0 && (FielderDetails.Trim().ToUpper().Contains("NOT OUT"))&& balls >=5) ? -20 : 0;
+
 
 
             return totalScore + runTotalPoints + sixesPoints + fourPoints + srPoints + ducks;
@@ -261,7 +262,7 @@ namespace IPLFranchise2021.Logic
 
         public string GetNoDupName(string name)
         {
-            List<char> charsToRemove = new List<char>() { ')', '(' };
+            List<char> charsToRemove = new List<char>() { ')', '(' ,'[',']'};
             string[] stringSeparators = new string[] { "lbw ", "b ", "c ", "st ", "sub " };
             string[] sName = name.Split(stringSeparators, StringSplitOptions.None);
             if (sName.Length == 1)
@@ -286,15 +287,19 @@ namespace IPLFranchise2021.Logic
         {
             ArrayList namely = new ArrayList(); 
             string[] slashSplit = new string[] { "/" };
-            List<char> charsToRemove = new List<char>() { ')','(' };
+            List<char> charsToRemove = new List<char>() { ')','(','[',']' };
             string[] stringSeparators = new string[] { "run out"};
+            string[] stringSeparatorsSub = new string[] { "sub " };
+
             string[] sName = name.Split(stringSeparators, StringSplitOptions.None);
             string[] runName = sName[1].Split(slashSplit, StringSplitOptions.None);
             for (int i = 0; i < runName.Length; i++)
             {
                 string n = runName[i];
                 string str1 = Filter(n, charsToRemove);
-                namely.Add(str1);
+                string[] NoSubName = str1.Split(stringSeparatorsSub, StringSplitOptions.None);
+                string FullName = str1.Contains("sub ") ? NoSubName[1] : NoSubName[0];
+                namely.Add(FullName);
 
             }
 
