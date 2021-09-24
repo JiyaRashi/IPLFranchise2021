@@ -42,7 +42,6 @@
     </UserControl.Resources>
     <ScrollViewer  VerticalScrollBarVisibility="Auto">
         <ListBox Name="listofMatch" ItemsSource="{Binding IPLScheduleDetails}" Background="WhiteSmoke">
-            
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
                     <UniformGrid Columns="4" />
