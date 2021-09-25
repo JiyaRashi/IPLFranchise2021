@@ -1,17 +1,14 @@
-Batsmen				Runs		Balls		SR		4s		6s
-KL Rahul	,	run out (Ravindra Jadeja)	,	5	,	7	,	71.42	,	1	,	0
-Mayank Agarwal	,	b Deepak Chahar	,	0	,	2	,	0	,	0	,	0
-Chris Gayle	,	c Ravindra Jadeja b Deepak Chahar	,	10	,	10	,	100	,	2	,	0
-Deepak Hooda	,	c Faf du Plessis b Deepak Chahar	,	10	,	15	,	66.66	,	1	,	0
-Nicholas Pooran	,	c Shardul Thakur b Deepak Chahar	,	0	,	2	,	0	,	0	,	0
-Shahrukh Khan	,	c Ravindra Jadeja b Sam Curran	,	47	,	36	,	130.55	,	4	,	2
-Jhye Richardson	,	b Moeen Ali	,	15	,	22	,	68.18	,	2	,	0
-Murugan Ashwin	,	c Faf du Plessis b Dwayne Bravo	,	6	,	14	,	42.85	,	0	,	0
-Mohammad Shami	,	NOT OUT	,	9	,	12	,	75	,	0	,	0
-Riley Meredith	,	NOT OUT	,	0	,	0	,	0	,	0	,	0
-Ruturaj Gaikwad	,	c Deepak Hooda b Arshdeep Singh	,	5	,	16	,	31.25	,	0	,	0
-Faf du Plessis	,	NOT OUT	,	36	,	33	,	109.09	,	3	,	1
-Moeen Ali	,	c Shahrukh Khan b Murugan Ashwin	,	46	,	31	,	148.38	,	7	,	1
-Suresh Raina	,	c KL Rahul b Mohammad Shami	,	8	,	9	,	88.88	,	1	,	0
-Ambati Rayudu	,	c Nicholas Pooran b Mohammad Shami	,	0	,	1	,	0	,	0	,	0
-Sam Curran	,	NOT OUT	,	5	,	4	,	125	,	1	,	0
+Batsmen	,		,	Runs	,	Balls	,	SR	,	4s	,	6s
+Virat Kohli	,	c Ravindra Jadeja b Dwayne Bravo	,	53	,	41	,	129.26	,	6	,	1
+Devdutt Padikkal	,	c Ambati Rayudu b Shardul Thakur	,	70	,	50	,	140	,	5	,	3
+AB de Villiers	,	c Suresh Raina b Shardul Thakur	,	12	,	11	,	109.09	,	0	,	1
+Glenn Maxwell	,	c Ravindra Jadeja b Dwayne Bravo	,	11	,	9	,	122.22	,	0	,	1
+Tim David	,	c Suresh Raina b Deepak Chahar	,	1	,	3	,	33.33	,	0	,	0
+Harshal Patel	,	c Suresh Raina b Dwayne Bravo	,	3	,	5	,	60	,	0	,	0
+Wanindu Hasaranga	,	NOT OUT	,	1	,	1	,	100	,	0	,	0
+Ruturaj Gaikwad	,	c Virat Kohli b Yuzvendra Chahal	,	38	,	26	,	146.15	,	4	,	1
+Faf du Plessis	,	c Navdeep Saini b Glenn Maxwell	,	31	,	26	,	119.23	,	2	,	2
+Moeen Ali	,	c Virat Kohli b Harshal Patel	,	23	,	18	,	127.77	,	0	,	2
+Ambati Rayudu	,	c AB de Villiers b Harshal Patel	,	32	,	22	,	145.45	,	3	,	1
+Suresh Raina	,	NOT OUT	,	17	,	10	,	170	,	2	,	1
+MS Dhoni	,	NOT OUT	,	11	,	9	,	122.22	,	2	,	0

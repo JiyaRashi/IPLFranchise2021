@@ -677,7 +677,7 @@ namespace IPLFranchise2021.ViewModels
                     Econ = double.Parse(columns[4]),
                     Dot = int.Parse(columns[5]),
                     Maiden = int.Parse(columns[6]),
-                    HatTrick = Convert.ToBoolean(columns[7])
+                    HatTrick = Convert.ToBoolean(columns[7] ?? "FALSE")
                 });
             }
 
