@@ -1,17 +1,20 @@
-Batsmen				Runs		Balls		SR		4s		6s
-KL Rahul	,	run out (Ravindra Jadeja)	,	5	,	7	,	71.42	,	1	,	0
-Mayank Agarwal	,	b Deepak Chahar	,	0	,	2	,	0	,	0	,	0
-Chris Gayle	,	c Ravindra Jadeja b Deepak Chahar	,	10	,	10	,	100	,	2	,	0
-Deepak Hooda	,	c Faf du Plessis b Deepak Chahar	,	10	,	15	,	66.66	,	1	,	0
-Nicholas Pooran	,	c Shardul Thakur b Deepak Chahar	,	0	,	2	,	0	,	0	,	0
-Shahrukh Khan	,	c Ravindra Jadeja b Sam Curran	,	47	,	36	,	130.55	,	4	,	2
-Jhye Richardson	,	b Moeen Ali	,	15	,	22	,	68.18	,	2	,	0
-Murugan Ashwin	,	c Faf du Plessis b Dwayne Bravo	,	6	,	14	,	42.85	,	0	,	0
-Mohammad Shami	,	NOT OUT	,	9	,	12	,	75	,	0	,	0
-Riley Meredith	,	NOT OUT	,	0	,	0	,	0	,	0	,	0
-Ruturaj Gaikwad	,	c Deepak Hooda b Arshdeep Singh	,	5	,	16	,	31.25	,	0	,	0
-Faf du Plessis	,	NOT OUT	,	36	,	33	,	109.09	,	3	,	1
-Moeen Ali	,	c Shahrukh Khan b Murugan Ashwin	,	46	,	31	,	148.38	,	7	,	1
-Suresh Raina	,	c KL Rahul b Mohammad Shami	,	8	,	9	,	88.88	,	1	,	0
-Ambati Rayudu	,	c Nicholas Pooran b Mohammad Shami	,	0	,	1	,	0	,	0	,	0
-Sam Curran	,	NOT OUT	,	5	,	4	,	125	,	1	,	0
+Batsmen	,		,	Runs	,	Balls	,	SR	,	4s	,	6s
+Virat Kohli	,	c sub (Anukul Roy) b Adam Milne	,	51	,	42	,	121.42	,	3	,	3
+Devdutt Padikkal	,	c Quinton de Kock b Jasprit Bumrah	,	0	,	4	,	0	,	0	,	0
+K.S Bharat	,	c Suryakumar Yadav b Rahul Chahar	,	32	,	24	,	133.33	,	2	,	2
+Glenn Maxwell	,	c Trent Boult b Jasprit Bumrah	,	56	,	37	,	151.35	,	6	,	3
+AB de Villiers	,	c Quinton de Kock b Jasprit Bumrah	,	11	,	6	,	183.33	,	1	,	1
+Dan Christian	,	NOT OUT	,	1	,	3	,	33.33	,	0	,	0
+Shahbaz Ahmed	,	b Trent Boult	,	1	,	3	,	33.33	,	0	,	0
+Kyle Jamieson	,	NOT OUT	,	2	,	2	,	100	,	0	,	0
+Rohit Sharma	,	c Devdutt Padikkal b Glenn Maxwell	,	43	,	28	,	153.57	,	5	,	1
+Quinton de Kock	,	c Glenn Maxwell b Yuzvendra Chahal	,	24	,	23	,	104.34	,	4	,	0
+Ishan Kishan	,	c Harshal Patel b Yuzvendra Chahal	,	9	,	12	,	75	,	1	,	0
+Suryakumar Yadav	,	c Yuzvendra Chahal b Mohammed Siraj	,	8	,	9	,	88.88	,	0	,	0
+Krunal Pandya	,	b Glenn Maxwell	,	5	,	11	,	45.45	,	0	,	0
+Kieron Pollard	,	b Harshal Patel	,	7	,	10	,	70	,	0	,	0
+Hardik Pandya	,	c Virat Kohli b Harshal Patel	,	3	,	6	,	50	,	0	,	0
+Adam Milne	,	b Harshal Patel	,	0	,	1	,	0	,	0	,	0
+Rahul Chahar	,	lbw Harshal Patel	,	0	,	1	,	0	,	0	,	0
+Jasprit Bumrah	,	b Yuzvendra Chahal	,	5	,	6	,	83.33	,	1	,	0
+Trent Boult	,	NOT OUT	,	0	,	3	,	0	,	0	,	0

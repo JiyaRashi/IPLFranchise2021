@@ -1,12 +1,12 @@
-Bowler		O		R		W		Econ		Dots		m		h
-Deepak Chahar	,	4	,	13	,	4	,	3.25	,	18	,	1	,	FALSE
-Sam Curran	,	3	,	12	,	1	,	4	,	12	,	0	,	FALSE
-Shardul Thakur	,	4	,	35	,	0	,	8.75	,	8	,	0	,	FALSE
-Ravindra Jadeja	,	4	,	19	,	0	,	4.75	,	14	,	0	,	FALSE
-Moeen Ali	,	3	,	17	,	1	,	5.66	,	6	,	0	,	FALSE
-Dwayne Bravo	,	2	,	10	,	1	,	5	,	6	,	0	,	FALSE
-Mohammad Shami	,	4	,	21	,	2	,	5.25	,	11	,	0	,	FALSE
-Jhye Richardson	,	3	,	21	,	0	,	7	,	11	,	0	,	FALSE
-Arshdeep Singh	,	2	,	7	,	1	,	3.5	,	8	,	0	,	FALSE
-Riley Meredith	,	3.4	,	21	,	0	,	5.72	,	14	,	0	,	FALSE
-Murugan Ashwin	,	3	,	32	,	1	,	10.66	,	5	,	0	,	FALSE
+Bowler	,	O	,	R	,	W	,	Econ	,	Dots	,		,	
+Kyle Jamieson	,	2	,	22	,	0	,	11	,	3	,	0	,	FALSE
+Mohammed Siraj	,	3	,	15	,	1	,	5	,	12	,	0	,	FALSE
+Dan Christian	,	2	,	21	,	0	,	10.5	,	2	,	0	,	FALSE
+Harshal Patel	,	3.1	,	17	,	4	,	5.36	,	10	,	0	,	TRUE
+Yuzvendra Chahal	,	4	,	11	,	3	,	2.75	,	16	,	1	,	FALSE
+Glenn Maxwell	,	4	,	23	,	2	,	5.75	,	8	,	0	,	FALSE
+Trent Boult	,	4	,	17	,	1	,	4.25	,	16	,	0	,	FALSE
+Jasprit Bumrah	,	4	,	36	,	3	,	9	,	12	,	0	,	FALSE
+Adam Milne	,	4	,	48	,	1	,	12	,	7	,	0	,	FALSE
+Krunal Pandya	,	4	,	27	,	0	,	6.75	,	8	,	0	,	FALSE
+Rahul Chahar	,	4	,	33	,	1	,	8.25	,	11	,	0	,	FALSE
