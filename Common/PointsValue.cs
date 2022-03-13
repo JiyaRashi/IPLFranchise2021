@@ -21,7 +21,14 @@ namespace IPLFranchise2021.Common
         public static readonly int BatRun30_Bonus_49 = 30;
         public static readonly int BatRun50_Bonus_69 = 50;
         public static readonly int BatRun70_Bonus_99 = 70;
-        public static readonly int BatRunAbove100_Bonus= 200;
+
+        public static readonly int FWCL_SixBonusGreater5 = 70;
+        public static readonly int FWCL_SixBonusGreater10 = 180;
+        public static readonly int FWCL_FourBonusGreater10 = 80;
+        public static readonly int FWCL_FourBonusGreater15 = 120;
+        public static readonly int FWCL_SRgreater250 = 70;
+        public static readonly int FWCL_SRgreater350 = 120;
+        public static readonly int FWCL_BatRunAbove100_Bonus = 250;
 
 
 

@@ -101,6 +101,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Common\PointsCalculator.cs" />
     <Compile Include="Common\PointsValue.cs" />
     <Compile Include="Controls\IPScheduleControl.xaml.cs">
       <DependentUpon>IPScheduleControl.xaml</DependentUpon>
@@ -122,6 +123,7 @@
     </Compile>
     <Compile Include="Event\MatchNoEvent.cs" />
     <Compile Include="Extension\BatsmanExtension.cs" />
+    <Compile Include="Logic\PointsCalculator_FWCL.cs" />
     <Compile Include="Model\FPLTeamList.cs" />
     <Compile Include="Model\FPLTeamTotalPoints.cs" />
     <Compile Include="Model\FPLTotalPoints.cs" />

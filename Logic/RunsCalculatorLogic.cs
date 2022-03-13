@@ -34,7 +34,7 @@ namespace IPLFranchise2021.Logic
             int runTotalPoints = (runs >= PointsValue.BatRunMargin_30 && runs <= PointsValue.BatRunMargin_49) ? runs + PointsValue.BatRun30_Bonus_49 :
                                  (runs >= PointsValue.BatRunMargin_50 && runs <= PointsValue.BatRunMargin_69) ? runs + PointsValue.BatRun50_Bonus_69 :
                                  (runs >= PointsValue.BatRunMargin_70 && runs <= PointsValue.BatRunMargin_99) ? runs + PointsValue.BatRun70_Bonus_99 :
-                                 (runs >= PointsValue.BatRunMargin_100) ? runs + PointsValue.BatRunAbove100_Bonus :
+                                 (runs >= PointsValue.BatRunMargin_100) ? runs + PointsValue.FWCL_BatRunAbove100_Bonus :
                                  runs;
 
             int sixesPoints = (sixes >= 5 && sixes <= 9) ? sixes * PointsValue.SixBonus + 70 :
