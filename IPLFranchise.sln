@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31005.135
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IPLFranchise2021", "IPLFranchise2021.csproj", "{3D9D0AC3-C3F0-4B13-8D2B-C72C30E3E732}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IPLFranchise", "IPLFranchise.csproj", "{3D9D0AC3-C3F0-4B13-8D2B-C72C30E3E732}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
