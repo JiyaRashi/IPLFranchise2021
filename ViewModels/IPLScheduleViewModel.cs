@@ -15,13 +15,20 @@ using System.Threading.Tasks;
 
 namespace IPLFranchise2021.ViewModels
 {
-    public class IPLScheduleViewModel :BindableBase
+    public class IPLScheduleViewModel :BindableBase, INavigationAware
     {
+
+        public void OnNavigatedFrom(NavigationContext parameters)
+        {
+            //int id = navigationContext.Parameters["ID"];
+        }
         public IEventAggregator _eventAggregator { get; set; }
 
         public DelegateCommand<IPLSchedule> MatchScoreDelegateCommand { get; private set; }
 
         private IPLSchedule _iPLSchedule;
+
+        int yearvalue;
         public IDataReaderLogic dataReaderLogic { get; set; }
 
         private IRegionManager _regionManger;
@@ -31,9 +38,22 @@ namespace IPLFranchise2021.ViewModels
         {
             dataReaderLogic = DataReaderLogic;
             _eventAggregator = eventAggregator;
-            _iPLScheduleDetails = new ObservableCollection<IPLSchedule>((dataReaderLogic.GetAllIPLSchedule()));
+            ValSubscribe();
             MatchScoreDelegateCommand = new DelegateCommand<IPLSchedule>(Execute);
             _regionManger = regionManger;
+        }
+
+        public void ValSubscribe()
+        {
+            _eventAggregator.GetEvent<IPLYearNoEvent>().Subscribe(YearValue,ThreadOption.UIThread);
+            _iPLScheduleDetails = new ObservableCollection<IPLSchedule>((dataReaderLogic.GetAllIPLSchedule(yearvalue)));
+
+
+        }
+
+        private void YearValue(int obj)
+        {
+            yearvalue = obj;
         }
 
         private bool CanExecute()
@@ -50,6 +70,16 @@ namespace IPLFranchise2021.ViewModels
 
             if (schedule != null)
                 _regionManger.RequestNavigate("MainRegion", "ScoreDetailsView", parameters);
+        }
+
+        public void OnNavigatedTo(NavigationContext navigationContext)
+        {
+
+        }
+
+        public bool IsNavigationTarget(NavigationContext navigationContext)
+        {
+            return true;
         }
 
         public ObservableCollection<IPLSchedule> IPLScheduleDetails

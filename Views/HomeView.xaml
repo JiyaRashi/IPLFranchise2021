@@ -13,6 +13,7 @@
         <StackPanel>
             <Button Command="{Binding IPLScheduleDelegateCommand}" Content="IPL 2021" FontSize="20" Margin="10"/>
             <Button Command="{Binding FWCLScheduleDelegateCommand}" Content="FWCL 2021" FontSize="20" Margin="10"/>
+            <Button Command="{Binding IPLSchedule22DelegateCommand}" Content="FWCL 2022" FontSize="20" Margin="10"/>
 
         </StackPanel>
             

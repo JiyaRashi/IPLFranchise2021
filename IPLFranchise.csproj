@@ -121,6 +121,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SqlDataDB.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Event\IPLYearNoEvent.cs" />
     <Compile Include="Event\MatchNoEvent.cs" />
     <Compile Include="Extension\BatsmanExtension.cs" />
     <Compile Include="Logic\PointsCalculator_FWCL.cs" />
@@ -200,6 +201,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="Data\FPL2022\IPL2022Schedule.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Data\FPLTeamList1sthalft.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

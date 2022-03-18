@@ -15,7 +15,7 @@ namespace IPLFranchise2021.Logic
     {
         IList<Batsman> GetAllBatsmen();
         IList<BowlSide> GetAllBowlSide();
-        IList<IPLSchedule> GetAllIPLSchedule();
+        IList<IPLSchedule> GetAllIPLSchedule(int year);
         Dictionary<string,string> GetAllFPLTeam(int matchNo);
         IList<SuperStars> GetFPLTeamStars(int matchNo);
     }
@@ -66,9 +66,12 @@ namespace IPLFranchise2021.Logic
             return query.ToList();
         }
 
-        public IList<IPLSchedule> GetAllIPLSchedule()
+        public IList<IPLSchedule> GetAllIPLSchedule(int year)
         {
-            string path = "Data/IPL2021Schedule.csv";
+            string path = "Data/FPL2022/IPL2022Schedule.csv" ;
+           // string path = (year == 2022) ? "Data/IPL2022Schedule.csv" : "Data/IPL2021Schedule.csv";
+
+
             var query =
 
                 File.ReadAllLines(path)
