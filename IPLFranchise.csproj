@@ -201,7 +201,10 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="Data\FPL2022\IPL2022Schedule.csv">
+    <None Include="Data\FPL2022\2022_FPLTeam.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\FPL2022\2022_IPLSchedule.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Data\FPLTeamList1sthalft.csv">

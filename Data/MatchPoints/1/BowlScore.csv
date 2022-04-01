@@ -1,13 +1,12 @@
-Bowler		O		R		W		Econ		Dots		m		h
-Mohammed Siraj	,	4	,	22	,	0	,	5.5	,	12	,	0	,	FALSE
-Kyle Jamieson	,	4	,	27	,	1	,	6.75	,	13	,	0	,	FALSE
-Yuzvendra Chahal	,	4	,	41	,	0	,	10.25	,	8	,	0	,	FALSE
-Shahbaz Ahmed	,	1	,	14	,	0	,	14	,	0	,	0	,	FALSE
-Harshal Patel	,	4	,	27	,	5	,	6.75	,	12	,	0	,	FALSE
-Dan Christian	,	2	,	21	,	0	,	10.5	,	3	,	0	,	FALSE
-Washington Sundar	,	1	,	7	,	1	,	7	,	2	,	0	,	FALSE
-Trent Boult	,	4	,	36	,	1	,	9	,	12	,	0	,	FALSE
-Jasprit Bumrah	,	4	,	26	,	2	,	6.5	,	10	,	0	,	FALSE
-Marco Jansen	,	4	,	28	,	2	,	7	,	9	,	0	,	FALSE
-Krunal Pandya	,	4	,	25	,	1	,	6.25	,	9	,	0	,	FALSE
-Rahul Chahar	,	4	,	43	,	0	,	10.75	,	4	,	0	,	FALSE
+BOWLER	,	O	,	R	,	W	,	ECON	,	DOTS	,	m	,	h
+Umesh Yadav	,	4	,	20	,	2	,	5	,	15	,	0	,	FALSE
+Shivam Mavi	,	4	,	35	,	0	,	8.75	,	12	,	0	,	FALSE
+Varun Chakaravarthy	,	4	,	23	,	1	,	5.75	,	11	,	0	,	FALSE
+Sunil Narine	,	4	,	15	,	0	,	3.75	,	10	,	0	,	FALSE
+Andre Russell	,	4	,	38	,	1	,	9.5	,	7	,	0	,	FALSE
+Tushar Deshpande	,	3	,	23	,	0	,	7.67	,	9	,	0	,	FALSE
+Adam Milne	,	2.3	,	19	,	0	,	7.6	,	9	,	0	,	FALSE
+Mitchell Santner	,	4	,	31	,	1	,	7.75	,	5	,	0	,	FALSE
+Dwayne Bravo	,	4	,	20	,	3	,	5	,	11	,	0	,	FALSE
+Shivam Dube	,	1	,	11	,	0	,	11	,	1	,	0	,	FALSE
+Ravindra Jadeja	,	4	,	25	,	0	,	6.25	,	8	,	0	,	FALSE

@@ -37,12 +37,12 @@ namespace IPLFranchise2021.Logic
                                  (runs >= PointsValue.BatRunMargin_100) ? runs + PointsValue.FWCL_BatRunAbove100_Bonus :
                                  runs;
 
-            int sixesPoints = (sixes >= 5 && sixes <= 9) ? sixes * PointsValue.SixBonus + 70 :
-                              (sixes >= 10) ? sixes * PointsValue.SixBonus + 150 :
+            int sixesPoints = (sixes >= 3 && sixes <= 4) ? sixes * PointsValue.SixBonus + 40 : (sixes >= 5 && sixes <= 9) ? sixes * PointsValue.SixBonus + 80 :
+                              (sixes >= 10) ? sixes * PointsValue.SixBonus + 180 :
                               sixes * PointsValue.SixBonus;
 
-            int fourPoints = (fours >= 10 && fours <= 14) ? fours * PointsValue.FourBouns + 60 :
-                              (fours >= 15) ? fours * PointsValue.FourBouns + 100 :
+            int fourPoints = (fours >= 5 && fours <= 9) ? fours * PointsValue.FourBouns + 30 : (fours >= 10 && fours <= 14) ? fours * PointsValue.FourBouns + 70 :
+                              (fours >= 15) ? fours * PointsValue.FourBouns + 120 :
                               fours * PointsValue.FourBouns;
 
             int srPoints = Convert.ToInt32(SR);
@@ -66,21 +66,23 @@ namespace IPLFranchise2021.Logic
             int wicketPoints = (wickets == 1) ? 30 :
                 (wickets == 2) ? 60 :
                 (wickets == 3) ? 100 :
-                (wickets == 4) ? 150 :
-                (wickets == 5) ? 250 : 0;
-            int maidenPoints = maiden * 70;
-            int hattrickPoints = hatTrick ? 200 : 0;
+                (wickets == 4) ? 170 :
+                (wickets == 5) ? 300 : 0;
+            int maidenPoints = maiden * 80;
+            int hattrickPoints = hatTrick ? 300 : 0;
             //int econPoints = Convert.ToInt32(Econ);
-            Econ = (Econ <= 3.00) ? 150 :
+            Econ = (Econ <= 2.00) ? 250 :
+                (Econ >= 2.01) && (Econ <= 3.00) ? 160 :
                 (Econ >= 3.01) && (Econ <= 4.00) ? 100 :
                 (Econ >= 4.01) && (Econ <= 5.00) ? 70 :
                 (Econ >= 5.01) && (Econ <= 6.00) ? 50 :
                 (Econ >= 6.01) && (Econ <= 7.00) ? 40 :
                 (Econ >= 7.01) && (Econ <= 7.99) ? 0 :
-                (Econ >= 8.00) && (Econ <= 8.99) ? -10 :
-                (Econ >= 9.00) && (Econ <= 9.99) ? -20 :
-                (Econ >= 10.00 && Econ <= 11.99) ? -30 :
-                (Econ >= 12.00) ? -40 : 0;
+                (Econ >= 8.00) && (Econ <= 8.99) ? 0 :
+                (Econ >= 9.00) && (Econ <= 9.99) ? -10 :
+                (Econ >= 10.00 && Econ <= 11.99) ? -20 :
+                (Econ >= 12.00 && Econ <= 13.99) ? -30 :
+                (Econ >= 14.00) ? -40 : 0;
 
             return _bowlTotalPoints + wicketPoints + maidenPoints + hattrickPoints + Convert.ToInt32(Econ);
         }
@@ -108,7 +110,7 @@ namespace IPLFranchise2021.Logic
                 int points = LBW ? 10 :
                     bowled ? 10 :
                     catcher ? 25 :
-                    stumbed ? 30 :
+                    stumbed ? 40 :
                     runout ? 50 : 0;
                 return points;
             }
@@ -153,12 +155,16 @@ namespace IPLFranchise2021.Logic
                 points = LBW ? 10 :
                     bowled ? 10 :
                     catcher ? 25 :
-                    stumbed ? 30 :
+                    stumbed ? 40 :
                     runout ? 50 : 0;
 
-                if (catcher || stumbed)
+                if (catcher)
                 {
-                    points = (count >= 3) ? count * 25 + 70 : points * count;
+                    points = (count >= 3) ? count * 25 + 80 : points * count;
+                }
+                else if (stumbed)
+                {
+                    points = (count >= 2) ? count * 25 + 70 : points * count;
                 }
                 else
                 {

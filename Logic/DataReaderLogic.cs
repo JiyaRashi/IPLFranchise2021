@@ -68,7 +68,7 @@ namespace IPLFranchise2021.Logic
 
         public IList<IPLSchedule> GetAllIPLSchedule(int year)
         {
-            string path = "Data/FPL2022/IPL2022Schedule.csv" ;
+            string path = "Data/FPL2022/2022_IPLSchedule.csv";
            // string path = (year == 2022) ? "Data/IPL2022Schedule.csv" : "Data/IPL2021Schedule.csv";
 
 
@@ -84,7 +84,9 @@ namespace IPLFranchise2021.Logic
 
         public Dictionary<string, string> GetAllFPLTeam(int matchNo)
         {
-            string path = (matchNo >= 29) ? $"Data/FPLTeamList2sthalft.csv" : $"Data/FPLTeamList1sthalft.csv";
+           // string path = (matchNo >= 29) ? $"Data/FPLTeamList2sthalft.csv" : $"Data/FPLTeamList1sthalft.csv";
+            string path = "Data/FPL2022/2022_FPLTeam.csv";
+
             StreamReader sr = new StreamReader(path);
             Dictionary<string, string> importingData = new Dictionary<string, string>();
 
